@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1510259773 source:c:\c\system-design\c\c_aes\main.c
+	<stdio.h>
+	<stdlib.h>
+
