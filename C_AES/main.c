@@ -85,6 +85,7 @@ void shiftRows() {}
 
 void mixColumns() {}
 
+
 void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage, unsigned char * result) {
     int i, j, k;
     unsigned char state[17];
