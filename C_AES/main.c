@@ -27,14 +27,6 @@ unsigned char sBox[256] =
 };
 
 
-
-void expandKeyCore(unsigned char* subKey, unsigned char i) {
-    // Rotate left
-
-
-
-}
-
 void getRoundKey(unsigned char* roundKey, unsigned char *curRCon) {
     int i,j;
     unsigned char tempStore[17];
