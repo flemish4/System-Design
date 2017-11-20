@@ -86,7 +86,31 @@ void subBytes(unsigned char* state) {
     }
 }
 
-void shiftRows() {}
+
+void shiftRows(unsigned char* state) {
+    int i;
+    unsigned char tempRow[16];
+    tempRow[0]=state[0];
+    tempRow[1]=state[5];
+    tempRow[2]=state[10];
+    tempRow[3]=state[15];
+    tempRow[4]=state[4];
+    tempRow[5]=state[9];
+    tempRow[6]=state[14];
+    tempRow[7]=state[3];
+    tempRow[8]=state[8];
+    tempRow[9]=state[13];
+    tempRow[10]=state[2];
+    tempRow[11]=state[7];
+    tempRow[12]=state[12];
+    tempRow[13]=state[1];
+    tempRow[14]=state[6];
+    tempRow[15]=state[11];
+
+    for(i=0; i<16 ; i++) {
+        state[i]=tempRow[i];
+    }
+}
 
 void mixColumns() {}
 
@@ -123,7 +147,7 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
             printf("Start of loopItrs\n");
             getRoundKey(roundKey, &curRCon);
             subBytes(state);
-            shiftRows();
+            shiftRows(state);
             mixColumns();
             addRoundKey(state, roundKey);
             printf("roundKey %d: ", i+1);
@@ -135,7 +159,7 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
 
         getRoundKey(roundKey, &curRCon);
         subBytes(state);
-        shiftRows();
+        shiftRows(state);
         addRoundKey(state, roundKey);
         printf("roundKey 10: ");
         for (k=0;k<16;k++) {
