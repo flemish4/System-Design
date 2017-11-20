@@ -79,7 +79,12 @@ void addRoundKey(unsigned char* state,unsigned char* roundKey) {
     }
 }
 
-void subBytes() {}
+void subBytes(unsigned char* state) {
+    int i;
+    for (i=0; i<16; i++) {
+        state[i] = sBox[(int)state[i]];
+    }
+}
 
 void shiftRows() {}
 
@@ -96,13 +101,14 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
     state[16] = '\0';
     tempResult[lenMessage] = '\0';
     // Iterate over given message in blocks of 16 bytes
-    for (j=0;j<lenMessage;j=j+16) {    // Initialise roundKey
-        strcpy(roundKey,"0000000000000000");
+    for (j=0;j<lenMessage;j=j+16) {
+        // Initialise roundKey
         for (i=0; i<16; i++) {
             roundKey[i] = key[i];
         }
         // Get the state as 16 bytes of message
         memcpy(state, &message[j], 16);
+        state[16] = '\0';
 
         //Initial addRoundKey
         addRoundKey(state, roundKey);
@@ -116,7 +122,7 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
         for(i=0;i<loopItrs;i++) {
             printf("Start of loopItrs\n");
             getRoundKey(roundKey, &curRCon);
-            subBytes();
+            subBytes(state);
             shiftRows();
             mixColumns();
             addRoundKey(state, roundKey);
@@ -128,7 +134,7 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
         }
 
         getRoundKey(roundKey, &curRCon);
-        subBytes();
+        subBytes(state);
         shiftRows();
         addRoundKey(state, roundKey);
         printf("roundKey 10: ");
@@ -157,7 +163,6 @@ size_t genPadMessage(unsigned char* message, unsigned char* padMessage, size_t l
     int lenPad = 0;
     int lenMesRem  = lenMessage % 16;
     strcpy(padMessage,message);
-    printf("Test: %s\n", message);
     if (lenMesRem > 0) {
         lenPad = 16 - lenMessage % 16;
         for (i=lenMessage;i<lenMessage+lenPad;i++) {
@@ -172,19 +177,17 @@ int main()
 {
     printf("Running C_AES!\n");
     // unsigned char key[]          = "0123456789ABCDEF"; // 16 ASCII (1 byte each) = 128 bits
-    // unsigned char key[]          = {0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c}; // 16 ASCII (1 byte each) = 128 bits
-    unsigned char key[]          = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}; // 16 ASCII (1 byte each) = 128 bits
-    unsigned char message[]      = "This is a test!!"; // A message of any length
+    unsigned char key[]          = {0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c}; // 16 ASCII (1 byte each) = 128 bits
+    // unsigned char key[]          = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}; // 16 ASCII (1 byte each) = 128 bits
+    // unsigned char message[]      = "This is a test!!"; // A message of any length
+    unsigned char message[]      = {0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34}; // A message of any length
     unsigned char *padMessage    = malloc(256);
     size_t lenPadMessage;
     size_t lenMessage;
     unsigned char result[msgBytes];
-    lenMessage = sizeof(message) - 1 ;
+    lenMessage = sizeof(message);
+    printf("lenMessage: %d",lenMessage);
     lenPadMessage = genPadMessage(message, padMessage, lenMessage);
-    printf("PadMessage: %s\n", padMessage);
     aesEncrypt(key, padMessage, lenPadMessage, result);
-
-    printf("Result: %s", result);
-
     return 0;
 }
