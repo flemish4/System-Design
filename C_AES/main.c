@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int loopItrs = 10;
+int loopItrs = 9;
 int msgBytes = 16;
 int keyBytes = 16;
 
@@ -35,11 +35,10 @@ void expandKeyCore(unsigned char* subKey, unsigned char i) {
 
 }
 
-void getRoundKey(unsigned char* roundKey) {
+void getRoundKey(unsigned char* roundKey, unsigned char *curRCon) {
     int i,j;
     unsigned char tempStore[17];
     unsigned char tempWord[5];
-    unsigned char curRCon = 0x01;
     // Init unsigned char arrays
     tempStore[16] = '\0';
     tempWord[5]   = '\0';
@@ -49,23 +48,21 @@ void getRoundKey(unsigned char* roundKey) {
     tempWord[1] = roundKey[14];
     tempWord[2] = roundKey[15];
     tempWord[3] = roundKey[12];
-    printf("tempWord: %s\n", tempWord);
 
     // SubBytes
     for (i=0; i<4; i++) {
         tempWord[i] = sBox[(int)tempWord[i]];
     }
-    printf("tempWord: %s\n", tempWord);
 
     // RCon XOR
-    tempWord[0] = tempStore[0] ^ tempWord[0] ^ curRCon;
-    printf("tempWord: %s\n", tempWord);
-
+    tempWord[0] = roundKey[0] ^ tempWord[0] ^ *curRCon;
+    for (i=1; i<4; i++) {
+        tempWord[i] = roundKey[i] ^ tempWord[i];
+    }
     // copy tempWord back to tempStore
     for (i=0; i<4; i++) {
         tempStore[i] = tempWord[i];
     }
-    printf("tempStore: %s\n", tempStore);
 
     // Calculate other 3 words
     for (i=1; i<4; i++) {
@@ -74,10 +71,9 @@ void getRoundKey(unsigned char* roundKey) {
             tempStore[(i*4)+j] = tempStore[((i-1)*4)+j] ^ roundKey[(i*4)+j];
         }
     }
-    printf("tempStore: %s\n", tempStore);
 
     // Calculate next RCon
-    curRCon = (curRCon<<1) ^ (0x11b & -(curRCon>>7)); // REVISIT THIS MUST BE STORED
+    *curRCon = (*curRCon<<1) ^ (0x11b & -(*curRCon>>7));
 
     // Move new round key to new slot
     strcpy(roundKey,tempStore);
@@ -102,59 +98,62 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
     unsigned char state[17];
     unsigned char tempResult[lenMessage+1];
     unsigned char roundKey[17];
-    // Initialise roundKey
+    unsigned char curRCon = 0x01;
     roundKey[16] = '\0';
     state[16] = '\0';
     tempResult[lenMessage] = '\0';
-    strcpy(roundKey,"0000000000000000");
-    for (i=0; i<16; i++) {
-        roundKey[i] = key[i];
-    }
-    printf("roundKey start: ");
-    for (i=0;i<16;i++) {
-        printf("%02x", roundKey[i]);
-    }
-    printf("\n");
     // Iterate over given message in blocks of 16 bytes
-    for (j=0;j<lenMessage;j=j+16) {
+    for (j=0;j<lenMessage;j=j+16) {    // Initialise roundKey
+        strcpy(roundKey,"0000000000000000");
+        for (i=0; i<16; i++) {
+            roundKey[i] = key[i];
+        }
         // Get the state as 16 bytes of message
         memcpy(state, &message[j], 16);
-        // Null terminate string
-        state[16] = '\0';
-        printf("State: %s\n", state);
-        addRoundKey(state, roundKey);
 
+        //Initial addRoundKey
+        addRoundKey(state, roundKey);
+        printf("roundKey 0: ");
+        for (k=0;k<16;k++) {
+            printf("%02x", roundKey[k]);
+        }
+        printf("\n");
+
+        // Loop 9 times
         for(i=0;i<loopItrs;i++) {
+            printf("Start of loopItrs\n");
+            getRoundKey(roundKey, &curRCon);
             subBytes();
             shiftRows();
             mixColumns();
             addRoundKey(state, roundKey);
-            // Generate next roundKey
-            getRoundKey(roundKey);
-            // printf("Round Key %d: %s\n", i, roundKey);
-
-            printf("roundKey %d: ", i);
-            for (i=0;i<16;i++) {
-                printf("%02x", roundKey[i]);
+            printf("roundKey %d: ", i+1);
+            for (k=0;k<16;k++) {
+                printf("%02x", roundKey[k]);
             }
             printf("\n");
         }
 
+        getRoundKey(roundKey, &curRCon);
         subBytes();
         shiftRows();
         addRoundKey(state, roundKey);
-
+        printf("roundKey 10: ");
+        for (k=0;k<16;k++) {
+            printf("%02x", roundKey[k]);
+        }
+        printf("\n");
+        printf("state end: ");
+        for (k=0;k<16;k++) {
+            printf("%02x", state[k]);
+        }
+        printf("\n");
         // Collect the results in tempResult
-        printf("State Result: %s\n", state);
         k=0;
         for (i=j;i<j+16;i++) {
             tempResult[i] = state[k++];
         }
-
-
     }
-
-    printf("Final result: %s\n", tempResult);
     // Return a pointer to the results
     strcpy(result,tempResult);
 
@@ -180,7 +179,8 @@ int main()
 {
     printf("Running C_AES!\n");
     // unsigned char key[]          = "0123456789ABCDEF"; // 16 ASCII (1 byte each) = 128 bits
-    unsigned char key[]          = {0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c}; // 16 ASCII (1 byte each) = 128 bits
+    // unsigned char key[]          = {0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c}; // 16 ASCII (1 byte each) = 128 bits
+    unsigned char key[]          = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}; // 16 ASCII (1 byte each) = 128 bits
     unsigned char message[]      = "This is a test!!"; // A message of any length
     unsigned char *padMessage    = malloc(256);
     size_t lenPadMessage;
