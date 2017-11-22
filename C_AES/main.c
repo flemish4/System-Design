@@ -143,6 +143,7 @@ void addRoundKey(unsigned char* state,unsigned char* roundKey) {
 }
 
 void decRoundKey(unsigned char* state,unsigned char* roundKey) {
+	int i;
 	for (i=16; i>0; i--){
 		state[i] = state[i] ^ roundKey[i];
 	}
