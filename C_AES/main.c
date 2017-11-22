@@ -144,6 +144,13 @@ void addRoundKey(unsigned char* state,unsigned char* roundKey) {
     }
 }
 
+void decRoundKey(unsigned char* state,unsigned char* roundKey) {
+	int i;
+	for (i=16; i>0; i--){
+		state[i] = state[i] ^ roundKey[i];
+	}
+}
+
 void subBytes(unsigned char* state) {
 	int i;
     for (i=0; i<16; i++) {
@@ -173,6 +180,31 @@ void shiftRows(unsigned char* state) {
     tempRow[15]=state[11];
 
     for(i=0; i<16 ; i++) {
+        state[i]=tempRow[i];
+    }
+}
+
+void undo_shiftRows(unsigned char* state) {
+    int i;
+    unsigned char tempRow[16];
+    tempRow[0]=state[0];
+    tempRow[1]=state[13];
+    tempRow[2]=state[10];
+    tempRow[3]=state[7];
+    tempRow[4]=state[4];
+    tempRow[5]=state[1];
+    tempRow[6]=state[14];
+    tempRow[7]=state[11];
+    tempRow[8]=state[8];
+    tempRow[9]=state[5];
+    tempRow[10]=state[2];
+    tempRow[11]=state[15];
+    tempRow[12]=state[12];
+    tempRow[13]=state[9];
+    tempRow[14]=state[6];
+    tempRow[15]=state[3];
+
+    for(i=16; i<0 ; i--) {
         state[i]=tempRow[i];
     }
 }
@@ -306,18 +338,19 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
 }
 
 void aesDecript (){
-
-	//initial round
-
-	//decrement_roundkey
-	//inv_shiftRows
+	
+	//initial round 
+	
+	decRoundKey();
+	undo_shiftRows();
 	//inv_SubBytes
-
-	//9 further rounds
-
-	//decrement_roundkey
+	
+	//9 further rounds 
+	
+	decRoundKey();
+  
 	//inv_mixColumns
-	//inv_shiftRows
+	undo_shiftRows();
 	//inv_subBytes
 
 }
