@@ -157,7 +157,14 @@ void subBytes(unsigned char* state) {
         state[i] = sBox[(int)state[i]];
     }
 }
+ 
 
+void inv_subBytes (unsigned char* state) {
+	int i=0;
+	for (i=0; i,16;i++) {
+		state[i] = inv_sBox[(int)state[i]];
+	}
+}
 
 void shiftRows(unsigned char* state) {
     int i;
@@ -348,7 +355,10 @@ void aesDecript (){
 
 	decRoundKey(state, roundKey);
 	undo_shiftRows(state);
+
 	//inv_SubBytes
+	inv_subBytes (state);
+ 
 
 	//9 further rounds
 
@@ -357,6 +367,7 @@ void aesDecript (){
 	//inv_mixColumns
 	undo_shiftRows(state);
 	//inv_subBytes
+	inv_subBytes (state);
 
 }
 
