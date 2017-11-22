@@ -69,7 +69,7 @@ unsigned char mul3[256] =
 0x0b,0x08,0x0d,0x0e,0x07,0x04,0x01,0x02,0x13,0x10,0x15,0x16,0x1f,0x1c,0x19,0x1a
 };
 
-unsigned char inv_sBox[256] = 
+unsigned char inv_sBox[256] =
  {
     0x52, 0x09, 0x6A, 0xD5, 0x30, 0x36, 0xA5, 0x38, 0xBF, 0x40, 0xA3, 0x9E, 0x81, 0xF3, 0xD7, 0xFB,
     0x7C, 0xE3, 0x39, 0x82, 0x9B, 0x2F, 0xFF, 0x87, 0x34, 0x8E, 0x43, 0x44, 0xC4, 0xDE, 0xE9, 0xCB,
@@ -91,7 +91,7 @@ unsigned char inv_sBox[256] =
 
 
 void getRoundKey(unsigned char* roundKey, unsigned char *curRCon) {
-    int i,j;
+    int i,j, k;
     unsigned char tempStore[17];
     unsigned char tempWord[5];
     // Init unsigned char arrays
@@ -131,7 +131,9 @@ void getRoundKey(unsigned char* roundKey, unsigned char *curRCon) {
     *curRCon = (*curRCon<<1) ^ (0x11b & -(*curRCon>>7));
 
     // Move new round key to new slot
-    strcpy(roundKey,tempStore);
+    for(i=0; i<16 ; i++) {
+        roundKey[i]=tempStore[i];
+    }
 
 }
 
@@ -255,34 +257,36 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
 
         //Initial addRoundKey
         addRoundKey(state, roundKey);
-        printf("roundKey 0: ");
+        printf("state 0: ");
         for (k=0;k<16;k++) {
-            printf("%02x", roundKey[k]);
+            printf("%02x", state[k]);
         }
         printf("\n");
 
         // Loop 9 times
         for(i=0;i<loopItrs;i++) {
-            printf("Start of loopItrs\n");
+            //printf("Start of loopItrs\n");
             getRoundKey(roundKey, &curRCon);
             subBytes(state);
             shiftRows(state);
             mixColumns(state);
             addRoundKey(state, roundKey);
-            printf("roundKey %d: ", i+1);
+
+            printf("state %d: ", i+1);
             for (k=0;k<16;k++) {
-                printf("%02x", roundKey[k]);
+                printf("%02x", state[k]);
             }
             printf("\n");
+
         }
 
         getRoundKey(roundKey, &curRCon);
         subBytes(state);
         shiftRows(state);
         addRoundKey(state, roundKey);
-        printf("roundKey 10: ");
+        printf("state 0: ");
         for (k=0;k<16;k++) {
-            printf("%02x", roundKey[k]);
+            printf("%02x", state[k]);
         }
         printf("\n");
         printf("state end: ");
@@ -302,20 +306,20 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
 }
 
 void aesDecript (){
-	
-	//initial round 
-	
+
+	//initial round
+
 	//decrement_roundkey
 	//inv_shiftRows
 	//inv_SubBytes
-	
-	//9 further rounds 
-	
+
+	//9 further rounds
+
 	//decrement_roundkey
 	//inv_mixColumns
 	//inv_shiftRows
 	//inv_subBytes
-	
+
 }
 
 size_t genPadMessage(unsigned char* message, unsigned char* padMessage, size_t lenMessage) {
