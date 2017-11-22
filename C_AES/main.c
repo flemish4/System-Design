@@ -110,9 +110,29 @@ void decRoundKey(unsigned char* state,unsigned char* roundKey) {
 
 void subBytes(unsigned char* state) {
 	int i;
-    for (i=0; i<16; i++) {
-        state[i] = sBox[(int)state[i]];
+	unsigned char compareTemp[16];
+	printf("Starting subBytes");
+    printf("state : ");
+    for (k=0;k<16;k++) {
+        printf("%02x", state[k]);
     }
+    printf("\n");
+
+
+    for (i=0; i<16; i++) {
+        compareTemp[i] = sBox[(int)state[i]];
+    }
+
+
+    printf("desoutput : ");
+    for (k=0;k<16;k++) {
+        printf("%02x", compareTemp[k]);
+    }
+    printf("\n");
+
+
+
+
 }
 
 
