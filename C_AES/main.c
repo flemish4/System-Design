@@ -273,19 +273,25 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
 
 /*
 void aesDecript (){
+    // These may not all be necessary
+    int i, j, k;
+    unsigned char state[17];
+    unsigned char roundKey[17];
+    unsigned char curRCon = 0x01;
 
 	//initial round
 
-	decRoundKey();
-	undo_shiftRows();
+	decRoundKey(state, roundKey);
+	undo_shiftRows(state);
+
 	//inv_SubBytes
 
 	//9 further rounds
 
-	decRoundKey();
+	decRoundKey(state, roundKey);
 
 	//inv_mixColumns
-	undo_shiftRows();
+	undo_shiftRows(state);
 	//inv_subBytes
 
 }
