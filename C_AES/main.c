@@ -49,13 +49,10 @@ unsigned char inv_sBox[256] =
 
 void getRoundKey(unsigned char* roundKey, unsigned char *curRCon) {
     int i,j, k;
-    unsigned char tempStore[17];
-    unsigned char tempWord[5];
-    // Init unsigned char arrays
-    tempStore[16] = '\0';
-    tempWord[5]   = '\0';
+    unsigned char tempWord[4];
 
-    // Rotate Left W(i-1)
+    // Calculating the first column
+    // RotWord - Rotate the last column left
     tempWord[0] = roundKey[13];
     tempWord[1] = roundKey[14];
     tempWord[2] = roundKey[15];
@@ -66,32 +63,40 @@ void getRoundKey(unsigned char* roundKey, unsigned char *curRCon) {
         tempWord[i] = sBox[(int)tempWord[i]];
     }
 
-    // RCon XOR
+    // RCon XOR - Col(i-4) XOR Col(i) XOR Rcon
+    // Previous key of current column XOR current column XOR Rcon
+    // RCon is zero for rows 1-3 in every column
+    // This means RCon can be stored as a single byte, only representing the first byte
     tempWord[0] = roundKey[0] ^ tempWord[0] ^ *curRCon;
+    // XOR other three rows with previous key column - Rcon == 0 for all these values
     for (i=1; i<4; i++) {
         tempWord[i] = roundKey[i] ^ tempWord[i];
     }
-    // copy tempWord back to tempStore
+
+    // copy over old roundKey - old column not required anymore
+    // This means there only needs to be one memory location for roundKey plus one tempWord
     for (i=0; i<4; i++) {
-        tempStore[i] = tempWord[i];
+        roundKey[i] = tempWord[i];
     }
 
-    // Calculate other 3 words
+    // Calculate other 3 columns
     for (i=1; i<4; i++) {
         for (j=0;j<4;j++) {
-            // XOR each bit of the W(i-4) and W(i-1) to get W(i)
-            tempStore[(i*4)+j] = tempStore[((i-1)*4)+j] ^ roundKey[(i*4)+j];
+            // XOR each bit of the W(i-4) and W(i-1) to get W(i) - Copy over old column
+            roundKey[(i*4)+j] = roundKey[((i-1)*4)+j] ^ roundKey[(i*4)+j];
         }
     }
 
     // Calculate next RCon
-    *curRCon = (*curRCon<<1) ^ (0x11b & -(*curRCon>>7));
-
-    // Move new round key to new slot
-    for(i=0; i<16 ; i++) {
-        roundKey[i]=tempStore[i];
-    }
-
+    *curRCon = (*curRCon<<1) ^ (0x11b & -(*curRCon>>7));    // 0000 0010 - SHL
+                                                            // 0000 0100 - SHL
+                                                            // 0000 1000 - SHL
+                                                            // 0001 0000 - SHL
+                                                            // 0010 0000 - SHL
+                                                            // 0100 0000 - SHL
+                                                            // 1000 0000 - SHL
+                                                            // 0001 1011 - Magic - maybe worth having a special case
+                                                            // 0011 0110 - Magic - for these last two to avoid >>7 each time
 }
 
 void addRoundKey(unsigned char* state,unsigned char* roundKey) {
