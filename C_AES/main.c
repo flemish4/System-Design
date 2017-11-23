@@ -109,8 +109,13 @@ void decRoundKey(unsigned char* state,unsigned char* roundKey) {
 }
 
 void subBytes(unsigned char* state) {
-	int i;
+	int i, j, k;
 	unsigned char compareTemp[16];
+	// new method
+	unsigned char tempOutput[16];
+	unsigned char tempByteS;
+	unsigned char tempByteResult;
+
 	printf("Starting subBytes");
     printf("state : ");
     for (k=0;k<16;k++) {
@@ -128,9 +133,35 @@ void subBytes(unsigned char* state) {
     for (k=0;k<16;k++) {
         printf("%02x", compareTemp[k]);
     }
-
     printf("\n");
 
+
+    // First find multiplicative inverse for a given number in the finite field
+
+
+    // Second trasnform using an affine transformation
+    // For each byte
+    for (i=0; i<16; i++) {
+        // Set tempByteS to the next byte in state
+        tempByteS = state[i];
+
+        // Init result
+        tempByteResult = 0;
+
+        for (j=0;j<5;j++) {
+            tempByteResult = tempByteResult ^ tempByteS;
+            // Rotate s one bit to the left
+            tempByteS = (tempByteS << 1) | (tempByteS >> 7);
+        }
+        tempByteResult = tempByteResult ^ 0x63;
+        tempOutput[i] = tempByteS;
+    }
+
+    printf("newOutput : ");
+    for (k=0;k<16;k++) {
+        printf("%02x", tempOutput[k]);
+    }
+    printf("\n");
 
 
 
