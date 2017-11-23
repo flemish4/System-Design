@@ -26,7 +26,7 @@ unsigned char sBox[256] =
 0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68, 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16
 };
 
-
+/*
 //needs replacing with calculation, LUT for hex*0x02
 unsigned char mul2[256] =
 {
@@ -68,7 +68,7 @@ unsigned char mul3[256] =
 0x3b,0x38,0x3d,0x3e,0x37,0x34,0x31,0x32,0x23,0x20,0x25,0x26,0x2f,0x2c,0x29,0x2a,
 0x0b,0x08,0x0d,0x0e,0x07,0x04,0x01,0x02,0x13,0x10,0x15,0x16,0x1f,0x1c,0x19,0x1a
 };
-
+*/
 unsigned char inv_sBox[256] =
  {
     0x52, 0x09, 0x6A, 0xD5, 0x30, 0x36, 0xA5, 0x38, 0xBF, 0x40, 0xA3, 0x9E, 0x81, 0xF3, 0xD7, 0xFB,
@@ -210,6 +210,7 @@ void undo_shiftRows(unsigned char* state) {
 }
 
 void mixColumns(unsigned char* state) {
+        /*
         int i;
 
         // use tmp array as cannot overwrite state whilst calculating as original values are used after their new value is calculated
@@ -265,7 +266,46 @@ void mixColumns(unsigned char* state) {
 	        state[i] = tmp[i];
 	    }
 
+	    */
+
+    unsigned char a[16];
+    unsigned char b[16];
+    unsigned char c;
+    unsigned char h;
+    /* The array 'a' is simply a copy of the input array 'r'
+     * The array 'b' is each element of the array 'a' multiplied by 2
+     * in Rijndael's Galois field
+     * a[n] ^ b[n] is element n multiplied by 3 in Rijndael's Galois field */
+    for (c = 0; c < 16; c++) {
+        a[c] = state[c];
+        /* h is 0xff if the high bit of r[c] is set, 0 otherwise */
+        h = (unsigned char)((signed char)state[c] >> 7); /* arithmetic right shift, thus shifting in either zeros or ones */
+        b[c] = state[c] << 1; /* implicitly removes high bit because b[c] is an 8-bit char, so we xor by 0x1b and not 0x11b in the next line */
+        b[c] ^= 0x1B & h; /* Rijndael's Galois field */
+    }
+    state[0] = b[0] ^ a[3] ^ a[2] ^ b[1] ^ a[1]; /* 2 * a0 + a3 + a2 + 3 * a1 */
+    state[1] = b[1] ^ a[0] ^ a[3] ^ b[2] ^ a[2]; /* 2 * a1 + a0 + a3 + 3 * a2 */
+    state[2] = b[2] ^ a[1] ^ a[0] ^ b[3] ^ a[3]; /* 2 * a2 + a1 + a0 + 3 * a3 */
+    state[3] = b[3] ^ a[2] ^ a[1] ^ b[0] ^ a[0]; /* 2 * a3 + a2 + a1 + 3 * a0 */
+
+    state[4] = b[4] ^ a[7] ^ a[6] ^ b[5] ^ a[5]; /* 2 * a0 + a3 + a2 + 3 * a1 */
+    state[5] = b[5] ^ a[4] ^ a[7] ^ b[6] ^ a[6]; /* 2 * a1 + a0 + a3 + 3 * a2 */
+    state[6] = b[6] ^ a[5] ^ a[4] ^ b[7] ^ a[7]; /* 2 * a2 + a1 + a0 + 3 * a3 */
+    state[7] = b[7] ^ a[6] ^ a[5] ^ b[4] ^ a[4]; /* 2 * a3 + a2 + a1 + 3 * a0 */
+
+    state[8] = b[8] ^ a[11] ^ a[10] ^ b[9] ^ a[9]; /* 2 * a0 + a3 + a2 + 3 * a1 */
+    state[9] = b[9] ^ a[8] ^ a[11] ^ b[10] ^ a[10]; /* 2 * a1 + a0 + a3 + 3 * a2 */
+    state[10] = b[10] ^ a[9] ^ a[8] ^ b[11] ^ a[11]; /* 2 * a2 + a1 + a0 + 3 * a3 */
+    state[11] = b[11] ^ a[10] ^ a[9] ^ b[8] ^ a[8]; /* 2 * a3 + a2 + a1 + 3 * a0 */
+
+    state[12] = b[12] ^ a[15] ^ a[14] ^ b[13] ^ a[13]; /* 2 * a0 + a3 + a2 + 3 * a1 */
+    state[13] = b[13] ^ a[12] ^ a[15] ^ b[14] ^ a[14]; /* 2 * a1 + a0 + a3 + 3 * a2 */
+    state[14] = b[14] ^ a[13] ^ a[12] ^ b[15] ^ a[15]; /* 2 * a2 + a1 + a0 + 3 * a3 */
+    state[15] = b[15] ^ a[14] ^ a[13] ^ b[12] ^ a[12]; /* 2 * a3 + a2 + a1 + 3 * a0 */
+
 }
+
+
 
 
 void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage, unsigned char * result) {
@@ -337,24 +377,25 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
 
 }
 
+/*
 void aesDecript (){
-	
-	//initial round 
-	
+
+	//initial round
+
 	decRoundKey();
 	undo_shiftRows();
 	//inv_SubBytes
-	
-	//9 further rounds 
-	
+
+	//9 further rounds
+
 	decRoundKey();
-  
+
 	//inv_mixColumns
 	undo_shiftRows();
 	//inv_subBytes
 
 }
-
+*/
 size_t genPadMessage(unsigned char* message, unsigned char* padMessage, size_t lenMessage) {
     int i;
     int lenPad = 0;
