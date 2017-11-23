@@ -161,7 +161,7 @@ void subBytes(unsigned char* state) {
 
 void inv_subBytes (unsigned char* state) {
 	int i=0;
-	for (i=0; i,16;i++) {
+	for (i=0; i<16;i++) {
 		state[i] = inv_sBox[(int)state[i]];
 	}
 }
