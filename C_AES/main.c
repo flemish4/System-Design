@@ -128,6 +128,7 @@ void subBytes(unsigned char* state) {
     for (k=0;k<16;k++) {
         printf("%02x", compareTemp[k]);
     }
+
     printf("\n");
 
 
