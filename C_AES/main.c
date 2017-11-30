@@ -204,6 +204,74 @@ void mixColumns(unsigned char* state) {
 
 }
 
+void InvMixColumns(unsigned char* state) {
+
+    unsigned char a[16];
+    unsigned char b[16];
+    unsigned char c[16];
+    unsigned char d[16];
+    unsigned char i;
+
+    //for (i = 0; i < 16; i++) {
+        //copy state to a
+        a[i] = state[i];
+        // set b = state * 2
+        // fill h with MSB of state[c], either 1111 1111, or 0000 0000
+        //h = (unsigned char)((signed char)state[i] >> 7);
+        // left shift multiplies by 2,
+        //mul2
+        b[i] = state[i] << 1;
+        if(state[i] >= 0x80){
+            b[i] ^= 0x1B;
+        }
+        //mul4
+        c[i] = state[i] << 2;
+        printf("c: ");
+            printbincharpad(c[0]);
+            printf("\n");
+
+        if(state[i] >= 0xc0){
+            c[i] ^= (0x1B << 1);
+            c[i] ^= 0x1B;
+        } else if(state[i] >= 0x80){
+            c[i] ^= 0x1B<<1;
+        }
+        else if(state[i] >= 0x40){
+            c[i] ^= 0x1B;
+        }
+        //mul8
+        d[i] = state[i] << 3;
+        if(state[i] >= 0xe0){
+            d[i] ^= (0x1B << 2);
+            d[i] ^= (0x1B << 1);
+            d[i] ^= 0x1B;
+        } else if(state[i] >= 0xc0){
+            d[i] ^= (0x1B << 2);
+            d[i] ^= 0x1B << 1;
+        } else if(state[i] >= 0x80){
+            c[i] ^= 0x1B<<2;
+        } else if(state[i] >= 0x60){
+            c[i] ^= 0x1B<<1;
+            c[i] ^= 0x1B;
+        }else if(state[i] >= 0x40){
+            c[i] ^= 0x1B<<1;
+        } else if(state[i] >= 0x20){
+            d[i] ^= 0x1B;
+        }
+
+        // matrix multiplication
+        //
+        // |ABCD|       |14 11 13 09|
+        // |EFGH|   *   |09 14 11 13|
+        // |IJKL|       |13 09 14 11|
+        // |MNOP|       |11 13 09 14|
+        for (i=0;i<16;i+=4){
+        state[i] = (b[i] ^ c[i] ^ d[i]) ^ (a[i] ^ b[i] ^ d[i]) ^ (a[i] ^ c[i] ^ d[i]) ^ (d[i] ^a[i]);
+        state[i+1] = (d[i] ^a[i]) ^ (b[i] ^ c[i] ^ d[i]) ^ (a[i] ^ b[i] ^ d[i]) ^ (a[i] ^ c[i] ^ d[i]);
+        state[i+2] = (a[i] ^ c[i] ^ d[i]) ^ (d[i] ^a[i]) ^ (b[i] ^ c[i] ^ d[i]) ^ (a[i] ^ b[i] ^ d[i]);
+        state[i+3] = (a[i] ^ b[i] ^ d[i]) ^ (a[i] ^ c[i] ^ d[i]) ^ (d[i] ^a[i]) ^ (b[i] ^ c[i] ^ d[i]);
+        }
+}
 
 
 
@@ -276,7 +344,7 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
 
 }
 
-/*
+
 void aesDecript (){
     // These may not all be necessary
     int i, j, k;
@@ -300,7 +368,7 @@ void aesDecript (){
 	//inv_subBytes
 
 }
-*/
+
 size_t genPadMessage(unsigned char* message, unsigned char* padMessage, size_t lenMessage) {
     int i;
     int lenPad = 0;
