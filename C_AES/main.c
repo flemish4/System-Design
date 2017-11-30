@@ -212,13 +212,9 @@ void InvMixColumns(unsigned char* state) {
     unsigned char d[16];
     unsigned char i;
 
-    //for (i = 0; i < 16; i++) {
+    for (i = 0; i < 16; i++) {
         //copy state to a
         a[i] = state[i];
-        // set b = state * 2
-        // fill h with MSB of state[c], either 1111 1111, or 0000 0000
-        //h = (unsigned char)((signed char)state[i] >> 7);
-        // left shift multiplies by 2,
         //mul2
         b[i] = state[i] << 1;
         if(state[i] >= 0x80){
@@ -226,10 +222,6 @@ void InvMixColumns(unsigned char* state) {
         }
         //mul4
         c[i] = state[i] << 2;
-        printf("c: ");
-            printbincharpad(c[0]);
-            printf("\n");
-
         if(state[i] >= 0xc0){
             c[i] ^= (0x1B << 1);
             c[i] ^= 0x1B;
@@ -258,6 +250,8 @@ void InvMixColumns(unsigned char* state) {
         } else if(state[i] >= 0x20){
             d[i] ^= 0x1B;
         }
+
+    }
 
         // matrix multiplication
         //
