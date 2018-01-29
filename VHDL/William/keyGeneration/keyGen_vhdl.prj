@@ -1,0 +1,6 @@
+vhdl work "E:\OneDrive\PC Documents\Important\University\Year 4\EEE6225\Project\keyGeneration\subBytes_CHEAT.vhd"
+vhdl work "E:\OneDrive\PC Documents\Important\University\Year 4\EEE6225\Project\keyGeneration\srl16_8.vhd"
+vhdl work "E:\OneDrive\PC Documents\Important\University\Year 4\EEE6225\Project\keyGeneration\RCon_gen.vhd"
+vhdl work "E:\OneDrive\PC Documents\Important\University\Year 4\EEE6225\Project\keyGeneration\key_counter_v2.vhd"
+vhdl work "E:\OneDrive\PC Documents\Important\University\Year 4\EEE6225\Project\keyGeneration\addr_gen.vhd"
+vhdl work "E:\OneDrive\PC Documents\Important\University\Year 4\EEE6225\Project\keyGeneration\keyGen.vhd"

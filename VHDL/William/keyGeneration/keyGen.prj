@@ -1,0 +1,6 @@
+vhdl work "subBytes_CHEAT.vhd"
+vhdl work "srl16_8.vhd"
+vhdl work "RCon_gen.vhd"
+vhdl work "key_counter_v2.vhd"
+vhdl work "addr_gen.vhd"
+vhdl work "keyGen.vhd"

@@ -1,0 +1,6 @@
+work	"RCon_gen.vhd"
+work	"addr_gen.vhd"
+work	"keyGen.vhd"
+work	"key_counter_v2.vhd"
+work	"srl16_8.vhd"
+work	"subBytes_CHEAT.vhd"
