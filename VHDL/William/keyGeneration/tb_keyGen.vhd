@@ -128,12 +128,13 @@ BEGIN
 		keyInEn <= '0';
 		
       wait for CLK_period * 2;
-		start <='1';
 		
-      wait for CLK_period;
-		start<='0';
-		
-      wait for CLK_period * 30;
+		for i in 0 to 9 loop
+			start <='1';
+			wait for CLK_period;
+			start<='0';
+			wait for CLK_period * 19;		
+		end loop;
       wait;
    end process;
 

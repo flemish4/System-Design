@@ -1,7 +1,7 @@
 Release 14.7 par P.20131013 (nt64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-SKYNET::  Mon Jan 29 22:52:17 2018
+SKYNET::  Tue Jan 30 00:42:27 2018
 
 par -w -intstyle ise -ol high -t 1 keyGen_map.ncd keyGen.ncd keyGen.pcf 
 
@@ -29,7 +29,7 @@ Device Utilization Summary:
       Number of LOCed IOBs                   0 out of 20      0%
 
    Number of RAMB16s                         1 out of 12      8%
-   Number of Slices                         58 out of 1920    3%
+   Number of Slices                         47 out of 1920    2%
       Number of SLICEMs                     11 out of 960     1%
 
 
@@ -39,50 +39,50 @@ Placer effort level (-pl):    High
 Placer cost table entry (-t): 1
 Router effort level (-rl):    High 
 
-Starting initial Timing Analysis.  REAL time: 0 secs 
-Finished initial Timing Analysis.  REAL time: 0 secs 
+Starting initial Timing Analysis.  REAL time: 1 secs 
+Finished initial Timing Analysis.  REAL time: 1 secs 
 
 
 Starting Placer
-Total REAL time at the beginning of Placer: 0 secs 
+Total REAL time at the beginning of Placer: 1 secs 
 Total CPU  time at the beginning of Placer: 0 secs 
 
 Phase 1.1  Initial Placement Analysis
-Phase 1.1  Initial Placement Analysis (Checksum:c5d) REAL time: 1 secs 
+Phase 1.1  Initial Placement Analysis (Checksum:92f) REAL time: 1 secs 
 
 Phase 2.7  Design Feasibility Check
-Phase 2.7  Design Feasibility Check (Checksum:c5d) REAL time: 1 secs 
+Phase 2.7  Design Feasibility Check (Checksum:92f) REAL time: 1 secs 
 
 Phase 3.31  Local Placement Optimization
-Phase 3.31  Local Placement Optimization (Checksum:c5d) REAL time: 1 secs 
+Phase 3.31  Local Placement Optimization (Checksum:92f) REAL time: 1 secs 
 
 Phase 4.2  Initial Clock and IO Placement
-............
-Phase 4.2  Initial Clock and IO Placement (Checksum:8e1757d) REAL time: 1 secs 
+........
+Phase 4.2  Initial Clock and IO Placement (Checksum:7b21c3f) REAL time: 1 secs 
 
 Phase 5.36  Local Placement Optimization
-Phase 5.36  Local Placement Optimization (Checksum:8e1757d) REAL time: 1 secs 
+Phase 5.36  Local Placement Optimization (Checksum:7b21c3f) REAL time: 1 secs 
 
 Phase 6.3  Local Placement Optimization
 .........
-Phase 6.3  Local Placement Optimization (Checksum:4660ea14) REAL time: 1 secs 
+Phase 6.3  Local Placement Optimization (Checksum:1c774224) REAL time: 1 secs 
 
 Phase 7.5  Local Placement Optimization
-Phase 7.5  Local Placement Optimization (Checksum:4660ea14) REAL time: 1 secs 
+Phase 7.5  Local Placement Optimization (Checksum:1c774224) REAL time: 1 secs 
 
 Phase 8.8  Global Placement
+....
 ..
-..
-Phase 8.8  Global Placement (Checksum:6fe477d6) REAL time: 1 secs 
+Phase 8.8  Global Placement (Checksum:2a21c7a) REAL time: 2 secs 
 
 Phase 9.5  Local Placement Optimization
-Phase 9.5  Local Placement Optimization (Checksum:6fe477d6) REAL time: 1 secs 
+Phase 9.5  Local Placement Optimization (Checksum:2a21c7a) REAL time: 2 secs 
 
 Phase 10.18  Placement Optimization
-Phase 10.18  Placement Optimization (Checksum:64936163) REAL time: 2 secs 
+Phase 10.18  Placement Optimization (Checksum:8735924) REAL time: 2 secs 
 
 Phase 11.5  Local Placement Optimization
-Phase 11.5  Local Placement Optimization (Checksum:64936163) REAL time: 2 secs 
+Phase 11.5  Local Placement Optimization (Checksum:8735924) REAL time: 2 secs 
 
 Total REAL time to Placer completion: 2 secs 
 Total CPU  time to Placer completion: 1 secs 
@@ -93,13 +93,13 @@ Writing design to file keyGen.ncd
 Starting Router
 
 
-Phase  1  : 405 unrouted;      REAL time: 2 secs 
+Phase  1  : 319 unrouted;      REAL time: 2 secs 
 
-Phase  2  : 343 unrouted;      REAL time: 2 secs 
+Phase  2  : 257 unrouted;      REAL time: 2 secs 
 
-Phase  3  : 136 unrouted;      REAL time: 2 secs 
+Phase  3  : 82 unrouted;      REAL time: 2 secs 
 
-Phase  4  : 141 unrouted; (Par is working to improve performance)     REAL time: 2 secs 
+Phase  4  : 109 unrouted; (Par is working to improve performance)     REAL time: 2 secs 
 
 Phase  5  : 0 unrouted; (Par is working to improve performance)     REAL time: 2 secs 
 
@@ -107,15 +107,15 @@ Updating file: keyGen.ncd with current fully routed design.
 
 Phase  6  : 0 unrouted; (Par is working to improve performance)     REAL time: 2 secs 
 
-Phase  7  : 0 unrouted; (Par is working to improve performance)     REAL time: 2 secs 
+Phase  7  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 secs 
 
-Phase  8  : 0 unrouted; (Par is working to improve performance)     REAL time: 2 secs 
+Phase  8  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 secs 
 
-Phase  9  : 0 unrouted; (Par is working to improve performance)     REAL time: 2 secs 
+Phase  9  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 secs 
 
-Phase 10  : 0 unrouted; (Par is working to improve performance)     REAL time: 2 secs 
+Phase 10  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 secs 
 
-Total REAL time to Router completion: 2 secs 
+Total REAL time to Router completion: 3 secs 
 Total CPU time to Router completion: 2 secs 
 
 Partition Implementation Status
@@ -154,8 +154,8 @@ Asterisk (*) preceding a constraint indicates it was not met.
   Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
                                             |             |    Slack   | Achievable | Errors |    Score   
 ----------------------------------------------------------------------------------------------------------
-  Autotimespec constraint for clock net CLK | SETUP       |         N/A|     7.627ns|     N/A|           0
-  _BUFGP                                    | HOLD        |     0.953ns|            |       0|           0
+  Autotimespec constraint for clock net CLK | SETUP       |         N/A|     7.673ns|     N/A|           0
+  _BUFGP                                    | HOLD        |     0.899ns|            |       0|           0
 ----------------------------------------------------------------------------------------------------------
 
 
@@ -171,10 +171,10 @@ Generating Pad Report.
 
 All signals are completely routed.
 
-Total REAL time to PAR completion: 2 secs 
+Total REAL time to PAR completion: 3 secs 
 Total CPU time to PAR completion: 2 secs 
 
-Peak Memory Usage:  361 MB
+Peak Memory Usage:  372 MB
 
 Placement: Completed - No errors found.
 Routing: Completed - No errors found.

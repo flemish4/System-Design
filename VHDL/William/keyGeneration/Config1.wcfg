@@ -19,7 +19,10 @@
    <WVObjectSize size="7" />
    <wave_markers>
       <marker time="425000000" label="" />
-      <marker time="575100000" label="" />
+      <marker time="395000000" label="" />
+      <marker time="415100000" label="" />
+      <marker time="565100000" label="" />
+      <marker time="573671000" label="" />
    </wave_markers>
    <wvobject fp_name="group35" type="group">
       <obj_property name="label">Top Level</obj_property>
@@ -190,6 +193,10 @@
          <obj_property name="ElementShortName">s0selout</obj_property>
          <obj_property name="ObjectShortName">s0selout</obj_property>
       </wvobject>
+      <wvobject fp_name="/tb_keygen/uut/controller/s1selout" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">s1selout</obj_property>
+         <obj_property name="ObjectShortName">s1selout</obj_property>
+      </wvobject>
       <wvobject fp_name="/tb_keygen/uut/controller/srlenable" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">srlenable</obj_property>
          <obj_property name="ObjectShortName">srlenable</obj_property>
@@ -225,10 +232,6 @@
       <wvobject fp_name="/tb_keygen/uut/controller/enablestart" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">enablestart</obj_property>
          <obj_property name="ObjectShortName">enablestart</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_keygen/uut/controller/s1selout" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">s1selout</obj_property>
-         <obj_property name="ObjectShortName">s1selout</obj_property>
       </wvobject>
       <wvobject fp_name="/tb_keygen/uut/controller/s1endout" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">s1endout</obj_property>

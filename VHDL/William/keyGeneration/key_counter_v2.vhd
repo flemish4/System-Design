@@ -48,15 +48,18 @@ signal 	enable 			: std_logic := '0';
 signal   SRLEnableR		: std_logic := '0';
 signal 	addrEnableR		: std_logic := '0';
 signal 	enableStart 	: std_logic; -- REVISIT : This may be hacky?
-constant NaddrI 			: integer := Ncycles;
-constant FaddrI 			: integer := 5 - Ncycles - 2; -- F - FiveAddr
-constant FNaddrI 			: integer := Ncycles - 2; -- N cycles delay but shorten signal by 1
+constant NaddrI 			: integer := Ncycles -1;
+constant FaddrI 			: integer := 5 - Ncycles - 3; -- F - FiveAddr
+constant FNaddrI 			: integer := Ncycles - 1; -- N cycles delay but shorten signal by 1
 constant Naddr  	  		: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(NaddrI, 4));
 constant Faddr  			: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(FaddrI, 4));
 constant FNaddr			: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(FNaddrI, 4));
 signal 	s0SelOut  		: std_logic;
 signal 	s1SelOut  		: std_logic;
-signal 	s1EndOut  		: std_logic;
+--signal 	s1EndOut  		: std_logic;
+signal 	addrEnDel  		: std_logic;
+signal 	endCond  		: std_logic;
+signal 	SRLCECount  	: std_logic := '1';
 --signal 	RConSelR			: std_logic := '0';
 begin	
 	-- Handle the enable switch - one cycle of start will enable the clock until reset or end
@@ -64,7 +67,7 @@ begin
 		if rising_edge(clk) then
 			if start = '1' then
 				enable <= '1';
-			elsif  rst = '1' or s1EndOut = '1' then
+			elsif  rst = '1' or endCond = '1' then
 				enable <= '0';
 			else
 				enable <= enable;
@@ -129,7 +132,7 @@ begin
 			A1 => Naddr(1), -- Select[1] input
 			A2 => Naddr(2), -- Select[2] input
 			A3 => Naddr(3), -- Select[3] input
-			CE => enableStart, -- Clock enable input
+			CE => SRLCECount, -- Clock enable input
 			CLK => CLK, -- Clock input
 			D => start -- SRL data input
 		);		
@@ -138,12 +141,12 @@ begin
 			INIT => X"0000")
 		port map (
 			Q => s1SelOut, -- SRL data output
-			Q15 => s1EndOut, -- Carry output (connect to next SRL)
+			--Q15 => s1EndOut, -- Carry output (connect to next SRL)
 			A0 => Faddr(0), -- Select[0] input
 			A1 => Faddr(1), -- Select[1] input
 			A2 => Faddr(2), -- Select[2] input
 			A3 => Faddr(3), -- Select[3] input
-			CE => enableStart, -- Clock enable input
+			CE => SRLCECount, -- Clock enable input
 			CLK => CLK, -- Clock input
 			D => s0SelOut -- SRL data input
 		);	
@@ -151,26 +154,26 @@ begin
 		generic map (
 			INIT => X"0000")
 		port map (
-			Q => FRowSel, -- SRL data output
-			--Q15 => , -- Carry output (connect to next SRL)
+			Q => addrEnDel, -- SRL data output
+			Q15 => endCond, -- Carry output (connect to next SRL)
 			A0 => FNaddr(0), -- Select[0] input
 			A1 => FNaddr(1), -- Select[1] input
 			A2 => FNaddr(2), -- Select[2] input
 			A3 => FNaddr(3), -- Select[3] input
-			CE => enableStart, -- Clock enable input
+			CE => SRLCECount, -- Clock enable input
 			CLK => CLK, -- Clock input
 			D => addrEnableR -- SRL data input
 		);
 
 		
-		
+	FRowSel	<= s0SelOut or addrEnDel;
 	enableStart <= enable or start;	
 	runAll <= enableStart;
 --	SRLStart <= '1' when s0SelOut = '1' else
 --				  '0'; -- Start when counter = Ncycles
 --	addrStop <= '1' when s1SelOut = '1' else
 --				  '0'; -- stop address when counter =5
-	addrEnable <= addrEnableR;			  
+	addrEnable <= addrEnableR or start;			  
 	SRLEnable <= (SRLEnableR or s0selout) and enable;			
 	RConEn     <= s0SelOut;
 	RConSel		<= s0SelOut; --RConSelR;

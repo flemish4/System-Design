@@ -3,14 +3,14 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> Parameter TMPDIR set to xst/projnav.tmp
 
 
-Total REAL time to Xst completion: 1.00 secs
-Total CPU time to Xst completion: 0.33 secs
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.39 secs
  
 --> Parameter xsthdpdir set to xst
 
 
-Total REAL time to Xst completion: 1.00 secs
-Total CPU time to Xst completion: 0.33 secs
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.39 secs
  
 --> Reading design: keyGen.prj
 
@@ -106,56 +106,51 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 Compiling vhdl file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/key_counter_v2.vhd" in Library work.
 Entity <key_counter_v2> compiled.
-Entity <key_counter_v2> (Architecture <Behavioral>) compiled.
+Entity <key_counter_v2> (Architecture <behavioral>) compiled.
 Compiling vhdl file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/srl16_8.vhd" in Library work.
-Entity <srl16_8> compiled.
-Entity <srl16_8> (Architecture <Behavioral>) compiled.
+Architecture behavioral of Entity srl16_8 is up to date.
 Compiling vhdl file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/addr_gen.vhd" in Library work.
-Entity <addr_gen> compiled.
-Entity <addr_gen> (Architecture <Behavioral>) compiled.
+Architecture behavioral of Entity addr_gen is up to date.
 Compiling vhdl file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/subBytes_CHEAT.vhd" in Library work.
-Entity <SUBBYTES> compiled.
-Entity <SUBBYTES> (Architecture <RTL>) compiled.
+Architecture rtl of Entity subbytes is up to date.
 Compiling vhdl file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/RCon_gen.vhd" in Library work.
-Entity <RCon_gen> compiled.
-Entity <RCon_gen> (Architecture <Behavioral>) compiled.
+Architecture behavioral of Entity rcon_gen is up to date.
 Compiling vhdl file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/keyGen.vhd" in Library work.
-Entity <keyGen> compiled.
-Entity <keyGen> (Architecture <Behavioral>) compiled.
+Architecture behavioral of Entity keygen is up to date.
 
 =========================================================================
 *                     Design Hierarchy Analysis                         *
 =========================================================================
-Analyzing hierarchy for entity <keyGen> in library <work> (architecture <Behavioral>) with generics.
+Analyzing hierarchy for entity <keyGen> in library <work> (architecture <behavioral>) with generics.
 	subBytesN = 2
 
-Analyzing hierarchy for entity <key_counter_v2> in library <work> (architecture <Behavioral>) with generics.
+Analyzing hierarchy for entity <key_counter_v2> in library <work> (architecture <behavioral>) with generics.
 	Ncycles = 2
 
-Analyzing hierarchy for entity <srl16_8> in library <work> (architecture <Behavioral>).
+Analyzing hierarchy for entity <srl16_8> in library <work> (architecture <behavioral>).
 
-Analyzing hierarchy for entity <addr_gen> in library <work> (architecture <Behavioral>).
+Analyzing hierarchy for entity <addr_gen> in library <work> (architecture <behavioral>).
 
-Analyzing hierarchy for entity <SUBBYTES> in library <work> (architecture <RTL>).
+Analyzing hierarchy for entity <SUBBYTES> in library <work> (architecture <rtl>).
 
-Analyzing hierarchy for entity <RCon_gen> in library <work> (architecture <Behavioral>).
+Analyzing hierarchy for entity <RCon_gen> in library <work> (architecture <behavioral>).
 
 
 =========================================================================
 *                            HDL Analysis                               *
 =========================================================================
-Analyzing generic Entity <keyGen> in library <work> (Architecture <Behavioral>).
+Analyzing generic Entity <keyGen> in library <work> (Architecture <behavioral>).
 	subBytesN = 2
 Entity <keyGen> analyzed. Unit <keyGen> generated.
 
-Analyzing generic Entity <key_counter_v2> in library <work> (Architecture <Behavioral>).
+Analyzing generic Entity <key_counter_v2> in library <work> (Architecture <behavioral>).
 	Ncycles = 2
     Set user-defined property "INIT =  0000" for instance <SRLC16E_0> in unit <key_counter_v2>.
     Set user-defined property "INIT =  0000" for instance <SRLC16E_1> in unit <key_counter_v2>.
     Set user-defined property "INIT =  0000" for instance <SRLC16E_5Delay> in unit <key_counter_v2>.
 Entity <key_counter_v2> analyzed. Unit <key_counter_v2> generated.
 
-Analyzing Entity <srl16_8> in library <work> (Architecture <Behavioral>).
+Analyzing Entity <srl16_8> in library <work> (Architecture <behavioral>).
     Set user-defined property "INIT =  0000" for instance <GEN_SRLS[0].SRLC16E_inst> in unit <srl16_8>.
     Set user-defined property "INIT =  0000" for instance <GEN_SRLS[1].SRLC16E_inst> in unit <srl16_8>.
     Set user-defined property "INIT =  0000" for instance <GEN_SRLS[2].SRLC16E_inst> in unit <srl16_8>.
@@ -166,13 +161,13 @@ Analyzing Entity <srl16_8> in library <work> (Architecture <Behavioral>).
     Set user-defined property "INIT =  0000" for instance <GEN_SRLS[7].SRLC16E_inst> in unit <srl16_8>.
 Entity <srl16_8> analyzed. Unit <srl16_8> generated.
 
-Analyzing Entity <addr_gen> in library <work> (Architecture <Behavioral>).
+Analyzing Entity <addr_gen> in library <work> (Architecture <behavioral>).
 Entity <addr_gen> analyzed. Unit <addr_gen> generated.
 
-Analyzing Entity <SUBBYTES> in library <work> (Architecture <RTL>).
+Analyzing Entity <SUBBYTES> in library <work> (Architecture <rtl>).
 Entity <SUBBYTES> analyzed. Unit <SUBBYTES> generated.
 
-Analyzing Entity <RCon_gen> in library <work> (Architecture <Behavioral>).
+Analyzing Entity <RCon_gen> in library <work> (Architecture <behavioral>).
 Entity <RCon_gen> analyzed. Unit <RCon_gen> generated.
 
 
@@ -366,14 +361,13 @@ Design Statistics
 # IOs                              : 20
 
 Cell Usage :
-# BELS                             : 96
+# BELS                             : 57
 #      GND                         : 2
 #      INV                         : 1
-#      LUT2                        : 13
-#      LUT2_L                      : 8
-#      LUT3                        : 24
-#      LUT4                        : 31
-#      MUXF5                       : 16
+#      LUT2                        : 14
+#      LUT3                        : 16
+#      LUT4                        : 15
+#      LUT4_L                      : 8
 #      VCC                         : 1
 # FlipFlops/Latches                : 22
 #      FD                          : 4
@@ -397,10 +391,10 @@ Device utilization summary:
 
 Selected Device : 3s200tq144-4 
 
- Number of Slices:                       45  out of   1920     2%  
+ Number of Slices:                       34  out of   1920     1%  
  Number of Slice Flip Flops:             22  out of   3840     0%  
- Number of 4 input LUTs:                 88  out of   3840     2%  
-    Number used as logic:                77
+ Number of 4 input LUTs:                 65  out of   3840     1%  
+    Number used as logic:                54
     Number used as Shift registers:      11
  Number of IOs:                          20
  Number of bonded IOBs:                  20  out of     97    20%  
@@ -439,10 +433,10 @@ Timing Summary:
 ---------------
 Speed Grade: -4
 
-   Minimum period: 7.228ns (Maximum Frequency: 138.351MHz)
-   Minimum input arrival time before clock: 5.772ns
-   Maximum output required time after clock: 13.310ns
-   Maximum combinational path delay: 11.854ns
+   Minimum period: 7.391ns (Maximum Frequency: 135.300MHz)
+   Minimum input arrival time before clock: 4.788ns
+   Maximum output required time after clock: 13.473ns
+   Maximum combinational path delay: 9.212ns
 
 Timing Detail:
 --------------
@@ -450,10 +444,10 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'CLK'
-  Clock period: 7.228ns (frequency: 138.351MHz)
-  Total number of paths / destination ports: 237 / 83
+  Clock period: 7.391ns (frequency: 135.300MHz)
+  Total number of paths / destination ports: 205 / 83
 -------------------------------------------------------------------------
-Delay:               7.228ns (Levels of Logic = 3)
+Delay:               7.391ns (Levels of Logic = 3)
   Source:            controller/SRLC16E_5Delay (FF)
   Destination:       keyStore/GEN_SRLS[7].SRLC16E_inst (FF)
   Source Clock:      CLK rising
@@ -463,42 +457,40 @@ Delay:               7.228ns (Levels of Logic = 3)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     SRLC16E:CLK->Q       16   3.195   1.263  controller/SRLC16E_5Delay (FRowSel)
-     LUT4:I3->O            1   0.551   0.000  QMux<7>_SW1_F (N64)
-     MUXF5:I0->O           1   0.360   0.869  QMux<7>_SW1 (N40)
-     LUT4:I2->O            2   0.551   0.000  newKey<7>1 (keyout_7_OBUF)
+     SRLC16E:CLK->Q        8   3.195   1.151  controller/SRLC16E_5Delay (controller/addrEnDel)
+     LUT3:I2->O            1   0.551   0.827  QMux<7>_SW1 (N40)
+     LUT4_L:I3->LO         1   0.551   0.126  QMux<7> (QMux<7>)
+     LUT4:I3->O            2   0.551   0.000  newKey<7>1 (keyout_7_OBUF)
      SRLC16E:D                 0.439          keyStore/GEN_SRLS[7].SRLC16E_inst
     ----------------------------------------
-    Total                      7.228ns (5.096ns logic, 2.132ns route)
-                                       (70.5% logic, 29.5% route)
+    Total                      7.391ns (5.287ns logic, 2.104ns route)
+                                       (71.5% logic, 28.5% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'CLK'
-  Total number of paths / destination ports: 96 / 37
+  Total number of paths / destination ports: 51 / 40
 -------------------------------------------------------------------------
-Offset:              5.772ns (Levels of Logic = 4)
-  Source:            keyInEn (PAD)
-  Destination:       keyStore/GEN_SRLS[7].SRLC16E_inst (FF)
+Offset:              4.788ns (Levels of Logic = 2)
+  Source:            RST (PAD)
+  Destination:       addr_generator/counter_2 (FF)
   Destination Clock: CLK rising
 
-  Data Path: keyInEn to keyStore/GEN_SRLS[7].SRLC16E_inst
+  Data Path: RST to addr_generator/counter_2
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            33   0.821   2.054  keyInEn_IBUF (keyInEn_IBUF)
-     LUT3:I1->O            1   0.551   0.000  QMux<7>_SW2_G (N67)
-     MUXF5:I1->O           1   0.360   0.996  QMux<7>_SW2 (N41)
-     LUT4:I1->O            2   0.551   0.000  newKey<7>1 (keyout_7_OBUF)
-     SRLC16E:D                 0.439          keyStore/GEN_SRLS[7].SRLC16E_inst
+     IBUF:I->O            11   0.821   1.483  RST_IBUF (subByte/RESET)
+     LUT3:I0->O            3   0.551   0.907  addr_generator/counter_or00001 (addr_generator/counter_or0000)
+     FDRE:R                    1.026          addr_generator/counter_0
     ----------------------------------------
-    Total                      5.772ns (2.722ns logic, 3.050ns route)
-                                       (47.2% logic, 52.8% route)
+    Total                      4.788ns (2.398ns logic, 2.390ns route)
+                                       (50.1% logic, 49.9% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'CLK'
-  Total number of paths / destination ports: 88 / 8
+  Total number of paths / destination ports: 56 / 8
 -------------------------------------------------------------------------
-Offset:              13.310ns (Levels of Logic = 4)
+Offset:              13.473ns (Levels of Logic = 4)
   Source:            controller/SRLC16E_5Delay (FF)
   Destination:       keyout<7> (PAD)
   Source Clock:      CLK rising
@@ -507,20 +499,20 @@ Offset:              13.310ns (Levels of Logic = 4)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     SRLC16E:CLK->Q       16   3.195   1.263  controller/SRLC16E_5Delay (FRowSel)
-     LUT4:I3->O            1   0.551   0.000  QMux<7>_SW1_F (N64)
-     MUXF5:I0->O           1   0.360   0.869  QMux<7>_SW1 (N40)
-     LUT4:I2->O            2   0.551   0.877  newKey<7>1 (keyout_7_OBUF)
+     SRLC16E:CLK->Q        8   3.195   1.151  controller/SRLC16E_5Delay (controller/addrEnDel)
+     LUT3:I2->O            1   0.551   0.827  QMux<7>_SW1 (N40)
+     LUT4_L:I3->LO         1   0.551   0.126  QMux<7> (QMux<7>)
+     LUT4:I3->O            2   0.551   0.877  newKey<7>1 (keyout_7_OBUF)
      OBUF:I->O                 5.644          keyout_7_OBUF (keyout<7>)
     ----------------------------------------
-    Total                     13.310ns (10.301ns logic, 3.009ns route)
-                                       (77.4% logic, 22.6% route)
+    Total                     13.473ns (10.492ns logic, 2.981ns route)
+                                       (77.9% logic, 22.1% route)
 
 =========================================================================
 Timing constraint: Default path analysis
-  Total number of paths / destination ports: 64 / 8
+  Total number of paths / destination ports: 16 / 8
 -------------------------------------------------------------------------
-Delay:               11.854ns (Levels of Logic = 5)
+Delay:               9.212ns (Levels of Logic = 3)
   Source:            keyInEn (PAD)
   Destination:       keyout<7> (PAD)
 
@@ -528,24 +520,22 @@ Delay:               11.854ns (Levels of Logic = 5)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            33   0.821   2.054  keyInEn_IBUF (keyInEn_IBUF)
-     LUT3:I1->O            1   0.551   0.000  QMux<7>_SW2_G (N67)
-     MUXF5:I1->O           1   0.360   0.996  QMux<7>_SW2 (N41)
+     IBUF:I->O             9   0.821   1.319  keyInEn_IBUF (keyInEn_IBUF)
      LUT4:I1->O            2   0.551   0.877  newKey<7>1 (keyout_7_OBUF)
      OBUF:I->O                 5.644          keyout_7_OBUF (keyout<7>)
     ----------------------------------------
-    Total                     11.854ns (7.927ns logic, 3.927ns route)
-                                       (66.9% logic, 33.1% route)
+    Total                      9.212ns (7.016ns logic, 2.196ns route)
+                                       (76.2% logic, 23.8% route)
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 5.00 secs
-Total CPU time to Xst completion: 4.57 secs
+Total REAL time to Xst completion: 4.00 secs
+Total CPU time to Xst completion: 4.49 secs
  
 --> 
 
-Total memory usage is 361396 kilobytes
+Total memory usage is 361460 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    3 (   0 filtered)

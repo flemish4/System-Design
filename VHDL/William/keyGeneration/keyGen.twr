@@ -44,17 +44,17 @@ Setup/Hold to clock CLK
             |Max Setup to|Max Hold to |                  | Clock  |
 Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------------+--------+
-RST         |    4.782(R)|    0.602(R)|CLK_BUFGP         |   0.000|
-Start       |    3.831(R)|    0.456(R)|CLK_BUFGP         |   0.000|
-keyIn<0>    |    3.078(R)|   -1.302(R)|CLK_BUFGP         |   0.000|
-keyIn<1>    |    3.009(R)|   -1.067(R)|CLK_BUFGP         |   0.000|
-keyIn<2>    |    2.882(R)|   -1.066(R)|CLK_BUFGP         |   0.000|
-keyIn<3>    |    2.809(R)|   -1.021(R)|CLK_BUFGP         |   0.000|
-keyIn<4>    |    3.796(R)|   -1.583(R)|CLK_BUFGP         |   0.000|
-keyIn<5>    |    4.469(R)|   -1.758(R)|CLK_BUFGP         |   0.000|
-keyIn<6>    |    4.135(R)|   -1.908(R)|CLK_BUFGP         |   0.000|
-keyIn<7>    |    3.701(R)|   -1.726(R)|CLK_BUFGP         |   0.000|
-keyInEn     |    5.914(R)|   -1.414(R)|CLK_BUFGP         |   0.000|
+RST         |    5.637(R)|    0.637(R)|CLK_BUFGP         |   0.000|
+Start       |    3.774(R)|    0.723(R)|CLK_BUFGP         |   0.000|
+keyIn<0>    |    1.900(R)|   -0.427(R)|CLK_BUFGP         |   0.000|
+keyIn<1>    |    2.782(R)|   -1.133(R)|CLK_BUFGP         |   0.000|
+keyIn<2>    |    2.526(R)|   -0.928(R)|CLK_BUFGP         |   0.000|
+keyIn<3>    |    2.927(R)|   -1.251(R)|CLK_BUFGP         |   0.000|
+keyIn<4>    |    2.981(R)|   -1.294(R)|CLK_BUFGP         |   0.000|
+keyIn<5>    |    3.709(R)|   -1.876(R)|CLK_BUFGP         |   0.000|
+keyIn<6>    |    2.543(R)|   -0.944(R)|CLK_BUFGP         |   0.000|
+keyIn<7>    |    2.177(R)|   -0.650(R)|CLK_BUFGP         |   0.000|
+keyInEn     |    4.462(R)|   -1.237(R)|CLK_BUFGP         |   0.000|
 ------------+------------+------------+------------------+--------+
 
 Clock CLK to Pad
@@ -62,14 +62,14 @@ Clock CLK to Pad
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-keyout<0>   |   15.362(R)|CLK_BUFGP         |   0.000|
-keyout<1>   |   15.231(R)|CLK_BUFGP         |   0.000|
-keyout<2>   |   14.845(R)|CLK_BUFGP         |   0.000|
-keyout<3>   |   14.418(R)|CLK_BUFGP         |   0.000|
-keyout<4>   |   14.949(R)|CLK_BUFGP         |   0.000|
-keyout<5>   |   15.393(R)|CLK_BUFGP         |   0.000|
-keyout<6>   |   14.444(R)|CLK_BUFGP         |   0.000|
-keyout<7>   |   14.306(R)|CLK_BUFGP         |   0.000|
+keyout<0>   |   15.333(R)|CLK_BUFGP         |   0.000|
+keyout<1>   |   15.463(R)|CLK_BUFGP         |   0.000|
+keyout<2>   |   15.276(R)|CLK_BUFGP         |   0.000|
+keyout<3>   |   14.134(R)|CLK_BUFGP         |   0.000|
+keyout<4>   |   14.825(R)|CLK_BUFGP         |   0.000|
+keyout<5>   |   14.107(R)|CLK_BUFGP         |   0.000|
+keyout<6>   |   14.664(R)|CLK_BUFGP         |   0.000|
+keyout<7>   |   15.176(R)|CLK_BUFGP         |   0.000|
 ------------+------------+------------------+--------+
 
 Clock to Setup on destination clock CLK
@@ -77,33 +77,33 @@ Clock to Setup on destination clock CLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-CLK            |    7.627|         |         |         |
+CLK            |    7.673|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 Pad to Pad
 ---------------+---------------+---------+
 Source Pad     |Destination Pad|  Delay  |
 ---------------+---------------+---------+
-keyIn<0>       |keyout<0>      |   10.548|
-keyIn<1>       |keyout<1>      |   10.566|
-keyIn<2>       |keyout<2>      |   10.113|
-keyIn<3>       |keyout<3>      |    9.685|
-keyIn<4>       |keyout<4>      |   10.909|
-keyIn<5>       |keyout<5>      |   11.695|
-keyIn<6>       |keyout<6>      |   10.466|
-keyIn<7>       |keyout<7>      |   10.066|
-keyInEn        |keyout<0>      |   12.128|
-keyInEn        |keyout<1>      |   11.922|
-keyInEn        |keyout<2>      |   12.157|
-keyInEn        |keyout<3>      |   11.108|
-keyInEn        |keyout<4>      |   12.616|
-keyInEn        |keyout<5>      |   12.190|
-keyInEn        |keyout<6>      |   11.548|
-keyInEn        |keyout<7>      |   12.279|
+keyIn<0>       |keyout<0>      |    9.020|
+keyIn<1>       |keyout<1>      |   10.038|
+keyIn<2>       |keyout<2>      |    9.873|
+keyIn<3>       |keyout<3>      |    9.653|
+keyIn<4>       |keyout<4>      |    9.833|
+keyIn<5>       |keyout<5>      |   10.258|
+keyIn<6>       |keyout<6>      |    9.231|
+keyIn<7>       |keyout<7>      |    9.239|
+keyInEn        |keyout<0>      |   10.032|
+keyInEn        |keyout<1>      |   10.376|
+keyInEn        |keyout<2>      |   10.765|
+keyInEn        |keyout<3>      |    9.748|
+keyInEn        |keyout<4>      |   10.777|
+keyInEn        |keyout<5>      |    9.969|
+keyInEn        |keyout<6>      |    9.843|
+keyInEn        |keyout<7>      |   10.474|
 ---------------+---------------+---------+
 
 
-Analysis completed Mon Jan 29 22:52:22 2018 
+Analysis completed Tue Jan 30 00:42:33 2018 
 --------------------------------------------------------------------------------
 
 Trace Settings:
