@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2018-01-30T00:43:16</DateModified>
+  <DateModified>2018-02-03T12:02:27</DateModified>
   <ModuleName>keyGen</ModuleName>
   <SummaryTimeStamp>2018-01-30T00:42:38</SummaryTimeStamp>
-  <SavedFilePath>E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/iseconfig/keyGen.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration</ImplementationReportsDirectory>
+  <SavedFilePath>E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/iseconfig/keyGen.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration\</ImplementationReportsDirectory>
   <DateInitialized>2018-01-26T00:48:58</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

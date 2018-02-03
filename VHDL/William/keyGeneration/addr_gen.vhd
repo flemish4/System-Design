@@ -33,6 +33,7 @@ entity addr_gen is
     Port ( 
 			  genEn : in STD_LOGIC;
            en : in  STD_LOGIC;
+           inv : in  STD_LOGIC;
            rst : in  STD_LOGIC;
            clk : in  STD_LOGIC;
            addr : out  STD_LOGIC_VECTOR (3 downto 0));
@@ -57,11 +58,21 @@ process (clk) begin
 	end if;
 end process;
 
-	addr <= 	"0010" when counter = "000" else
-				"0001" when counter = "001" else
-				"0000" when counter = "010" else
-				"0100" when counter = "011" else
-				"0011";
-
+	addrF <= 	"0010" when counter = "000" else
+					"0001" when counter = "001" else
+					"0000" when counter = "010" else
+					"0100" when counter = "011" else
+					"0011";
+					
+	addrI <= 	"1011" when counter = "000" else
+					"0000" when counter = "001" else
+					"0000" when counter = "010" else
+					"0000" when counter = "011" else
+					"0010" when counter = "011" else
+					"1011"; -- reset necessary?
+					
+	addr  <=    addrF when inv = '0' else
+					addrI;
+					
 end Behavioral;
 

@@ -34,6 +34,7 @@ entity keyGen is
     Port ( keyIn : in  STD_LOGIC_VECTOR (7 downto 0);
            CLK : in  STD_LOGIC;
            RST : in  STD_LOGIC;
+           INV : in  STD_LOGIC;
            Start : in  STD_LOGIC;
 			  keyInEn : in STD_LOGIC;
            keyout : out  STD_LOGIC_VECTOR (7 downto 0)
@@ -71,6 +72,7 @@ component addr_gen is
     Port ( 
 			  genEn : in STD_LOGIC;
            en : in  STD_LOGIC;
+           inv : in  STD_LOGIC;
            rst : in  STD_LOGIC;
            clk : in  STD_LOGIC;
            addr : out  STD_LOGIC_VECTOR (3 downto 0));
@@ -88,6 +90,7 @@ component RCon_gen is
     Port ( en : in  STD_LOGIC;
            clk : in  STD_LOGIC;
            rst : in  STD_LOGIC;
+           INV : in  STD_LOGIC;
            rcon : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 --		  key_in : in  STD_LOGIC_VECTOR (7 downto 0);
@@ -141,6 +144,7 @@ addr_generator : addr_gen
     Port map ( 
 			  genEn => genEn,
            en => AddrEn,
+           inv => inv,
            rst => rst,
            clk => clk,
            addr => addr );
@@ -156,6 +160,7 @@ RCon_generator : RCon_gen
     Port map ( en => RConEn ,
            clk => clk,
            rst => rst,
+           INV => INV,
            rcon => Rcon );
 			    
 	keyOut <= newKey;

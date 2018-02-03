@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.39 secs
+Total CPU time to Xst completion: 0.14 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.39 secs
+Total CPU time to Xst completion: 0.14 secs
  
 --> Reading design: keyGen.prj
 
@@ -104,19 +104,19 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 *                          HDL Compilation                              *
 =========================================================================
-Compiling vhdl file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/key_counter_v2.vhd" in Library work.
-Entity <key_counter_v2> compiled.
-Entity <key_counter_v2> (Architecture <behavioral>) compiled.
-Compiling vhdl file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/srl16_8.vhd" in Library work.
+Compiling vhdl file "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/key_counter_v2.vhd" in Library work.
+Architecture behavioral of Entity key_counter_v2 is up to date.
+Compiling vhdl file "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/srl16_8.vhd" in Library work.
 Architecture behavioral of Entity srl16_8 is up to date.
-Compiling vhdl file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/addr_gen.vhd" in Library work.
+Compiling vhdl file "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/addr_gen.vhd" in Library work.
 Architecture behavioral of Entity addr_gen is up to date.
-Compiling vhdl file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/subBytes_CHEAT.vhd" in Library work.
+Compiling vhdl file "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/subBytes_CHEAT.vhd" in Library work.
 Architecture rtl of Entity subbytes is up to date.
-Compiling vhdl file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/RCon_gen.vhd" in Library work.
+Compiling vhdl file "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/RCon_gen.vhd" in Library work.
 Architecture behavioral of Entity rcon_gen is up to date.
-Compiling vhdl file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/keyGen.vhd" in Library work.
-Architecture behavioral of Entity keygen is up to date.
+Compiling vhdl file "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/keyGen.vhd" in Library work.
+Entity <keygen> compiled.
+Entity <keygen> (Architecture <behavioral>) compiled.
 
 =========================================================================
 *                     Design Hierarchy Analysis                         *
@@ -178,7 +178,7 @@ Entity <RCon_gen> analyzed. Unit <RCon_gen> generated.
 Performing bidirectional port resolution...
 
 Synthesizing Unit <addr_gen>.
-    Related source file is "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/addr_gen.vhd".
+    Related source file is "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/addr_gen.vhd".
 WARNING:Xst:1780 - Signal <enable> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
     Found 3-bit up counter for signal <counter>.
     Summary:
@@ -187,7 +187,7 @@ Unit <addr_gen> synthesized.
 
 
 Synthesizing Unit <SUBBYTES>.
-    Related source file is "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/subBytes_CHEAT.vhd".
+    Related source file is "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/subBytes_CHEAT.vhd".
 WARNING:Xst:647 - Input <INVE> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 256x8-bit ROM for signal <invout$rom0000> created at line 301.
     Found 8-bit register for signal <affine>.
@@ -214,7 +214,7 @@ Unit <SUBBYTES> synthesized.
 
 
 Synthesizing Unit <RCon_gen>.
-    Related source file is "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/RCon_gen.vhd".
+    Related source file is "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/RCon_gen.vhd".
     Found 8-bit register for signal <RConR>.
     Summary:
 	inferred   8 D-type flip-flop(s).
@@ -222,7 +222,8 @@ Unit <RCon_gen> synthesized.
 
 
 Synthesizing Unit <key_counter_v2>.
-    Related source file is "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/key_counter_v2.vhd".
+    Related source file is "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/key_counter_v2.vhd".
+WARNING:Xst:653 - Signal <SRLCECount> is used but never assigned. This sourceless signal will be automatically connected to value 1.
     Found 1-bit register for signal <addrEnableR>.
     Found 1-bit register for signal <enable>.
     Found 1-bit register for signal <SRLEnableR>.
@@ -232,12 +233,12 @@ Unit <key_counter_v2> synthesized.
 
 
 Synthesizing Unit <srl16_8>.
-    Related source file is "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/srl16_8.vhd".
+    Related source file is "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/srl16_8.vhd".
 Unit <srl16_8> synthesized.
 
 
 Synthesizing Unit <keyGen>.
-    Related source file is "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/Project/keyGeneration/keyGen.vhd".
+    Related source file is "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/keyGen.vhd".
 WARNING:Xst:653 - Signal <subInv> is used but never assigned. This sourceless signal will be automatically connected to value 0.
     Found 8-bit xor2 for signal <calcKey>.
     Found 8-bit xor2 for signal <RconOut>.
@@ -323,7 +324,7 @@ Optimizing unit <srl16_8> ...
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 5) on block keyGen, actual ratio is 1.
+Found area constraint ratio of 100 (+ 5) on block keyGen, actual ratio is 2.
 
 Final Macro Processing ...
 
@@ -358,31 +359,33 @@ Optimization Goal                  : Speed
 Keep Hierarchy                     : No
 
 Design Statistics
-# IOs                              : 20
+# IOs                              : 21
 
 Cell Usage :
-# BELS                             : 57
+# BELS                             : 73
 #      GND                         : 2
-#      INV                         : 1
-#      LUT2                        : 14
-#      LUT3                        : 16
-#      LUT4                        : 15
+#      INV                         : 2
+#      LUT2                        : 7
+#      LUT3                        : 21
+#      LUT4                        : 24
 #      LUT4_L                      : 8
+#      MUXF5                       : 8
 #      VCC                         : 1
 # FlipFlops/Latches                : 22
 #      FD                          : 4
+#      FDE                         : 8
 #      FDR                         : 4
-#      FDRE                        : 11
+#      FDRE                        : 4
 #      FDRSE                       : 1
-#      FDSE                        : 2
+#      FDSE                        : 1
 # RAMS                             : 1
 #      RAMB16                      : 1
 # Shift Registers                  : 11
 #      SRLC16E                     : 11
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
-# IO Buffers                       : 19
-#      IBUF                        : 11
+# IO Buffers                       : 20
+#      IBUF                        : 12
 #      OBUF                        : 8
 =========================================================================
 
@@ -391,13 +394,13 @@ Device utilization summary:
 
 Selected Device : 3s200tq144-4 
 
- Number of Slices:                       34  out of   1920     1%  
+ Number of Slices:                       38  out of   1920     1%  
  Number of Slice Flip Flops:             22  out of   3840     0%  
- Number of 4 input LUTs:                 65  out of   3840     1%  
-    Number used as logic:                54
+ Number of 4 input LUTs:                 73  out of   3840     1%  
+    Number used as logic:                62
     Number used as Shift registers:      11
- Number of IOs:                          20
- Number of bonded IOBs:                  20  out of     97    20%  
+ Number of IOs:                          21
+ Number of bonded IOBs:                  21  out of     97    21%  
  Number of BRAMs:                         1  out of     12     8%  
  Number of GCLKs:                         1  out of      8    12%  
 
@@ -434,7 +437,7 @@ Timing Summary:
 Speed Grade: -4
 
    Minimum period: 7.391ns (Maximum Frequency: 135.300MHz)
-   Minimum input arrival time before clock: 4.788ns
+   Minimum input arrival time before clock: 5.061ns
    Maximum output required time after clock: 13.473ns
    Maximum combinational path delay: 9.212ns
 
@@ -445,7 +448,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'CLK'
   Clock period: 7.391ns (frequency: 135.300MHz)
-  Total number of paths / destination ports: 205 / 83
+  Total number of paths / destination ports: 222 / 80
 -------------------------------------------------------------------------
 Delay:               7.391ns (Levels of Logic = 3)
   Source:            controller/SRLC16E_5Delay (FF)
@@ -458,7 +461,7 @@ Delay:               7.391ns (Levels of Logic = 3)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      SRLC16E:CLK->Q        8   3.195   1.151  controller/SRLC16E_5Delay (controller/addrEnDel)
-     LUT3:I2->O            1   0.551   0.827  QMux<7>_SW1 (N40)
+     LUT3:I2->O            1   0.551   0.827  QMux<7>_SW1 (N59)
      LUT4_L:I3->LO         1   0.551   0.126  QMux<7> (QMux<7>)
      LUT4:I3->O            2   0.551   0.000  newKey<7>1 (keyout_7_OBUF)
      SRLC16E:D                 0.439          keyStore/GEN_SRLS[7].SRLC16E_inst
@@ -468,9 +471,9 @@ Delay:               7.391ns (Levels of Logic = 3)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'CLK'
-  Total number of paths / destination ports: 51 / 40
+  Total number of paths / destination ports: 73 / 45
 -------------------------------------------------------------------------
-Offset:              4.788ns (Levels of Logic = 2)
+Offset:              5.061ns (Levels of Logic = 2)
   Source:            RST (PAD)
   Destination:       addr_generator/counter_2 (FF)
   Destination Clock: CLK rising
@@ -479,12 +482,12 @@ Offset:              4.788ns (Levels of Logic = 2)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            11   0.821   1.483  RST_IBUF (subByte/RESET)
+     IBUF:I->O            18   0.821   1.756  RST_IBUF (subByte/RESET)
      LUT3:I0->O            3   0.551   0.907  addr_generator/counter_or00001 (addr_generator/counter_or0000)
      FDRE:R                    1.026          addr_generator/counter_0
     ----------------------------------------
-    Total                      4.788ns (2.398ns logic, 2.390ns route)
-                                       (50.1% logic, 49.9% route)
+    Total                      5.061ns (2.398ns logic, 2.663ns route)
+                                       (47.4% logic, 52.6% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'CLK'
@@ -500,7 +503,7 @@ Offset:              13.473ns (Levels of Logic = 4)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      SRLC16E:CLK->Q        8   3.195   1.151  controller/SRLC16E_5Delay (controller/addrEnDel)
-     LUT3:I2->O            1   0.551   0.827  QMux<7>_SW1 (N40)
+     LUT3:I2->O            1   0.551   0.827  QMux<7>_SW1 (N59)
      LUT4_L:I3->LO         1   0.551   0.126  QMux<7> (QMux<7>)
      LUT4:I3->O            2   0.551   0.877  newKey<7>1 (keyout_7_OBUF)
      OBUF:I->O                 5.644          keyout_7_OBUF (keyout<7>)
@@ -530,14 +533,14 @@ Delay:               9.212ns (Levels of Logic = 3)
 =========================================================================
 
 
-Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 4.49 secs
+Total REAL time to Xst completion: 6.00 secs
+Total CPU time to Xst completion: 5.56 secs
  
 --> 
 
-Total memory usage is 361460 kilobytes
+Total memory usage is 361396 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :    3 (   0 filtered)
+Number of warnings :    4 (   0 filtered)
 Number of infos    :    2 (   0 filtered)
 

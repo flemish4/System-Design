@@ -50,10 +50,16 @@ signal 	addrEnableR		: std_logic := '0';
 signal 	enableStart 	: std_logic; -- REVISIT : This may be hacky?
 constant NaddrI 			: integer := Ncycles -1;
 constant FaddrI 			: integer := 5 - Ncycles - 3; -- F - FiveAddr
+constant TaddrI 			: integer := 12 - 1; -- T - TwelveAddr
+constant EaddrI 			: integer := 16 + N - 12 -1; -- E - EndAddr
 constant FNaddrI 			: integer := Ncycles - 1; -- N cycles delay but shorten signal by 1
 constant Naddr  	  		: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(NaddrI, 4));
 constant Faddr  			: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(FaddrI, 4));
+constant Taddr 	  		: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(TaddrI, 4));
+constant Eaddr  			: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(EaddrI, 4));
 constant FNaddr			: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(FNaddrI, 4));
+signal delAddr0  			: std_logic_vector (3 downto 0);
+signal delAddr1			: std_logic_vector (3 downto 0);
 signal 	s0SelOut  		: std_logic;
 signal 	s1SelOut  		: std_logic;
 --signal 	s1EndOut  		: std_logic;
@@ -128,10 +134,10 @@ begin
 		port map (
 			Q => s0SelOut, -- SRL data output
 			--Q15 => Q15(i), -- Carry output -- unused
-			A0 => Naddr(0), -- Select[0] input
-			A1 => Naddr(1), -- Select[1] input
-			A2 => Naddr(2), -- Select[2] input
-			A3 => Naddr(3), -- Select[3] input
+			A0 => delAddr0(0), -- Select[0] input
+			A1 => delAddr0(1), -- Select[1] input
+			A2 => delAddr0(2), -- Select[2] input
+			A3 => delAddr0(3), -- Select[3] input
 			CE => SRLCECount, -- Clock enable input
 			CLK => CLK, -- Clock input
 			D => start -- SRL data input
@@ -142,10 +148,10 @@ begin
 		port map (
 			Q => s1SelOut, -- SRL data output
 			--Q15 => s1EndOut, -- Carry output (connect to next SRL)
-			A0 => Faddr(0), -- Select[0] input
-			A1 => Faddr(1), -- Select[1] input
-			A2 => Faddr(2), -- Select[2] input
-			A3 => Faddr(3), -- Select[3] input
+			A0 => delAddr1(0), -- Select[0] input
+			A1 => delAddr1(1), -- Select[1] input
+			A2 => delAddr1(2), -- Select[2] input
+			A3 => delAddr1(3), -- Select[3] input
 			CE => SRLCECount, -- Clock enable input
 			CLK => CLK, -- Clock input
 			D => s0SelOut -- SRL data input
@@ -177,5 +183,11 @@ begin
 	SRLEnable <= (SRLEnableR or s0selout) and enable;			
 	RConEn     <= s0SelOut;
 	RConSel		<= s0SelOut; --RConSelR;
+	
+	delAddr0 <= Naddr when inv = '0' else
+					Taddr;
+	delAddr1 <= Faddr when inv = '0' else
+					Eaddr;
+					
 end Behavioral;
 
