@@ -1,0 +1,29 @@
+Command line:
+   key_counter_v2_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  55173
+
+Sun Feb 04 21:30:35 2018
+
+
+ Elaboration Time: 0.171875 sec
+
+ Current Memory Usage: 1536.16 Meg
+
+ Total Signals          : 87
+ Total Nets             : 115
+ Total Signal Drivers   : 25
+ Total Blocks           : 11
+ Total Primitive Blocks : 10
+ Total Processes        : 22
+ Total Traceable Variables  : 140
+ Total Scalar Nets and Variables : 4907
+Total Line Count : 111
+
+ Total Simulation Time: 0.171875 sec
+
+ Current Memory Usage: 1536.16 Meg
+
+Sun Feb 04 21:30:45 2018
+

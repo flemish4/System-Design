@@ -1,0 +1,36 @@
+Running: C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\fuse.exe -intstyle ise -incremental -o E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/tb_keyGen_isim_beh.exe -prj E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/tb_keyGen_beh.prj work.tb_keyGen 
+ISim P.20131013 (signature 0x7708f090)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Parsing VHDL file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/subBytes_CHEAT.vhd" into library work
+Parsing VHDL file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/srl16_8.vhd" into library work
+Parsing VHDL file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/RCon_gen.vhd" into library work
+Parsing VHDL file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/key_counter_v2.vhd" into library work
+Parsing VHDL file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/addr_gen.vhd" into library work
+Parsing VHDL file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.vhd" into library work
+Parsing VHDL file "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/tb_keyGen.vhd" into library work
+Starting static elaboration
+Completed static elaboration
+Compiling package standard
+Compiling package std_logic_1164
+Compiling package numeric_std
+Compiling package vcomponents
+Compiling package textio
+Compiling package vital_timing
+Compiling package vital_primitives
+Compiling package vpkg
+Compiling architecture srlc16e_v of entity SRLC16E [\SRLC16E("0000000000000000")(0,1...]
+Compiling architecture behavioral of entity key_counter_v2 [\key_counter_v2(2)\]
+Compiling architecture behavioral of entity srl16_8 [srl16_8_default]
+Compiling architecture behavioral of entity addr_gen [addr_gen_default]
+Compiling architecture rtl of entity SUBBYTES [subbytes_default]
+Compiling architecture behavioral of entity RCon_gen [rcon_gen_default]
+Compiling architecture behavioral of entity keyGen [\keyGen(2)\]
+Compiling architecture behavior of entity tb_keygen
+Time Resolution for simulation is 1ps.
+Waiting for 8 sub-compilation(s) to finish...
+Compiled 23 VHDL Units
+Built simulation executable E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/tb_keyGen_isim_beh.exe
+Fuse Memory Usage: 59060 KB
+Fuse CPU Usage: 717 ms
