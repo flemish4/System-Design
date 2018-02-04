@@ -96,7 +96,12 @@ dkms.conf
 *_summary.xml
 *_usage.xml
 *_xst.xrpt
-
+*.xreport
+*.gise
+*.xise
+*.wdb
+*.dat
+*.log
 # iMPACT generated files
 _impactbatch.log
 impact.xsl
