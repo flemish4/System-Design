@@ -42,6 +42,8 @@ end addr_gen;
 architecture Behavioral of addr_gen is
 signal enable : std_logic := '0';
 signal counter : std_logic_vector (2 downto 0):= "000";
+signal addrF : std_logic_vector (3 downto 0);
+signal addrI : std_logic_vector (3 downto 0);
 
 begin
 
@@ -65,11 +67,11 @@ end process;
 					"0011";
 					
 	addrI <= 	"1011" when counter = "000" else
-					"0000" when counter = "001" else
-					"0000" when counter = "010" else
-					"0000" when counter = "011" else
-					"0010" when counter = "011" else
-					"1011"; -- reset necessary?
+					"0110" when counter = "001" else
+					"1001" when counter = "010" else
+					"1000" when counter = "011" else
+					"1000" ; -- when counter = "011" ; else
+					-- "1011"; -- reset necessary?
 					
 	addr  <=    addrF when inv = '0' else
 					addrI;

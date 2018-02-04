@@ -3,17 +3,18 @@
 <!--The data in this file is primarily intended for consumption by Xilinx tools.
 The structure and the elements are likely to change over the next few releases.
 This means code written to parse this file will need to be revisited each subsequent release.-->
-<application name="pn" timeStamp="Sat Feb 03 12:03:47 2018">
+<application name="pn" timeStamp="Sun Feb 04 21:41:54 2018">
 <section name="Project Information" visible="false">
 <property name="ProjectID" value="55473D30D4474E0EA6558FBF4FE5ACF7" type="project"/>
-<property name="ProjectIteration" value="22" type="project"/>
-<property name="ProjectFile" value="E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/keyGeneration.xise" type="project"/>
+<property name="ProjectIteration" value="27" type="project"/>
+<property name="ProjectFile" value="E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGeneration.xise" type="project"/>
 <property name="ProjectCreationTimestamp" value="2018-01-23T11:46:58" type="project"/>
 </section>
 <section name="Project Statistics" visible="true">
 <property name="PROPEXT_xilxSynthMaxFanout_virtex2" value="100000" type="process"/>
 <property name="PROP_Enable_Message_Filtering" value="false" type="design"/>
 <property name="PROP_FitterReportFormat" value="HTML" type="process"/>
+<property name="PROP_ISimsUseCustomWaveConfigFile_behav" value="true" type="process"/>
 <property name="PROP_LastAppliedGoal" value="Balanced" type="design"/>
 <property name="PROP_LastAppliedStrategy" value="Xilinx Default (unlocked)" type="design"/>
 <property name="PROP_ManualCompileOrderImp" value="false" type="design"/>
@@ -26,7 +27,7 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="PROP_UserConstraintEditorPreference" value="Text Editor" type="process"/>
 <property name="PROP_intProjectCreationTimestamp" value="2018-01-23T11:46:58" type="design"/>
 <property name="PROP_intWbtProjectID" value="55473D30D4474E0EA6558FBF4FE5ACF7" type="design"/>
-<property name="PROP_intWbtProjectIteration" value="22" type="process"/>
+<property name="PROP_intWbtProjectIteration" value="27" type="process"/>
 <property name="PROP_intWorkingDirLocWRTProjDir" value="Same" type="design"/>
 <property name="PROP_intWorkingDirUsed" value="No" type="design"/>
 <property name="PROP_selectedSimRootSourceNode_behav" value="work.tb_keyGen" type="process"/>
@@ -34,6 +35,7 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="PROP_xilxMapReportDetail" value="true" type="process"/>
 <property name="PROP_AutoTop" value="false" type="design"/>
 <property name="PROP_DevFamily" value="Spartan3" type="design"/>
+<property name="PROP_ISimsUseCustomWaveConfigFilename_behav" value="changed" type="process"/>
 <property name="PROP_DevDevice" value="xc3s200" type="design"/>
 <property name="PROP_DevFamilyPMName" value="spartan3" type="design"/>
 <property name="PROP_DevPackage" value="tq144" type="design"/>

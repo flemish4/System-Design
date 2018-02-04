@@ -44,6 +44,7 @@ ARCHITECTURE behavior OF tb_keyGen IS
          keyIn : IN  std_logic_vector(7 downto 0);
          CLK : IN  std_logic;
          RST : IN  std_logic;
+         INV : IN  std_logic;
          Start : IN  std_logic;
          keyInEn : IN  std_logic;
          keyout : OUT  std_logic_vector(7 downto 0)
@@ -55,6 +56,7 @@ ARCHITECTURE behavior OF tb_keyGen IS
    signal keyIn : std_logic_vector(7 downto 0) := (others => '0');
    signal CLK : std_logic := '0';
    signal RST : std_logic := '0';
+   signal INV : std_logic := '0';
    signal Start : std_logic := '0';
    signal keyInEn : std_logic := '0';
 
@@ -67,7 +69,7 @@ ARCHITECTURE behavior OF tb_keyGen IS
 	-- type definition for 256 word x 8 bit Inverse ROM 
 	type vectype is array (0 to 15) of std_logic_vector (7 downto 0);
 	-- ROM invrom 
-	constant testKey  : vectype := (
+	constant testKey0  : vectype := (
 	0 => x"2b", 
 	1 => x"7e", 
 	2 => x"15", 
@@ -84,6 +86,23 @@ ARCHITECTURE behavior OF tb_keyGen IS
 	13 => x"cf", 
 	14 => x"4f", 
 	15 => x"3c" );
+	constant testKey10  : vectype := (
+	0 => x"d0", 
+	1 => x"14", 
+	2 => x"f9", 
+	3 => x"a8", 
+	4 => x"c9", 
+	5 => x"ee", 
+	6 => x"25", 
+	7 => x"89", 
+	8 => x"e1", 
+	9 => x"3f", 
+	10 => x"0c", 
+	11 => x"c8", 
+	12 => x"b6", 
+	13 => x"63", 
+	14 => x"0c", 
+	15 => x"a6" );
 
 
  
@@ -94,6 +113,7 @@ BEGIN
           keyIn => keyIn,
           CLK => CLK,
           RST => RST,
+          INV => INV,
           Start => Start,
           keyInEn => keyInEn,
           keyout => keyout
@@ -112,8 +132,35 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    begin		
+-- forward testing
+--      -- hold reset state for 100 ns.
+--      wait for 100 ns;	
+--		RST <= '1';
+--      wait for CLK_period;
+--		RST <= '0';
+--      wait for CLK_period*10;
+
+--      -- insert stimulus here 
+--		keyInEn <= '1';
+--		for i in 0 to 15 loop
+--			keyIn <= testKey0(i);
+--			wait for CLK_period;
+--		end loop;
+--		keyInEn <= '0';
+--		
+--      wait for CLK_period * 2;
+--		
+--		for i in 0 to 9 loop
+--			start <='1';
+--			wait for CLK_period;
+--			start<='0';
+--			wait for CLK_period * 19;		
+--		end loop;
+
+-- inv testing
       -- hold reset state for 100 ns.
       wait for 100 ns;	
+		inv <= '1';
 		RST <= '1';
       wait for CLK_period;
 		RST <= '0';
@@ -122,7 +169,7 @@ BEGIN
       -- insert stimulus here 
 		keyInEn <= '1';
 		for i in 0 to 15 loop
-			keyIn <= testKey(i);
+			keyIn <= testKey10(15-i);
 			wait for CLK_period;
 		end loop;
 		keyInEn <= '0';
@@ -135,6 +182,8 @@ BEGIN
 			start<='0';
 			wait for CLK_period * 19;		
 		end loop;
+
+
       wait;
    end process;
 

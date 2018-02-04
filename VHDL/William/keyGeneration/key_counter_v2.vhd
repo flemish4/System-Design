@@ -33,13 +33,15 @@ entity key_counter_v2 is
 	generic ( Ncycles : integer := 2);
     Port ( rst : in  STD_LOGIC;
            start : in  STD_LOGIC;
+           inv : in  STD_LOGIC;
            clk : in  STD_LOGIC;
 			  SRLEnable : out STD_LOGIC;
 			  addrEnable : out STD_LOGIC;
 			  runAll  : out STD_LOGIC;
 			  RConEn  : out STD_LOGIC;
 			  RConSel : out STD_LOGIC;
-			  FRowSel : out STD_LOGIC
+			  FRowSel : out STD_LOGIC;
+			  invDelSel : out STD_LOGIC
 			  );
 end key_counter_v2;
 
@@ -50,22 +52,25 @@ signal 	addrEnableR		: std_logic := '0';
 signal 	enableStart 	: std_logic; -- REVISIT : This may be hacky?
 constant NaddrI 			: integer := Ncycles -1;
 constant FaddrI 			: integer := 5 - Ncycles - 3; -- F - FiveAddr
-constant TaddrI 			: integer := 12 - 1; -- T - TwelveAddr
-constant EaddrI 			: integer := 16 + N - 12 -1; -- E - EndAddr
+constant TaddrI 			: integer := 12 - Ncycles - 2; -- T - TwelveAddr
 constant FNaddrI 			: integer := Ncycles - 1; -- N cycles delay but shorten signal by 1
+constant InvFNaddrI 			: integer := Ncycles ; -- N cycles delay but shorten signal by 1
 constant Naddr  	  		: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(NaddrI, 4));
 constant Faddr  			: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(FaddrI, 4));
 constant Taddr 	  		: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(TaddrI, 4));
-constant Eaddr  			: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(EaddrI, 4));
 constant FNaddr			: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(FNaddrI, 4));
-signal delAddr0  			: std_logic_vector (3 downto 0);
+constant InvFNaddr		: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(InvFNaddrI, 4));
 signal delAddr1			: std_logic_vector (3 downto 0);
+signal delAddrDel			: std_logic_vector (3 downto 0);
 signal 	s0SelOut  		: std_logic;
 signal 	s1SelOut  		: std_logic;
---signal 	s1EndOut  		: std_logic;
+signal 	s1EndOut  		: std_logic;
 signal 	addrEnDel  		: std_logic;
 signal 	endCond  		: std_logic;
-signal 	SRLCECount  	: std_logic := '1';
+signal 	delQ15  			: std_logic;
+signal 	FRowSelW  		: std_logic;
+signal 	SRLEnableW  	: std_logic;
+constant 	SRLCECount  	: std_logic := '1';
 --signal 	RConSelR			: std_logic := '0';
 begin	
 	-- Handle the enable switch - one cycle of start will enable the clock until reset or end
@@ -96,9 +101,9 @@ begin
 						end if;
 					end if;
 				else -- inv = '1'
-					if s0SelOut = '1' then
+					if s1SelOut = '1' then
 						addrEnableR <= '1';
-					elsif s1SelOut = '1' then
+					elsif s1EndOut = '1' then
 						addrEnableR <= '0';
 					else
 						addrEnableR <= addrEnableR;
@@ -115,16 +120,27 @@ begin
 	process (clk) begin
 		if rising_edge(clk) then
 			if enableStart = '1' then
-				if s0SelOut = '1' then
-					SRLEnableR <= '1';
-				else 
-					SRLEnableR <= SRLEnableR;
+				if inv = '0' then
+					if s0SelOut = '1' then
+						SRLEnableR <= '1';
+					else 
+						SRLEnableR <= SRLEnableR;
+					end if;
+				else
+					if start = '1' or addrEnDel ='1' then
+						SRLEnableR <= '1';
+					elsif addrEnableR = '1' and fRowSelW = '0' then
+						SRLEnableR <= '0';
+					else
+						SRLEnableR <= SRLEnableR;
+					end if;
 				end if;
 			else -- If not enabled - not running
 				SRLEnableR <= '0';
 			end if;
 		end if;
 	end process;	
+
 	
 	-- Handle the RCon mux enable switch 
 --	process (clk) begin
@@ -145,10 +161,10 @@ begin
 		port map (
 			Q => s0SelOut, -- SRL data output
 			--Q15 => Q15(i), -- Carry output -- unused
-			A0 => delAddr0(0), -- Select[0] input
-			A1 => delAddr0(1), -- Select[1] input
-			A2 => delAddr0(2), -- Select[2] input
-			A3 => delAddr0(3), -- Select[3] input
+			A0 => Naddr(0), -- Select[0] input
+			A1 => Naddr(1), -- Select[1] input
+			A2 => Naddr(2), -- Select[2] input
+			A3 => Naddr(3), -- Select[3] input
 			CE => SRLCECount, -- Clock enable input
 			CLK => CLK, -- Clock input
 			D => start -- SRL data input
@@ -158,7 +174,7 @@ begin
 			INIT => X"0000")
 		port map (
 			Q => s1SelOut, -- SRL data output
-			--Q15 => s1EndOut, -- Carry output (connect to next SRL)
+			Q15 => s1EndOut, -- Carry output (connect to next SRL)
 			A0 => delAddr1(0), -- Select[0] input
 			A1 => delAddr1(1), -- Select[1] input
 			A2 => delAddr1(2), -- Select[2] input
@@ -172,33 +188,44 @@ begin
 			INIT => X"0000")
 		port map (
 			Q => addrEnDel, -- SRL data output
-			Q15 => endCond, -- Carry output (connect to next SRL)
-			A0 => FNaddr(0), -- Select[0] input
-			A1 => FNaddr(1), -- Select[1] input
-			A2 => FNaddr(2), -- Select[2] input
-			A3 => FNaddr(3), -- Select[3] input
+			Q15 => delQ15, -- Carry output (connect to next SRL)
+			A0 => delAddrDel(0), -- Select[0] input
+			A1 => delAddrDel(1), -- Select[1] input
+			A2 => delAddrDel(2), -- Select[2] input
+			A3 => delAddrDel(3), -- Select[3] input
 			CE => SRLCECount, -- Clock enable input
 			CLK => CLK, -- Clock input
 			D => addrEnableR -- SRL data input
 		);
 
 		
-	FRowSel	<= s0SelOut or addrEnDel;
+	FRowSelW	<= s0SelOut or addrEnDel when inv = '0' else --s0SelOut or addrEnDel when inv = '0' else
+					addrEnDel and enable;
+	FRowSel <= FRowSelW;
+	invDelSel <= not FRowSelW;
+	
 	enableStart <= enable or start;	
 	runAll <= enableStart;
 --	SRLStart <= '1' when s0SelOut = '1' else
 --				  '0'; -- Start when counter = Ncycles
 --	addrStop <= '1' when s1SelOut = '1' else
 --				  '0'; -- stop address when counter =5
-	addrEnable <= addrEnableR or start;			  
-	SRLEnable <= (SRLEnableR or s0selout) and enable;			
+	addrEnable <= addrEnableR or start when inv = '0' else
+						addrEnableR or s1EndOut;			  
+	SRLEnableW <= (SRLEnableR or s0selout) and enable when inv ='0' else
+						(SRLEnableR or s0selout or frowselw) and enable;	
+	SRLEnable <= SRLEnableW	;	
 	RConEn     <= s0SelOut;
-	RConSel		<= s0SelOut; --RConSelR;
+	RConSel		<= s0SelOut when inv = '0' else
+						s1EndOut;
 	
-	delAddr0 <= Naddr when inv = '0' else
-					Taddr;
 	delAddr1 <= Faddr when inv = '0' else
-					Eaddr;
+					Taddr;
+	delAddrDel <= FNaddr when inv = '0' else
+						invFNaddr;
+	endCond <= delQ15 when inv = '0' else 
+					s1EndOut;
+					
 					
 end Behavioral;
 

@@ -1,2 +1,47 @@
 xst -intstyle ise -ifn "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
 xst -intstyle ise -ifn "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc3s200-tq144-4 "keyGen.ngc" keyGen.ngd  
+map -intstyle ise -p xc3s200-tq144-4 -cm area -detail -ir off -pr off -c 100 -o keyGen_map.ncd keyGen.ngd keyGen.pcf 
+par -w -intstyle ise -ol high -t 1 keyGen_map.ncd keyGen.ncd keyGen.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml keyGen.twx keyGen.ncd -o keyGen.twr keyGen.pcf 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc3s200-tq144-4 "keyGen.ngc" keyGen.ngd  
+map -intstyle ise -p xc3s200-tq144-4 -cm area -detail -ir off -pr off -c 100 -o keyGen_map.ncd keyGen.ngd keyGen.pcf 
+par -w -intstyle ise -ol high -t 1 keyGen_map.ncd keyGen.ncd keyGen.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml keyGen.twx keyGen.ncd -o keyGen.twr keyGen.pcf 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc3s200-tq144-4 "keyGen.ngc" keyGen.ngd  
+map -intstyle ise -p xc3s200-tq144-4 -cm area -detail -ir off -pr off -c 100 -o keyGen_map.ncd keyGen.ngd keyGen.pcf 
+par -w -intstyle ise -ol high -t 1 keyGen_map.ncd keyGen.ncd keyGen.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml keyGen.twx keyGen.ncd -o keyGen.twr keyGen.pcf 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc3s200-tq144-4 "keyGen.ngc" keyGen.ngd  
+map -intstyle ise -p xc3s200-tq144-4 -cm area -detail -ir off -pr off -c 100 -o keyGen_map.ncd keyGen.ngd keyGen.pcf 
+par -w -intstyle ise -ol high -t 1 keyGen_map.ncd keyGen.ncd keyGen.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml keyGen.twx keyGen.ncd -o keyGen.twr keyGen.pcf 
+xst -intstyle ise -ifn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.xst" -ofn "E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/keyGen.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc3s200-tq144-4 "keyGen.ngc" keyGen.ngd  
+map -intstyle ise -p xc3s200-tq144-4 -cm area -detail -ir off -pr off -c 100 -o keyGen_map.ncd keyGen.ngd keyGen.pcf 
+par -w -intstyle ise -ol high -t 1 keyGen_map.ncd keyGen.ncd keyGen.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml keyGen.twx keyGen.ncd -o keyGen.twr keyGen.pcf 

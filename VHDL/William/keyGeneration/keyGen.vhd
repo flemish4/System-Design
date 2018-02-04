@@ -22,7 +22,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
@@ -48,6 +48,7 @@ architecture Behavioral of keyGen is
 component key_counter_v2 is
 	generic ( Ncycles : integer := 2);
     Port ( rst : in  STD_LOGIC;
+           inv : in  STD_LOGIC;
            start : in  STD_LOGIC;
            clk : in  STD_LOGIC;
 			  SRLEnable : out STD_LOGIC;
@@ -55,7 +56,8 @@ component key_counter_v2 is
 			  runAll  : out STD_LOGIC;
 			  RConEn  : out STD_LOGIC;
 			  RConSel : out STD_LOGIC;
-			  FRowSel : out STD_LOGIC
+			  FRowSel : out STD_LOGIC;
+			  invDelSel : out STD_LOGIC
 			  );
 end component;
 
@@ -117,20 +119,25 @@ signal Addr  : STD_LOGIC_VECTOR (3 downto 0) ;
 signal subInv : STD_LOGIC := '0';
 signal FRowSel : STD_LOGIC;
 signal genEn : STD_LOGIC;
-
+signal invDelSel : STD_LOGIC;
+signal invDelKey  : STD_LOGIC_VECTOR (7 downto 0) ;
+constant invDelAddrI : integer := subBytesN -1;
+constant invDelAddr  : std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(invDelAddrI, 4));
 
 begin
 controller : key_counter_v2
 	generic map ( Ncycles => 2)
     Port map (   rst => rst,
 					  start => start,
+					  inv => inv,
 					  clk => clk,
 					  SRLEnable => SrlEn,
 					  addrEnable => AddrEn,
 					  runAll  => genEn,
 					  RConEn  => RConEn,
 					  RConSel => RconSel,
-					  FRowSel => FRowSel);
+					  FRowSel => FRowSel,
+					  invDelSel => invDelSel);
 
 keyStore : srl16_8 
     Port map ( D => newKey ,
@@ -162,10 +169,20 @@ RCon_generator : RCon_gen
            rst => rst,
            INV => INV,
            rcon => Rcon );
+			  
+invDelay : srl16_8 
+    Port map ( D => calcKey ,
+           CE => genEn,
+           CLK => clk,
+           Addr => invDelAddr,
+           Q  => invDelKey
+           --Q15  => Q15 
+			  );
 			    
 	keyOut <= newKey;
 	shiftEn <= keyInEn or srlEn;
 	newKey <= keyIn when keyInEn = '1' else
+				 invDelKey when inv = '1' and invDelSel = '1' else
 				 calcKey;
 	RConOut <= subOut xor RCon;
 	QAddrFirst <= RConOut when RConSel = '1' else
