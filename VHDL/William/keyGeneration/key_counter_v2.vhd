@@ -85,15 +85,26 @@ begin
 	process (clk) begin
 		if rising_edge(clk) then
 			if enableStart = '1' then
-				if start = '1' then
-					addrEnableR <= '1';
-				else
-					if s1SelOut = '1' then
+				if inv = '0' then
+					if start = '1' then
+						addrEnableR <= '1';
+					else
+						if s1SelOut = '1' then
+							addrEnableR <= '0';
+						else 
+							addrEnableR <= addrEnableR;
+						end if;
+					end if;
+				else -- inv = '1'
+					if s0SelOut = '1' then
+						addrEnableR <= '1';
+					elsif s1SelOut = '1' then
 						addrEnableR <= '0';
-					else 
+					else
 						addrEnableR <= addrEnableR;
 					end if;
 				end if;
+						
 			else -- If not enabled - not running
 				addrEnableR <= '0';
 			end if;
