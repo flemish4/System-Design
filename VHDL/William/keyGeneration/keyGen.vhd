@@ -179,11 +179,13 @@ invDelay : srl16_8
            --Q15  => Q15 
 			  );
 			    
-	keyOut <= newKey;
-	shiftEn <= keyInEn or srlEn;
-	newKey <= keyIn when keyInEn = '1' else
+	keyOut <= keyIn when keyInEn = '1' else
 				 invDelKey when inv = '1' and invDelSel = '1' else
 				 calcKey;
+	newKey <= 	keyIn when keyInEn = '1' else
+					--invDelKey when inv ='1' and invDelSel = '0' else
+					calcKey;
+	shiftEn <= keyInEn or srlEn;
 	RConOut <= subOut xor RCon;
 	QAddrFirst <= RConOut when RConSel = '1' else
 					  subOut;

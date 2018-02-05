@@ -67,10 +67,10 @@ end process;
 					"0011";
 					
 	addrI <= 	"1011" when counter = "000" else
-					"0110" when counter = "001" else
-					"1001" when counter = "010" else
-					"1000" when counter = "011" else
-					"1000" ; -- when counter = "011" ; else
+					"1000" when counter = "001" else
+					"1011" when counter = "010" else
+					"1010" when counter = "011" else
+					"1010" ; -- when counter = "011" ; else
 					-- "1011"; -- reset necessary?
 					
 	addr  <=    addrF when inv = '0' else

@@ -51,15 +51,18 @@ signal   SRLEnableR		: std_logic := '0';
 signal 	addrEnableR		: std_logic := '0';
 signal 	enableStart 	: std_logic; -- REVISIT : This may be hacky?
 constant NaddrI 			: integer := Ncycles -1;
+constant invNaddrI 		: integer := Ncycles -2;
 constant FaddrI 			: integer := 5 - Ncycles - 3; -- F - FiveAddr
 constant TaddrI 			: integer := 12 - Ncycles - 2; -- T - TwelveAddr
 constant FNaddrI 			: integer := Ncycles - 1; -- N cycles delay but shorten signal by 1
 constant InvFNaddrI 			: integer := Ncycles ; -- N cycles delay but shorten signal by 1
 constant Naddr  	  		: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(NaddrI, 4));
+constant invNaddr  	  		: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(invNaddrI, 4));
 constant Faddr  			: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(FaddrI, 4));
 constant Taddr 	  		: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(TaddrI, 4));
 constant FNaddr			: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(FNaddrI, 4));
 constant InvFNaddr		: std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(InvFNaddrI, 4));
+signal delAddr0			: std_logic_vector (3 downto 0);
 signal delAddr1			: std_logic_vector (3 downto 0);
 signal delAddrDel			: std_logic_vector (3 downto 0);
 signal 	s0SelOut  		: std_logic;
@@ -70,6 +73,7 @@ signal 	endCond  		: std_logic;
 signal 	delQ15  			: std_logic;
 signal 	FRowSelW  		: std_logic;
 signal 	SRLEnableW  	: std_logic;
+--signal 	endCondDel	  	: std_logic;
 constant 	SRLCECount  	: std_logic := '1';
 --signal 	RConSelR			: std_logic := '0';
 begin	
@@ -85,6 +89,19 @@ begin
 			end if;
 		end if;
 	end process;
+	
+--	-- delay enable by one for inverse srlenable
+--	process (clk) begin
+--		if rising_edge(clk) then
+--			if endCond = '1' then
+--				endCondDel <= '1';
+--			elsif  rst = '1' or endCond = '0' then
+--				endCondDel <= '0';
+--			else
+--				endCondDel <= endCondDel;
+--			end if;
+--		end if;
+--	end process;
 	
 	-- Handle the Addr enable switch 
 	process (clk) begin
@@ -161,10 +178,10 @@ begin
 		port map (
 			Q => s0SelOut, -- SRL data output
 			--Q15 => Q15(i), -- Carry output -- unused
-			A0 => Naddr(0), -- Select[0] input
-			A1 => Naddr(1), -- Select[1] input
-			A2 => Naddr(2), -- Select[2] input
-			A3 => Naddr(3), -- Select[3] input
+			A0 => delAddr0(0), -- Select[0] input
+			A1 => delAddr0(1), -- Select[1] input
+			A2 => delAddr0(2), -- Select[2] input
+			A3 => delAddr0(3), -- Select[3] input
 			CE => SRLCECount, -- Clock enable input
 			CLK => CLK, -- Clock input
 			D => start -- SRL data input
@@ -213,12 +230,14 @@ begin
 	addrEnable <= addrEnableR or start when inv = '0' else
 						addrEnableR or s1EndOut;			  
 	SRLEnableW <= (SRLEnableR or s0selout) and enable when inv ='0' else
-						(SRLEnableR or s0selout or frowselw) and enable;	
+						(SRLEnableR or s0selout or frowselw or start) and enableStart ; --or endCondDel ;	
 	SRLEnable <= SRLEnableW	;	
 	RConEn     <= s0SelOut;
 	RConSel		<= s0SelOut when inv = '0' else
 						s1EndOut;
 	
+	delAddr0 <= Naddr when inv = '0' else
+					invNaddr;
 	delAddr1 <= Faddr when inv = '0' else
 					Taddr;
 	delAddrDel <= FNaddr when inv = '0' else

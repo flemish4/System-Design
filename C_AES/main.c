@@ -222,15 +222,16 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
         for (i=0; i<16; i++) {
             roundKey[i] = key[i];
         }
+
         // Get the state as 16 bytes of message
         memcpy(state, &message[j], 16);
         state[16] = '\0';
 
         //Initial addRoundKey
         addRoundKey(state, roundKey);
-        printf("state 0: ");
+        printf("key 0: ");
         for (k=0;k<16;k++) {
-            printf("%02x", state[k]);
+            printf("%02x", roundKey[k]);
         }
         printf("\n");
 
@@ -243,9 +244,9 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
             mixColumns(state);
             addRoundKey(state, roundKey);
 
-            printf("state %d: ", i+1);
+            printf("key %d: ", i+1);
             for (k=0;k<16;k++) {
-                printf("%02x", state[k]);
+                printf("%02x", roundKey[k]);
             }
             printf("\n");
 
@@ -255,9 +256,9 @@ void aesEncrypt(unsigned char * key, unsigned char * message, size_t lenMessage,
         subBytes(state);
         shiftRows(state);
         addRoundKey(state, roundKey);
-        printf("state 0: ");
+        printf("key 0: ");
         for (k=0;k<16;k++) {
-            printf("%02x", state[k]);
+            printf("%02x", roundKey[k]);
         }
         printf("\n");
         printf("state end: ");

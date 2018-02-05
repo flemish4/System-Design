@@ -133,34 +133,8 @@ BEGIN
    stim_proc: process
    begin		
 -- forward testing
---      -- hold reset state for 100 ns.
---      wait for 100 ns;	
---		RST <= '1';
---      wait for CLK_period;
---		RST <= '0';
---      wait for CLK_period*10;
-
---      -- insert stimulus here 
---		keyInEn <= '1';
---		for i in 0 to 15 loop
---			keyIn <= testKey0(i);
---			wait for CLK_period;
---		end loop;
---		keyInEn <= '0';
---		
---      wait for CLK_period * 2;
---		
---		for i in 0 to 9 loop
---			start <='1';
---			wait for CLK_period;
---			start<='0';
---			wait for CLK_period * 19;		
---		end loop;
-
--- inv testing
       -- hold reset state for 100 ns.
       wait for 100 ns;	
-		inv <= '1';
 		RST <= '1';
       wait for CLK_period;
 		RST <= '0';
@@ -169,7 +143,7 @@ BEGIN
       -- insert stimulus here 
 		keyInEn <= '1';
 		for i in 0 to 15 loop
-			keyIn <= testKey10(15-i);
+			keyIn <= testKey0(i);
 			wait for CLK_period;
 		end loop;
 		keyInEn <= '0';
@@ -182,6 +156,32 @@ BEGIN
 			start<='0';
 			wait for CLK_period * 19;		
 		end loop;
+
+-- inv testing
+      -- hold reset state for 100 ns.
+--      wait for 100 ns;	
+--		inv <= '1';
+--		RST <= '1';
+--      wait for CLK_period;
+--		RST <= '0';
+--      wait for CLK_period*10;
+--
+--      -- insert stimulus here 
+--		keyInEn <= '1';
+--		for i in 0 to 15 loop
+--			keyIn <= testKey10(15-i);
+--			wait for CLK_period;
+--		end loop;
+--		keyInEn <= '0';
+--		
+--      wait for CLK_period * 2;
+--		
+--		for i in 0 to 9 loop
+--			start <='1';
+--			wait for CLK_period;
+--			start<='0';
+--			wait for CLK_period * 19;		
+--		end loop;
 
 
       wait;
