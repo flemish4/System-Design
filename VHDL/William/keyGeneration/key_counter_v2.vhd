@@ -33,6 +33,8 @@ entity key_counter_v2 is
 	generic ( Ncycles : integer := 2);
     Port ( rst : in  STD_LOGIC;
            start : in  STD_LOGIC;
+           done : out  STD_LOGIC;
+           keyInEn : in  STD_LOGIC;
            inv : in  STD_LOGIC;
            clk : in  STD_LOGIC;
 			  SRLEnable : out STD_LOGIC;
@@ -73,9 +75,8 @@ signal 	endCond  		: std_logic;
 signal 	delQ15  			: std_logic;
 signal 	FRowSelW  		: std_logic;
 signal 	SRLEnableW  	: std_logic;
---signal 	endCondDel	  	: std_logic;
+signal 	keyInEnDel			: std_logic := '0';
 constant 	SRLCECount  	: std_logic := '1';
---signal 	RConSelR			: std_logic := '0';
 begin	
 	-- Handle the enable switch - one cycle of start will enable the clock until reset or end
 	process (clk) begin
@@ -90,18 +91,12 @@ begin
 		end if;
 	end process;
 	
---	-- delay enable by one for inverse srlenable
---	process (clk) begin
---		if rising_edge(clk) then
---			if endCond = '1' then
---				endCondDel <= '1';
---			elsif  rst = '1' or endCond = '0' then
---				endCondDel <= '0';
---			else
---				endCondDel <= endCondDel;
---			end if;
---		end if;
---	end process;
+		-- Handle the keyInEnDel - used to detect negative edge
+	process (clk) begin
+		if rising_edge(clk) then
+			keyInEnDel <= keyInEn;
+		end if;
+	end process;
 	
 	-- Handle the Addr enable switch 
 	process (clk) begin
@@ -157,20 +152,6 @@ begin
 			end if;
 		end if;
 	end process;	
-
-	
-	-- Handle the RCon mux enable switch 
---	process (clk) begin
---		if rising_edge(clk) then
---			if start = '1' then
---				RConSelR <= '1';
---			elsif SRLEnableR = '1' then
---				RConSelR <= '0';
---			else
---				RConSelR <= RConSelR;
---			end if;
---		end if;
---	end process;
 		
 	SRLC16E_0 : SRLC16E
 		generic map (
@@ -216,21 +197,17 @@ begin
 		);
 
 		
-	FRowSelW	<= s0SelOut or addrEnDel when inv = '0' else --s0SelOut or addrEnDel when inv = '0' else
+	FRowSelW	<= s0SelOut or addrEnDel when inv = '0' else 
 					addrEnDel and enable;
 	FRowSel <= FRowSelW;
 	invDelSel <= not FRowSelW;
 	
 	enableStart <= enable or start;	
 	runAll <= enableStart;
---	SRLStart <= '1' when s0SelOut = '1' else
---				  '0'; -- Start when counter = Ncycles
---	addrStop <= '1' when s1SelOut = '1' else
---				  '0'; -- stop address when counter =5
 	addrEnable <= addrEnableR or start when inv = '0' else
 						addrEnableR or s1EndOut;			  
 	SRLEnableW <= (SRLEnableR or s0selout) and enable when inv ='0' else
-						(SRLEnableR or s0selout or frowselw or start) and enableStart ; --or endCondDel ;	
+						(SRLEnableR or s0selout or frowselw or start) and enableStart ;	
 	SRLEnable <= SRLEnableW	;	
 	RConEn     <= s0SelOut;
 	RConSel		<= s0SelOut when inv = '0' else
@@ -244,7 +221,8 @@ begin
 						invFNaddr;
 	endCond <= delQ15 when inv = '0' else 
 					s1EndOut;
-					
+	done <= s1endout or (keyInEnDel and not keyInEn) when inv = '0' else
+				(srlenabler and not enableStart) or (keyInEnDel and not keyInEn);
 					
 end Behavioral;
 

@@ -37,6 +37,7 @@ entity keyGen is
            INV : in  STD_LOGIC;
            Start : in  STD_LOGIC;
 			  keyInEn : in STD_LOGIC;
+			  done : out STD_LOGIC;
            keyout : out  STD_LOGIC_VECTOR (7 downto 0)
 			  );
 end keyGen;
@@ -48,6 +49,7 @@ architecture Behavioral of keyGen is
 component key_counter_v2 is
 	generic ( Ncycles : integer := 2);
     Port ( rst : in  STD_LOGIC;
+           keyInEn : in  STD_LOGIC;
            inv : in  STD_LOGIC;
            start : in  STD_LOGIC;
            clk : in  STD_LOGIC;
@@ -57,7 +59,8 @@ component key_counter_v2 is
 			  RConEn  : out STD_LOGIC;
 			  RConSel : out STD_LOGIC;
 			  FRowSel : out STD_LOGIC;
-			  invDelSel : out STD_LOGIC
+			  invDelSel : out STD_LOGIC;
+			  done : out STD_LOGIC
 			  );
 end component;
 
@@ -84,7 +87,6 @@ component SUBBYTES is
     port (CLK    : in  std_logic;
           RESET  : in  std_logic;
           XIN    : in  std_logic_vector( 7 downto 0 );
-          INVE    : in  std_logic;  -- NOT SUPPORTED FOR THIS
           YOUT   : out std_logic_vector( 7 downto 0) );
 end component SUBBYTES;
 
@@ -95,12 +97,7 @@ component RCon_gen is
            INV : in  STD_LOGIC;
            rcon : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
---		  key_in : in  STD_LOGIC_VECTOR (7 downto 0);
---		  CLK : in  STD_LOGIC;
---		  RST : in  STD_LOGIC;
---		  Start : in  STD_LOGIC;
---		  key_in_en : in STD_LOGIC;
---		  key_out : out  STD_LOGIC_VECTOR (7 downto 0)
+
 signal SrlEn : STD_LOGIC ;
 signal RConEn : STD_LOGIC ;
 signal AddrEn : STD_LOGIC ;
@@ -116,7 +113,6 @@ signal QAddrFirst  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal QMux  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal calcKey  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal Addr  : STD_LOGIC_VECTOR (3 downto 0) ;
-signal subInv : STD_LOGIC := '0';
 signal FRowSel : STD_LOGIC;
 signal genEn : STD_LOGIC;
 signal invDelSel : STD_LOGIC;
@@ -128,6 +124,8 @@ begin
 controller : key_counter_v2
 	generic map ( Ncycles => 2)
     Port map (   rst => rst,
+					  done => done,
+					  keyInEn => keyInEn,
 					  start => start,
 					  inv => inv,
 					  clk => clk,
@@ -160,7 +158,6 @@ subByte : SUBBYTES
     port map (CLK    => clk,
           RESET  => rst,
           XIN    => QAddr,
-          INVE    => subInv , -- NOT SUPPORTED FOR THIS
           YOUT   => SubOut );
 
 RCon_generator : RCon_gen
@@ -183,7 +180,6 @@ invDelay : srl16_8
 				 invDelKey when inv = '1' and invDelSel = '1' else
 				 calcKey;
 	newKey <= 	keyIn when keyInEn = '1' else
-					--invDelKey when inv ='1' and invDelSel = '0' else
 					calcKey;
 	shiftEn <= keyInEn or srlEn;
 	RConOut <= subOut xor RCon;
@@ -192,7 +188,6 @@ invDelay : srl16_8
 	QMux <= QAddrFirst when FRowSel = '1' else
 			  QAddr;
 	calcKey <= Q15 xor QMux;
-	
    
 end Behavioral;
 

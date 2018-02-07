@@ -64,8 +64,10 @@ begin
 	
 	-- Find newRCon value - usually just left shifted but can be 0x1B when full, works for small values - this is not the full calculation
 	newRCon <= "00011011" when RConR(7) = '1' else
+				  "00000001" when RConR    = x"36" else
 					std_logic_vector(rotate_left(unsigned(RConR), 1));
 	prevRCon <= "10000000" when RConR(0) = '1' and RConR(1) = '1' else
+					x"36"		  when RConR    = "00000001" else
 					std_logic_vector(rotate_right(unsigned(RConR), 1));
 	rcon <= RConR;
 

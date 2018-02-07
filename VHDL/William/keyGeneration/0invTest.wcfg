@@ -24,6 +24,10 @@
          <obj_property name="label">top</obj_property>
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="Radix">HEXRADIX</obj_property>
+         <wvobject fp_name="/tb_keygen/uut/done" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">done</obj_property>
+            <obj_property name="ObjectShortName">done</obj_property>
+         </wvobject>
          <wvobject fp_name="/tb_keygen/keyin" type="array" db_ref_id="1">
             <obj_property name="ElementShortName">keyin[7:0]</obj_property>
             <obj_property name="ObjectShortName">keyin[7:0]</obj_property>
@@ -168,10 +172,6 @@
             <obj_property name="ObjectShortName">qmux[7:0]</obj_property>
             <obj_property name="Radix">HEXRADIX</obj_property>
          </wvobject>
-         <wvobject fp_name="/tb_keygen/uut/subinv" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">subinv</obj_property>
-            <obj_property name="ObjectShortName">subinv</obj_property>
-         </wvobject>
          <wvobject fp_name="/tb_keygen/uut/frowsel" type="logic" db_ref_id="1">
             <obj_property name="ElementShortName">frowsel</obj_property>
             <obj_property name="ObjectShortName">frowsel</obj_property>
@@ -306,10 +306,6 @@
          <wvobject fp_name="/tb_keygen/uut/controller/srlenablew" type="logic" db_ref_id="1">
             <obj_property name="ElementShortName">srlenablew</obj_property>
             <obj_property name="ObjectShortName">srlenablew</obj_property>
-         </wvobject>
-         <wvobject fp_name="/tb_keygen/uut/controller/endconddel" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">endconddel</obj_property>
-            <obj_property name="ObjectShortName">endconddel</obj_property>
          </wvobject>
          <wvobject fp_name="/tb_keygen/uut/controller/ncycles" type="other" db_ref_id="1">
             <obj_property name="ElementShortName">ncycles</obj_property>

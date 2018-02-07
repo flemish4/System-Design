@@ -14,7 +14,7 @@ entity SUBBYTES is
     port (CLK    : in  std_logic;
           RESET  : in  std_logic;
           XIN    : in  std_logic_vector( 7 downto 0 );
-          INVE    : in  std_logic;  -- NOT SUPPORTED FOR THIS
+          --INVE    : in  std_logic;  -- NOT SUPPORTED FOR THIS
           YOUT   : out std_logic_vector( 7 downto 0) );
 end entity SUBBYTES;
 
@@ -285,8 +285,6 @@ constant invrom  : vectype := (
 -- signal defininition
 signal invout  : std_logic_vector (7 downto 0);  -- Inverse output
 signal affine  : std_logic_vector (7 downto 0);  -- affin transform output
--- signal delay0  : std_logic_vector (7 downto 0);  -- affin transform output
--- signal delay1  : std_logic_vector (7 downto 0);  -- affin transform output
 
 begin
 ----------------------------------
@@ -320,27 +318,6 @@ begin
   end if;
 end process AFFINE_TRAN;
 
---del0 : process (CLK)
---begin
---    if rising_edge(CLK) then
---        if (RESET='1') then
---            delay0 <= "00000000";
---        else
---            delay0 <= affine;
---        end if;
---    end if;	
---end process del0;
---
---del1 : process (CLK)
---begin
---    if rising_edge(CLK) then
---        if (RESET='1') then
---            delay1 <= "00000000";
---        else
---            delay1 <= delay0;
---        end if;
---    end if;	
---end process del1;
 ----------------------------------
 -- OUTPUT GENERATION
 ----------------------------------
