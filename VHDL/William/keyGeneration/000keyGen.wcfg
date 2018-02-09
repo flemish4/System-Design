@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/tb_keyGen_v2_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+            <top_module name="tb_keygen_v2" />
+            <top_module name="textio" />
+            <top_module name="vcomponents" />
+            <top_module name="vital_primitives" />
+            <top_module name="vital_timing" />
+            <top_module name="vpkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="27" />
+   <wvobject fp_name="/tb_keygen_v2/keyin" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">keyin[7:0]</obj_property>
+      <obj_property name="ObjectShortName">keyin[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/rst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/inv" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">inv</obj_property>
+      <obj_property name="ObjectShortName">inv</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/ce" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ce</obj_property>
+      <obj_property name="ObjectShortName">ce</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/keyinen" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">keyinen</obj_property>
+      <obj_property name="ObjectShortName">keyinen</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/done" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">done</obj_property>
+      <obj_property name="ObjectShortName">done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/keyout" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">keyout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">keyout[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/clk_period" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">clk_period</obj_property>
+      <obj_property name="ObjectShortName">clk_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="group38" type="group">
+      <obj_property name="label">top inter</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_keygen_v2/uut/keyin" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">keyin[7:0]</obj_property>
+         <obj_property name="ObjectShortName">keyin[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/inv" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">inv</obj_property>
+         <obj_property name="ObjectShortName">inv</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/ce" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ce</obj_property>
+         <obj_property name="ObjectShortName">ce</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/keyinen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">keyinen</obj_property>
+         <obj_property name="ObjectShortName">keyinen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/done" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">done</obj_property>
+         <obj_property name="ObjectShortName">done</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/keyout" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">keyout[7:0]</obj_property>
+         <obj_property name="ObjectShortName">keyout[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/rconen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rconen</obj_property>
+         <obj_property name="ObjectShortName">rconen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/addren" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">addren</obj_property>
+         <obj_property name="ObjectShortName">addren</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/newkey" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">newkey[7:0]</obj_property>
+         <obj_property name="ObjectShortName">newkey[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/addr" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">addr[3:0]</obj_property>
+         <obj_property name="ObjectShortName">addr[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/qaddr" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">qaddr[7:0]</obj_property>
+         <obj_property name="ObjectShortName">qaddr[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/qaddrdel" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">qaddrdel[7:0]</obj_property>
+         <obj_property name="ObjectShortName">qaddrdel[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/q15" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">q15[7:0]</obj_property>
+         <obj_property name="ObjectShortName">q15[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/subout" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">subout[7:0]</obj_property>
+         <obj_property name="ObjectShortName">subout[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/rcon" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rcon[7:0]</obj_property>
+         <obj_property name="ObjectShortName">rcon[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/rconout" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rconout[7:0]</obj_property>
+         <obj_property name="ObjectShortName">rconout[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/rconsel" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rconsel</obj_property>
+         <obj_property name="ObjectShortName">rconsel</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/qaddrfirst" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">qaddrfirst[7:0]</obj_property>
+         <obj_property name="ObjectShortName">qaddrfirst[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/qmux" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">qmux[7:0]</obj_property>
+         <obj_property name="ObjectShortName">qmux[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/calckey" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">calckey[7:0]</obj_property>
+         <obj_property name="ObjectShortName">calckey[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/frowsel" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">frowsel</obj_property>
+         <obj_property name="ObjectShortName">frowsel</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/subbytesn" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">subbytesn</obj_property>
+         <obj_property name="ObjectShortName">subbytesn</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/invdeladdri" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">invdeladdri</obj_property>
+         <obj_property name="ObjectShortName">invdeladdri</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/invdeladdr" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">invdeladdr[3:0]</obj_property>
+         <obj_property name="ObjectShortName">invdeladdr[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/setupce" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">setupce</obj_property>
+      <obj_property name="ObjectShortName">setupce</obj_property>
+   </wvobject>
+   <wvobject fp_name="group57" type="group">
+      <obj_property name="label">controller</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/ce" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ce</obj_property>
+         <obj_property name="ObjectShortName">ce</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/done" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">done</obj_property>
+         <obj_property name="ObjectShortName">done</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/inv" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">inv</obj_property>
+         <obj_property name="ObjectShortName">inv</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/rconen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rconen</obj_property>
+         <obj_property name="ObjectShortName">rconen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/rconsel" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rconsel</obj_property>
+         <obj_property name="ObjectShortName">rconsel</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/addrenable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">addrenable</obj_property>
+         <obj_property name="ObjectShortName">addrenable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/frowsel" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">frowsel</obj_property>
+         <obj_property name="ObjectShortName">frowsel</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/srl0q15" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">srl0q15</obj_property>
+         <obj_property name="ObjectShortName">srl0q15</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/srl0qaddr" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">srl0qaddr</obj_property>
+         <obj_property name="ObjectShortName">srl0qaddr</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/srl1q15" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">srl1q15</obj_property>
+         <obj_property name="ObjectShortName">srl1q15</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/srl1qaddr" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">srl1qaddr</obj_property>
+         <obj_property name="ObjectShortName">srl1qaddr</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/donedel" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">donedel</obj_property>
+         <obj_property name="ObjectShortName">donedel</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/ncycles" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">ncycles</obj_property>
+         <obj_property name="ObjectShortName">ncycles</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/frowaddri" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">frowaddri</obj_property>
+         <obj_property name="ObjectShortName">frowaddri</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/frowaddr" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">frowaddr[3:0]</obj_property>
+         <obj_property name="ObjectShortName">frowaddr[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/rconselfaddri" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">rconselfaddri</obj_property>
+         <obj_property name="ObjectShortName">rconselfaddri</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/controller/rconselfaddr" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rconselfaddr[3:0]</obj_property>
+         <obj_property name="ObjectShortName">rconselfaddr[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group64" type="group">
+      <obj_property name="label">keystore</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_keygen_v2/uut/keyStore/d" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">d[7:0]</obj_property>
+         <obj_property name="ObjectShortName">d[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/keyStore/ce" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ce</obj_property>
+         <obj_property name="ObjectShortName">ce</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/keyStore/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/keyStore/addr" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">addr[3:0]</obj_property>
+         <obj_property name="ObjectShortName">addr[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/keyStore/q" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">q[7:0]</obj_property>
+         <obj_property name="ObjectShortName">q[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/keyStore/q15" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">q15[7:0]</obj_property>
+         <obj_property name="ObjectShortName">q15[7:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group73" type="group">
+      <obj_property name="label">addrgen</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_keygen_v2/uut/addr_generator/en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">en</obj_property>
+         <obj_property name="ObjectShortName">en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/addr_generator/inv" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">inv</obj_property>
+         <obj_property name="ObjectShortName">inv</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/addr_generator/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/addr_generator/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/addr_generator/addr" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">addr[3:0]</obj_property>
+         <obj_property name="ObjectShortName">addr[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/addr_generator/counter" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">counter[2:0]</obj_property>
+         <obj_property name="ObjectShortName">counter[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/addr_generator/addrf" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">addrf[3:0]</obj_property>
+         <obj_property name="ObjectShortName">addrf[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/addr_generator/addri" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">addri[3:0]</obj_property>
+         <obj_property name="ObjectShortName">addri[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group81" type="group">
+      <obj_property name="label">rcongen</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_keygen_v2/uut/RCon_generator/en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">en</obj_property>
+         <obj_property name="ObjectShortName">en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/RCon_generator/inv" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">inv</obj_property>
+         <obj_property name="ObjectShortName">inv</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/RCon_generator/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/RCon_generator/rcon" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rcon[7:0]</obj_property>
+         <obj_property name="ObjectShortName">rcon[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/RCon_generator/rconr" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rconr[7:0]</obj_property>
+         <obj_property name="ObjectShortName">rconr[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/RCon_generator/newrcon" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">newrcon[7:0]</obj_property>
+         <obj_property name="ObjectShortName">newrcon[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/RCon_generator/prevrcon" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">prevrcon[7:0]</obj_property>
+         <obj_property name="ObjectShortName">prevrcon[7:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group88" type="group">
+      <obj_property name="label">invdel</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/uut/controller/SRLC16E_0/q" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">q</obj_property>
+      <obj_property name="ObjectShortName">q</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/uut/controller/SRLC16E_0/q15" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">q15</obj_property>
+      <obj_property name="ObjectShortName">q15</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/uut/controller/SRLC16E_0/a0" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">a0</obj_property>
+      <obj_property name="ObjectShortName">a0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/uut/controller/SRLC16E_0/a1" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">a1</obj_property>
+      <obj_property name="ObjectShortName">a1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/uut/controller/SRLC16E_0/a2" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">a2</obj_property>
+      <obj_property name="ObjectShortName">a2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/uut/controller/SRLC16E_0/a3" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">a3</obj_property>
+      <obj_property name="ObjectShortName">a3</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/uut/controller/SRLC16E_0/ce" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ce</obj_property>
+      <obj_property name="ObjectShortName">ce</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/uut/controller/SRLC16E_0/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/uut/controller/SRLC16E_0/d" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">d</obj_property>
+      <obj_property name="ObjectShortName">d</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/uut/controller/SRLC16E_0/shift_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">shift_reg[16:0]</obj_property>
+      <obj_property name="ObjectShortName">shift_reg[16:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_keygen_v2/uut/controller/SRLC16E_0/init" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">init[0:15]</obj_property>
+      <obj_property name="ObjectShortName">init[0:15]</obj_property>
+   </wvobject>
+</wave_config>

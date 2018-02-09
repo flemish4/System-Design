@@ -33,7 +33,7 @@ entity RCon_gen is
     Port ( en : in  STD_LOGIC;
            inv : in  STD_LOGIC;
            clk : in  STD_LOGIC;
-           rst : in  STD_LOGIC;
+           --rst : in  STD_LOGIC;
            rcon : out  STD_LOGIC_VECTOR (7 downto 0));
 end RCon_gen;
 
@@ -44,21 +44,22 @@ signal prevRCon : std_logic_vector (7 downto 0);
 begin
 	process (clk) begin
 		if rising_edge(clk) then
-			if rst = '1' then
-				if inv = '0' then
-					RConR <= x"01";
-				else 
-					RConR <= x"6C"; -- one shift above 36 for first
-				end if;
-			elsif en = '1' then
-				if inv = '0' then
-					RConR <= newRCon;
-				else 
-					RConR <= prevRCon;
-				end if;
+--			if rst = '1' then
+--				if inv = '0' then
+--					RConR <= x"01";
+--				else 
+--					RConR <= x"6C"; -- one shift above 36 for first
+--				end if;
+			--els
+		if en = '1' then
+			if inv = '0' then
+				RConR <= newRCon;
 			else 
-				RConR <= RConR;
+				RConR <= prevRCon;
 			end if;
+		else 
+			RConR <= RConR;
+		end if;
 		end if;
 	end process;	
 	

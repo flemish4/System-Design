@@ -35,7 +35,9 @@ entity keyGen is
            CLK : in  STD_LOGIC;
            RST : in  STD_LOGIC;
            INV : in  STD_LOGIC;
-           Start : in  STD_LOGIC;
+           --Start : in  STD_LOGIC;
+			  CE : in STD_LOGIC;
+           setupce : in  STD_LOGIC;
 			  keyInEn : in STD_LOGIC;
 			  done : out STD_LOGIC;
            keyout : out  STD_LOGIC_VECTOR (7 downto 0)
@@ -46,21 +48,37 @@ end keyGen;
 
 architecture Behavioral of keyGen is
 
-component key_counter_v2 is
+--component key_counter_v2 is
+--	generic ( Ncycles : integer := 2);
+--    Port ( rst : in  STD_LOGIC;
+--           keyInEn : in  STD_LOGIC;
+--           inv : in  STD_LOGIC;
+--           start : in  STD_LOGIC;
+--           clk : in  STD_LOGIC;
+--			  SRLEnable : out STD_LOGIC;
+--			  addrEnable : out STD_LOGIC;
+--			  runAll  : out STD_LOGIC;
+--			  RConEn  : out STD_LOGIC;
+--			  RConSel : out STD_LOGIC;
+--			  FRowSel : out STD_LOGIC;
+--			  invDelSel : out STD_LOGIC;
+--			  done : out STD_LOGIC
+--			  );
+--end component;
+
+component keyGenController_v3 is
 	generic ( Ncycles : integer := 2);
-    Port ( rst : in  STD_LOGIC;
+    Port ( --rst : in  STD_LOGIC;
+           ce : in  STD_LOGIC;
+           setupce : in  STD_LOGIC;
            keyInEn : in  STD_LOGIC;
+           done : out  STD_LOGIC;
            inv : in  STD_LOGIC;
-           start : in  STD_LOGIC;
            clk : in  STD_LOGIC;
-			  SRLEnable : out STD_LOGIC;
 			  addrEnable : out STD_LOGIC;
-			  runAll  : out STD_LOGIC;
 			  RConEn  : out STD_LOGIC;
 			  RConSel : out STD_LOGIC;
-			  FRowSel : out STD_LOGIC;
-			  invDelSel : out STD_LOGIC;
-			  done : out STD_LOGIC
+			  FRowSel : out STD_LOGIC
 			  );
 end component;
 
@@ -75,7 +93,7 @@ end component;
 
 component addr_gen is
     Port ( 
-			  genEn : in STD_LOGIC;
+			  --genEn : in STD_LOGIC;--------------------
            en : in  STD_LOGIC;
            inv : in  STD_LOGIC;
            rst : in  STD_LOGIC;
@@ -93,15 +111,15 @@ end component SUBBYTES;
 component RCon_gen is
     Port ( en : in  STD_LOGIC;
            clk : in  STD_LOGIC;
-           rst : in  STD_LOGIC;
+           --rst : in  STD_LOGIC;
            INV : in  STD_LOGIC;
            rcon : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
-signal SrlEn : STD_LOGIC ;
+--signal SrlEn : STD_LOGIC ;
 signal RConEn : STD_LOGIC ;
 signal AddrEn : STD_LOGIC ;
-signal shiftEn : STD_LOGIC ;
+--signal shiftEn : STD_LOGIC ;
 signal newKey  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal QAddr  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal Q15  : STD_LOGIC_VECTOR (7 downto 0) ;
@@ -114,32 +132,51 @@ signal QMux  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal calcKey  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal Addr  : STD_LOGIC_VECTOR (3 downto 0) ;
 signal FRowSel : STD_LOGIC;
-signal genEn : STD_LOGIC;
-signal invDelSel : STD_LOGIC;
-signal invDelKey  : STD_LOGIC_VECTOR (7 downto 0) ;
+--signal genEn : STD_LOGIC;
+--signal invDelSel : STD_LOGIC;
+--signal invDelKey  : STD_LOGIC_VECTOR (7 downto 0) ;
 constant invDelAddrI : integer := subBytesN -1;
 constant invDelAddr  : std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(invDelAddrI, 4));
+signal QAddrDel  : STD_LOGIC_VECTOR (7 downto 0) ;
+--signal FQMux  : STD_LOGIC_VECTOR (7 downto 0) ;
+--signal invQMux  : STD_LOGIC_VECTOR (7 downto 0) ;
+
 
 begin
-controller : key_counter_v2
-	generic map ( Ncycles => 2)
-    Port map (   rst => rst,
-					  done => done,
-					  keyInEn => keyInEn,
-					  start => start,
-					  inv => inv,
-					  clk => clk,
-					  SRLEnable => SrlEn,
-					  addrEnable => AddrEn,
-					  runAll  => genEn,
-					  RConEn  => RConEn,
-					  RConSel => RconSel,
-					  FRowSel => FRowSel,
-					  invDelSel => invDelSel);
+--controller : key_counter_v2--------------------------------------------------------
+--	generic map ( Ncycles => 2)
+--    Port map (   rst => rst,
+--					  done => done,
+--					  keyInEn => keyInEn,
+--					  start => start,
+--					  inv => inv,
+--					  clk => clk,
+--					  SRLEnable => SrlEn,
+--					  addrEnable => AddrEn,
+--					  runAll  => genEn,
+--					  RConEn  => RConEn,
+--					  RConSel => RconSel,
+--					  FRowSel => FRowSel,
+--					  invDelSel => invDelSel);
 
+controller : keyGenController_v3 
+	generic map ( Ncycles => 2)
+    Port map ( --rst : in  STD_LOGIC;
+           keyInEn  => keyInEn ,
+           ce  => CE ,
+           setupce  => setupCE ,
+           done  => done ,
+           inv  => inv ,
+           clk  => clk ,
+			  addrEnable  => AddrEn ,
+			  RConEn   => RConEn ,
+			  RConSel  => RConSel ,
+			  FRowSel  => FRowSel
+			  );
+			  
 keyStore : srl16_8 
     Port map ( D => newKey ,
-           CE => shiftEn,
+           CE => CE,
            CLK => clk,
            Addr => Addr,
            Q  => QAddr,
@@ -147,7 +184,7 @@ keyStore : srl16_8
 
 addr_generator : addr_gen 
     Port map ( 
-			  genEn => genEn,
+			  --genEn => genEn,
            en => AddrEn,
            inv => inv,
            rst => rst,
@@ -163,30 +200,32 @@ subByte : SUBBYTES
 RCon_generator : RCon_gen
     Port map ( en => RConEn ,
            clk => clk,
-           rst => rst,
+           --rst => rst,
            INV => INV,
            rcon => Rcon );
 			  
-invDelay : srl16_8 
-    Port map ( D => calcKey ,
-           CE => genEn,
+QAddrDelayer : srl16_8 
+    Port map ( D => QAddr ,
+           CE => CE, 
            CLK => clk,
            Addr => invDelAddr,
-           Q  => invDelKey
+           Q  => QAddrDel 
            --Q15  => Q15 
 			  );
 			    
-	keyOut <= keyIn when keyInEn = '1' else
-				 invDelKey when inv = '1' and invDelSel = '1' else
+	keyOut <= newKey;
+	newKey <= keyIn when keyInEn = '1' else 
 				 calcKey;
-	newKey <= 	keyIn when keyInEn = '1' else
-					calcKey;
-	shiftEn <= keyInEn or srlEn;
+	--shiftEn <= keyInEn or srlEn;---------------------------
 	RConOut <= subOut xor RCon;
 	QAddrFirst <= RConOut when RConSel = '1' else
 					  subOut;
-	QMux <= QAddrFirst when FRowSel = '1' else
-			  QAddr;
+--	FQMux <= QAddrFirst when FRowSel = '1' else
+--			   QAddr;
+	QMux <= QAddrDel when FRowSel = '0' else
+				  QaddrFirst;
+--	QMux <= FQMux when inv = '0' else
+--			  invQMux;
 	calcKey <= Q15 xor QMux;
    
 end Behavioral;
