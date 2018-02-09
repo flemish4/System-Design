@@ -97,8 +97,6 @@ dkms.conf
 *_usage.xml
 *_xst.xrpt
 *.xreport
-*.gise
-*.xise
 *.wdb
 *.dat
 *.log
