@@ -127,8 +127,8 @@ BEGIN
       wait for CLK_period;
 		RST <= '0';
       wait for CLK_period*10;	
-		inv <= '1';
-      wait for CLK_period*16;	
+		--inv <= '1';
+      --wait for CLK_period*16;	
 
       -- insert stimulus here 
 		keyInEn <= '1';

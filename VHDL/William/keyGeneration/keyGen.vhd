@@ -47,27 +47,9 @@ end keyGen;
 
 architecture Behavioral of keyGen is
 
---component key_counter_v2 is
---	generic ( Ncycles : integer := 2);
---    Port ( rst : in  STD_LOGIC;
---           keyInEn : in  STD_LOGIC;
---           inv : in  STD_LOGIC;
---           start : in  STD_LOGIC;
---           clk : in  STD_LOGIC;
---			  SRLEnable : out STD_LOGIC;
---			  addrEnable : out STD_LOGIC;
---			  runAll  : out STD_LOGIC;
---			  RConEn  : out STD_LOGIC;
---			  RConSel : out STD_LOGIC;
---			  FRowSel : out STD_LOGIC;
---			  invDelSel : out STD_LOGIC;
---			  done : out STD_LOGIC
---			  );
---end component;
-
 component keyGenController_v3 is
 	generic ( Ncycles : integer := 2);
-    Port ( --rst : in  STD_LOGIC;
+    Port ( 
            ce : in  STD_LOGIC;
            keyInEn : in  STD_LOGIC;
            done : out  STD_LOGIC;
@@ -91,7 +73,6 @@ end component;
 
 component addr_gen is
     Port ( 
-			  --genEn : in STD_LOGIC;--------------------
            en : in  STD_LOGIC;
            inv : in  STD_LOGIC;
            rst : in  STD_LOGIC;
@@ -114,10 +95,8 @@ component RCon_gen is
            rcon : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
---signal SrlEn : STD_LOGIC ;
 signal RConEn : STD_LOGIC ;
 signal AddrEn : STD_LOGIC ;
---signal shiftEn : STD_LOGIC ;
 signal newKey  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal QAddr  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal Q15  : STD_LOGIC_VECTOR (7 downto 0) ;
@@ -130,36 +109,15 @@ signal QMux  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal calcKey  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal Addr  : STD_LOGIC_VECTOR (3 downto 0) ;
 signal FRowSel : STD_LOGIC;
---signal genEn : STD_LOGIC;
---signal invDelSel : STD_LOGIC;
---signal invDelKey  : STD_LOGIC_VECTOR (7 downto 0) ;
 constant invDelAddrI : integer := subBytesN -1;
 constant invDelAddr  : std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(invDelAddrI, 4));
 signal QAddrDel  : STD_LOGIC_VECTOR (7 downto 0) ;
---signal FQMux  : STD_LOGIC_VECTOR (7 downto 0) ;
---signal invQMux  : STD_LOGIC_VECTOR (7 downto 0) ;
-
 
 begin
---controller : key_counter_v2--------------------------------------------------------
---	generic map ( Ncycles => 2)
---    Port map (   rst => rst,
---					  done => done,
---					  keyInEn => keyInEn,
---					  start => start,
---					  inv => inv,
---					  clk => clk,
---					  SRLEnable => SrlEn,
---					  addrEnable => AddrEn,
---					  runAll  => genEn,
---					  RConEn  => RConEn,
---					  RConSel => RconSel,
---					  FRowSel => FRowSel,
---					  invDelSel => invDelSel);
 
 controller : keyGenController_v3 
 	generic map ( Ncycles => 2)
-    Port map ( --rst : in  STD_LOGIC;
+    Port map (
            keyInEn  => keyInEn ,
            ce  => CE ,
            done  => done ,
@@ -181,7 +139,6 @@ keyStore : srl16_8
 
 addr_generator : addr_gen 
     Port map ( 
-			  --genEn => genEn,
            en => AddrEn,
            inv => inv,
            rst => rst,
@@ -213,16 +170,11 @@ QAddrDelayer : srl16_8
 	keyOut <= newKey;
 	newKey <= keyIn when keyInEn = '1' else 
 				 calcKey;
-	--shiftEn <= keyInEn or srlEn;---------------------------
 	RConOut <= subOut xor RCon;
 	QAddrFirst <= RConOut when RConSel = '1' else
 					  subOut;
---	FQMux <= QAddrFirst when FRowSel = '1' else
---			   QAddr;
 	QMux <= QAddrDel when FRowSel = '0' else
 				  QaddrFirst;
---	QMux <= FQMux when inv = '0' else
---			  invQMux;
 	calcKey <= Q15 xor QMux;
    
 end Behavioral;

@@ -58,12 +58,6 @@ component CEGen is
            ce : out  STD_LOGIC);
 end component;
 
---component setupCEgen is
---    Port ( inv : in  STD_LOGIC;
---           clk : in  STD_LOGIC;
---           setupce : out  STD_LOGIC);
---end component;
-
 component keyStoreExt is
     Port ( keyIn : in  STD_LOGIC_VECTOR (7 downto 0);
            ce : in  STD_LOGIC;
@@ -80,9 +74,7 @@ component keyGen is
            CLK : in  STD_LOGIC;
            RST : in  STD_LOGIC;
            INV : in  STD_LOGIC;
-           --Start : in  STD_LOGIC;
 			  CE : in STD_LOGIC;
-           --setupce : in  STD_LOGIC;
 			  keyInEn : in STD_LOGIC;
 			  done : out STD_LOGIC;
            keyout : out  STD_LOGIC_VECTOR (7 downto 0)
@@ -96,21 +88,6 @@ component counter_srl is
            q : out  STD_LOGIC);
 end component;
 
---component delay is
---	generic ( del : integer := 2 ) ;
---    Port ( D : in  STD_LOGIC;
---           CLK : in  STD_LOGIC;
---           Q : out  STD_LOGIC);
---end component;
-
---component startBlockgen is
---    Port ( roundDone : in  STD_LOGIC;
---			  startShift : in  STD_LOGIC;
---           rst : in  STD_LOGIC;
---           clk : in  STD_LOGIC;
---           startBlock : out  STD_LOGIC);
---end component;
-
 component pulse_extender is
 	generic ( del : integer := 16 ) ;
     Port ( d : in  STD_LOGIC;
@@ -118,12 +95,6 @@ component pulse_extender is
            clk : in  STD_LOGIC;
            rst : in  STD_LOGIC);
 end component;
-
---component invRstGen is
---    Port ( invF : in  STD_LOGIC;
---           clk : in  STD_LOGIC;
---           invRst : out  STD_LOGIC);
---end component;
 
 constant NCycles : integer := 2;
 constant NRounds : integer := 11;
@@ -135,18 +106,11 @@ signal genKeyOut  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal storeIn  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal genDone : STD_LOGIC ;
 signal roundDone : STD_LOGIC ;
---signal startShift : STD_LOGIC ;
 signal RInEn : STD_LOGIC ;
 signal genInEn : STD_LOGIC ;
 signal storeCE : STD_LOGIC ;
---signal nStart : STD_LOGIC ;
---signal genStart : STD_LOGIC ;
 signal invF : STD_LOGIC ;
---signal startBlock : STD_LOGIC ;
 signal genInv : STD_LOGIC ;
---signal invRst : STD_LOGIC ;
---signal genRst : STD_LOGIC ;
---signal setupce : std_logic;
 signal ce : std_logic;
 signal counterCE : std_logic;
 
@@ -168,11 +132,6 @@ begin
 				  clk => clk ,
 				  ce => ce );
 
---	setupCEgen_0 : setupCEgen 
---		 Port map ( inv => inv ,
---				  clk => clk ,
---				  setupce => setupce );
-
 	keyStoreExt0 : keyStoreExt
 		 Port map ( keyIn => storeIn ,
 				  ce => storeCE ,
@@ -190,7 +149,6 @@ begin
 				  RST => rst ,
 				  INV => genInv ,
 				  ce => ce ,
-				  --setupce => setupce ,
 				  keyInEn => genInEn ,
 				  done => genDone ,
 				  keyout => genKeyOut
@@ -203,29 +161,6 @@ begin
 				  q => roundDone
 				  );
 
---	keyGenDelay : delay
---		generic map ( del => NCycles + sysCycles)
---		 Port map ( D => roundDone ,
---				  CLK => clk ,
---				  Q => startShift
---				  );
-
-
---	systemDelay : delay
---		generic map ( del => sysCycles )
---		 Port map ( D => genDone ,
---				  CLK => clk ,
---				  Q => nStart
---				  );
-	
---	blockGen : startBlockgen 
---	Port map ( roundDone => roundDone ,
---			  startShift => startShift ,
---           rst => rst ,
---           clk => clk ,
---           startBlock => startBlock
---			  );
-	
 	RInEnExtender : pulse_extender
 		generic map ( del =>	15 ) 
 		 Port map ( d => roundDone ,
@@ -234,22 +169,14 @@ begin
 				  rst => rst
 				  );
 				  
---	invRstGen0 : invRstGen
---		 Port map ( invF => invF ,
---				  clk =>	clk ,
---				  invRst =>	invRst
---				  );
-	
 	genKeyIn <= keyIn when keyInEn = '1' else
 					storeOut;
 	storeIn <= keyIn when invF = '0' else
 					genKeyOut;
 	genInEn <= keyInEn or RInEn;
 	storeCE <= (keyInEn or invF) ;--and not genDone;
-	--genStart <= nStart and not startBlock;
 	keyOut <= genKeyOut;
 	genInv <= inv and not invF;
-	--genRst <= invRst or rst;
 	counterCE <= genDone and CE;
 end Behavioral;
 
