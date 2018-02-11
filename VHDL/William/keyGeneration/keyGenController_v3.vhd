@@ -33,7 +33,6 @@ entity keyGenController_v3 is
 	generic ( Ncycles : integer := 2);
     Port ( --rst : in  STD_LOGIC;
            ce : in  STD_LOGIC;
-           setupce : in  STD_LOGIC;
            keyInEn : in  STD_LOGIC;
            inv : in  STD_LOGIC;
            clk : in  STD_LOGIC;
@@ -53,13 +52,16 @@ constant RConSelFAddrI : integer := 0;
 constant RConSelFAddr  : std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(RConSelFAddrI, 4));
 
 signal SRL0Q15 : STD_LOGIC;
+signal SRL0Q15Inv : STD_LOGIC;
 signal SRL0QAddr : STD_LOGIC;
+signal SRL0QAddrInv : STD_LOGIC;
 signal SRL1Q15 : STD_LOGIC;
 signal SRL1QAddr : STD_LOGIC;
+signal SRL0Frow : STD_LOGIC;
+signal SRL0addrEn : STD_LOGIC;
 
 signal doneDel : STD_LOGIC := '0';
 signal FRowSelDel : STD_LOGIC := '0';
-signal SRL0CE : STD_LOGIC;
 
 begin
 	-- Handle done delay
@@ -72,7 +74,7 @@ begin
 	-- Handle FRowSel delay
 	process (clk) begin
 		if rising_edge(clk) and CE = '1' then
-			FRowSelDel <= SRL0QAddr;
+			FRowSelDel <= SRL0Frow;
 		end if;
 	end process;
 	
@@ -86,9 +88,24 @@ begin
 			A1 => FRowAddr(1), -- Select[1] input
 			A2 => FRowAddr(2), -- Select[2] input
 			A3 => FRowAddr(3), -- Select[3] input
-			CE => SRL0CE, -- Clock enable input
+			CE => ce, -- Clock enable input
 			CLK => CLK, -- Clock input
 			D => SRL0Q15 -- SRL data input
+		);	
+		
+	SRLC16E_0Inv : SRLC16E -- generates addrGenEn and FRowSel
+		generic map (
+			INIT => "0000000001111100")
+		port map (
+			Q => SRL0QAddrInv, -- SRL data output
+			Q15 => SRL0Q15Inv, -- Carry output 
+			A0 => FRowAddr(0), -- Select[0] input
+			A1 => FRowAddr(1), -- Select[1] input
+			A2 => FRowAddr(2), -- Select[2] input
+			A3 => FRowAddr(3), -- Select[3] input
+			CE => ce, -- Clock enable input
+			CLK => CLK, -- Clock input
+			D => SRL0Q15Inv -- SRL data input
 		);	
 		
 	SRLC16E_1 : SRLC16E -- generates RConSel and Done
@@ -106,12 +123,15 @@ begin
 			D => SRL1Q15 -- SRL data input
 		);		
 		
-		addrEnable 	<= SRL0Q15 and CE		;
-		FRowSel 		<= SRL0QAddr and FRowSelDel	;
+		addrEnable 	<= SRL0addrEn and CE		;
+		FRowSel 		<= SRL0Frow and FRowSelDel	;
 		RConSel		<= SRL1QAddr when inv = '0' else
 							SRL1Q15;
 		done 			<= SRL1Q15;
 		RConEn 		<= doneDel and not keyInEn;
-		SRL0CE		<= ce or setupce;
+		SRL0Frow		<= SRL0QAddr when inv = '0' else
+							SRL0QAddrInv;
+		SRL0addrEn	<= SRL0Q15 when inv = '0' else
+							SRL0Q15Inv;
 end Behavioral;
 

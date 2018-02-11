@@ -46,7 +46,6 @@ ARCHITECTURE behavior OF tb_keyGen_v2 IS
          RST : IN  std_logic;
          INV : IN  std_logic;
          CE : IN  std_logic;
-		   setupce : in  STD_LOGIC;
          keyInEn : IN  std_logic;
          done : OUT  std_logic;
          keyout : OUT  std_logic_vector(7 downto 0)
@@ -60,7 +59,6 @@ ARCHITECTURE behavior OF tb_keyGen_v2 IS
    signal RST : std_logic := '0';
    signal INV : std_logic := '0';
    signal CE : std_logic := '0';
-   signal setupCE : std_logic := '0';
    signal keyInEn : std_logic := '0';
 
  	--Outputs
@@ -116,7 +114,6 @@ BEGIN
           RST => RST,
           INV => INV,
           CE => CE,
-          setupCE => setupCE,
           keyInEn => keyInEn,
           done => done,
           keyout => keyout
@@ -139,12 +136,12 @@ BEGIN
 		wait for CLK_period/10;
 		
 -- forward testing
-			-- hold reset state for 100 ns.
---			wait for 100 ns;	
---			RST <= '1';
---			wait for CLK_period;
---			RST <= '0';
---			wait for CLK_period*10;
+		-- hold reset state for 100 ns.
+--		wait for 100 ns;	
+--		RST <= '1';
+--		wait for CLK_period;
+--		RST <= '0';
+--		wait for CLK_period*10;
 --		for j in 0 to 3 loop
 --
 --			-- insert stimulus here 
@@ -165,17 +162,13 @@ BEGIN
  --      hold reset state for 100 ns.
 --      wait for 100 ns;	
 --		
---		
+		
 		inv <= '1';
-		RST <= '1';
-      wait for CLK_period;
-		RST <= '0';
+--		RST <= '1';
+--      wait for CLK_period;
+--		RST <= '0';
       wait for CLK_period*10;
 	
-		setupCE <= '1';
-      wait for CLK_period*4;
-		setupCE <='0';
-
 	for j in 0 to 2 loop
       -- insert stimulus here 
 		keyInEn <= '1';

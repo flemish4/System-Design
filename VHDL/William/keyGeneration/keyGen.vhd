@@ -37,7 +37,6 @@ entity keyGen is
            INV : in  STD_LOGIC;
            --Start : in  STD_LOGIC;
 			  CE : in STD_LOGIC;
-           setupce : in  STD_LOGIC;
 			  keyInEn : in STD_LOGIC;
 			  done : out STD_LOGIC;
            keyout : out  STD_LOGIC_VECTOR (7 downto 0)
@@ -70,7 +69,6 @@ component keyGenController_v3 is
 	generic ( Ncycles : integer := 2);
     Port ( --rst : in  STD_LOGIC;
            ce : in  STD_LOGIC;
-           setupce : in  STD_LOGIC;
            keyInEn : in  STD_LOGIC;
            done : out  STD_LOGIC;
            inv : in  STD_LOGIC;
@@ -164,7 +162,6 @@ controller : keyGenController_v3
     Port map ( --rst : in  STD_LOGIC;
            keyInEn  => keyInEn ,
            ce  => CE ,
-           setupce  => setupCE ,
            done  => done ,
            inv  => inv ,
            clk  => clk ,

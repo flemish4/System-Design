@@ -58,11 +58,11 @@ component CEGen is
            ce : out  STD_LOGIC);
 end component;
 
-component setupCEgen is
-    Port ( inv : in  STD_LOGIC;
-           clk : in  STD_LOGIC;
-           setupce : out  STD_LOGIC);
-end component;
+--component setupCEgen is
+--    Port ( inv : in  STD_LOGIC;
+--           clk : in  STD_LOGIC;
+--           setupce : out  STD_LOGIC);
+--end component;
 
 component keyStoreExt is
     Port ( keyIn : in  STD_LOGIC_VECTOR (7 downto 0);
@@ -82,7 +82,7 @@ component keyGen is
            INV : in  STD_LOGIC;
            --Start : in  STD_LOGIC;
 			  CE : in STD_LOGIC;
-           setupce : in  STD_LOGIC;
+           --setupce : in  STD_LOGIC;
 			  keyInEn : in STD_LOGIC;
 			  done : out STD_LOGIC;
            keyout : out  STD_LOGIC_VECTOR (7 downto 0)
@@ -146,7 +146,7 @@ signal invF : STD_LOGIC ;
 signal genInv : STD_LOGIC ;
 --signal invRst : STD_LOGIC ;
 --signal genRst : STD_LOGIC ;
-signal setupce : std_logic;
+--signal setupce : std_logic;
 signal ce : std_logic;
 signal counterCE : std_logic;
 
@@ -168,10 +168,10 @@ begin
 				  clk => clk ,
 				  ce => ce );
 
-	setupCEgen_0 : setupCEgen 
-		 Port map ( inv => inv ,
-				  clk => clk ,
-				  setupce => setupce );
+--	setupCEgen_0 : setupCEgen 
+--		 Port map ( inv => inv ,
+--				  clk => clk ,
+--				  setupce => setupce );
 
 	keyStoreExt0 : keyStoreExt
 		 Port map ( keyIn => storeIn ,
@@ -190,7 +190,7 @@ begin
 				  RST => rst ,
 				  INV => genInv ,
 				  ce => ce ,
-				  setupce => setupce ,
+				  --setupce => setupce ,
 				  keyInEn => genInEn ,
 				  done => genDone ,
 				  keyout => genKeyOut

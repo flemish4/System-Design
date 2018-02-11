@@ -32,6 +32,8 @@ use UNISIM.VComponents.all;
 entity setupCEgen is
     Port ( inv : in  STD_LOGIC;
            clk : in  STD_LOGIC;
+           doneInvF : in  STD_LOGIC;
+           invDone : out  STD_LOGIC;
            setupce : out  STD_LOGIC);
 end setupCEgen;
 
@@ -58,7 +60,7 @@ begin
 	-- Handle running FF
 	process (clk) begin
 		if rising_edge(clk) then
-			if anyEdge = '1' then
+			if negEdge = '1' or doneInvF then
 				setupCER <= '1';
 			elsif anyDelOut = '1' then
 				setupCER <= '0';
@@ -83,11 +85,12 @@ begin
 		D => posEdge -- SRL data input
 	);	
 
-	posEdge <= inv and not invDel;
+	--posEdge <= inv and not invDel;
 	negEdge <= invDel and not inv;
-	anyEdge <= posEdge or negEdge;
+	--anyEdge <= posEdge or negEdge;
 	delayCE <= anyEdge or setupCER;
 	anyDelOut <= Q or Q15;
 	setupCE <= negedge or setupCER;
+	invDone <= Q;
 end Behavioral;
 
