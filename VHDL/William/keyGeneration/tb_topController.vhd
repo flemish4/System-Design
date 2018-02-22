@@ -122,15 +122,27 @@ BEGIN
 		wait for CLK_period/2;
 		wait for CLK_period/10;
       -- hold reset state for 100 ns.
-      wait for 100 ns;
-		RST <= '1';
-      wait for CLK_period;
-		RST <= '0';
+      --wait for 100 ns;
+		--RST <= '1';
+      --wait for CLK_period;
+		--RST <= '0';
       wait for CLK_period*10;	
-		--inv <= '1';
-      --wait for CLK_period*16;	
 
-      -- insert stimulus here 
+		keyInEn <= '1';
+		for i in 0 to 15 loop
+			keyIn <= testKey0(i);
+			wait for CLK_period;
+		end loop;
+		keyInEn <= '0';
+		
+      wait for CLK_period * 16*10*2;
+		
+		stop <= '1';
+		wait for clk_period *16;
+		stop <='0';
+		wait for clk_period *16;
+		
+		inv <= '1';
 		keyInEn <= '1';
 		for i in 0 to 15 loop
 			keyIn <= testKey0(i);
@@ -139,6 +151,11 @@ BEGIN
 		keyInEn <= '0';
 		
       wait for CLK_period * 16*10*3;
+
+		stop <= '1';
+		wait for clk_period *16;
+		stop <='0';
+		
 
       wait;
    end process;

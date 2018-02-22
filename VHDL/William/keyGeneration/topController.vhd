@@ -100,10 +100,10 @@ constant NCycles : integer := 2;
 constant NRounds : integer := 11;
 constant sysCycles : integer := 6;
 
+signal storeIn  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal storeOut  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal genKeyIn  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal genKeyOut  : STD_LOGIC_VECTOR (7 downto 0) ;
-signal storeIn  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal genDone : STD_LOGIC ;
 signal roundDone : STD_LOGIC ;
 signal RInEn : STD_LOGIC ;
@@ -111,7 +111,7 @@ signal genInEn : STD_LOGIC ;
 signal storeCE : STD_LOGIC ;
 signal invF : STD_LOGIC ;
 signal genInv : STD_LOGIC ;
-signal ce : std_logic;
+signal genCE : std_logic;
 signal counterCE : std_logic;
 
 begin
@@ -130,7 +130,7 @@ begin
 				  stop => stop ,
 				  done => gendone ,
 				  clk => clk ,
-				  ce => ce );
+				  ce => genCE );
 
 	keyStoreExt0 : keyStoreExt
 		 Port map ( keyIn => storeIn ,
@@ -148,7 +148,7 @@ begin
 				  CLK => clk ,
 				  RST => rst ,
 				  INV => genInv ,
-				  ce => ce ,
+				  ce => genCE ,
 				  keyInEn => genInEn ,
 				  done => genDone ,
 				  keyout => genKeyOut
@@ -174,9 +174,9 @@ begin
 	storeIn <= keyIn when invF = '0' else
 					genKeyOut;
 	genInEn <= keyInEn or RInEn;
-	storeCE <= (keyInEn or invF) ;--and not genDone;
+	storeCE <= (keyInEn or invF) ;
 	keyOut <= genKeyOut;
 	genInv <= inv and not invF;
-	counterCE <= genDone and CE;
+	counterCE <= genDone and genCE;
 end Behavioral;
 

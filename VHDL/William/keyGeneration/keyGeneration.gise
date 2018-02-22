@@ -134,7 +134,11 @@
   </files>
 
   <transforms xmlns="http://www.xilinx.com/XMLSchema">
-    <transform xil_pn:end_ts="1518387516" xil_pn:in_ck="-722332972266812173" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1518387516">
+    <transform xil_pn:end_ts="1518459309" xil_pn:name="TRAN_copyInitialToAbstractSimulation" xil_pn:start_ts="1518459309">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1518459498" xil_pn:in_ck="-722332972266812173" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1518459498">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="CEGen.vhd"/>
@@ -174,19 +178,19 @@
       <outfile xil_pn:name="tb_topController.vhd"/>
       <outfile xil_pn:name="topController.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1518383368" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="-8795483762035298238" xil_pn:start_ts="1518383368">
+    <transform xil_pn:end_ts="1518459309" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="-8795483762035298238" xil_pn:start_ts="1518459309">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1518383368" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="811888069660386042" xil_pn:start_ts="1518383368">
+    <transform xil_pn:end_ts="1518459309" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="811888069660386042" xil_pn:start_ts="1518459309">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1518383368" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="-8272464988827651375" xil_pn:start_ts="1518383368">
+    <transform xil_pn:end_ts="1518459309" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="-8272464988827651375" xil_pn:start_ts="1518459309">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1518387516" xil_pn:in_ck="-722332972266812173" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1518387516">
+    <transform xil_pn:end_ts="1518459498" xil_pn:in_ck="-722332972266812173" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1518459498">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="CEGen.vhd"/>
@@ -226,9 +230,11 @@
       <outfile xil_pn:name="tb_topController.vhd"/>
       <outfile xil_pn:name="topController.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1518387522" xil_pn:in_ck="-722332972266812173" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-355190455702634399" xil_pn:start_ts="1518387516">
+    <transform xil_pn:end_ts="1518459507" xil_pn:in_ck="-722332972266812173" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-355190455702634399" xil_pn:start_ts="1518459498">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="fuse.log"/>
       <outfile xil_pn:name="isim"/>
       <outfile xil_pn:name="isim.log"/>
@@ -236,9 +242,11 @@
       <outfile xil_pn:name="tb_topController_isim_beh.exe"/>
       <outfile xil_pn:name="xilinxsim.ini"/>
     </transform>
-    <transform xil_pn:end_ts="1518387523" xil_pn:in_ck="6830219183877688507" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="-1476022475625711445" xil_pn:start_ts="1518387522">
+    <transform xil_pn:end_ts="1518459507" xil_pn:in_ck="6830219183877688507" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="-1476022475625711445" xil_pn:start_ts="1518459507">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="isim.cmd"/>
       <outfile xil_pn:name="isim.log"/>
       <outfile xil_pn:name="tb_topController_isim_beh.wdb"/>
@@ -267,7 +275,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1518383336" xil_pn:in_ck="5793405104890336471" xil_pn:name="TRANEXT_xstsynthesize_spartan3" xil_pn:prop_ck="3921164221446604827" xil_pn:start_ts="1518383330">
+    <transform xil_pn:end_ts="1518461861" xil_pn:in_ck="5793405104890336471" xil_pn:name="TRANEXT_xstsynthesize_spartan3" xil_pn:prop_ck="3921164221446604827" xil_pn:start_ts="1518461853">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -292,7 +300,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1518383341" xil_pn:in_ck="-1907144787847300525" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="2410767624538402713" xil_pn:start_ts="1518383336">
+    <transform xil_pn:end_ts="1518461866" xil_pn:in_ck="-1907144787847300525" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="2410767624538402713" xil_pn:start_ts="1518461861">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_ngo"/>
@@ -301,7 +309,7 @@
       <outfile xil_pn:name="topController.ngd"/>
       <outfile xil_pn:name="topController_ngdbuild.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1518383344" xil_pn:in_ck="2538356821193498742" xil_pn:name="TRANEXT_map_spartan3" xil_pn:prop_ck="5859742380335015828" xil_pn:start_ts="1518383341">
+    <transform xil_pn:end_ts="1518461870" xil_pn:in_ck="2538356821193498742" xil_pn:name="TRANEXT_map_spartan3" xil_pn:prop_ck="5859742380335015828" xil_pn:start_ts="1518461866">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/map.xmsgs"/>
@@ -314,7 +322,7 @@
       <outfile xil_pn:name="topController_summary.xml"/>
       <outfile xil_pn:name="topController_usage.xml"/>
     </transform>
-    <transform xil_pn:end_ts="1518383354" xil_pn:in_ck="205873731075379297" xil_pn:name="TRANEXT_par_spartan3" xil_pn:prop_ck="3333849164707216606" xil_pn:start_ts="1518383344">
+    <transform xil_pn:end_ts="1518461880" xil_pn:in_ck="205873731075379297" xil_pn:name="TRANEXT_par_spartan3" xil_pn:prop_ck="3333849164707216606" xil_pn:start_ts="1518461870">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/par.xmsgs"/>
@@ -328,7 +336,7 @@
       <outfile xil_pn:name="topController_pad.txt"/>
       <outfile xil_pn:name="topController_par.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1518383354" xil_pn:in_ck="6027954786513647210" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416186" xil_pn:start_ts="1518383352">
+    <transform xil_pn:end_ts="1518461880" xil_pn:in_ck="6027954786513647210" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416186" xil_pn:start_ts="1518461878">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/trce.xmsgs"/>

@@ -16,9 +16,15 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="45" />
+   <WVObjectSize size="93" />
    <wave_markers>
-      <marker time="1871030000" label="" />
+      <marker time="306000000" label="" />
+      <marker time="2065000000" label="" />
+      <marker time="3665000000" label="" />
+      <marker time="3825000000" label="" />
+      <marker time="3986000000" label="" />
+      <marker time="5745000000" label="" />
+      <marker time="7505100000" label="" />
    </wave_markers>
    <wvobject fp_name="/tb_topcontroller/keyin" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">keyin[7:0]</obj_property>
@@ -127,14 +133,6 @@
          <obj_property name="ElementShortName">geninv</obj_property>
          <obj_property name="ObjectShortName">geninv</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_topcontroller/uut/setupce" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">setupce</obj_property>
-         <obj_property name="ObjectShortName">setupce</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_topcontroller/uut/ce" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">ce</obj_property>
-         <obj_property name="ObjectShortName">ce</obj_property>
-      </wvobject>
       <wvobject fp_name="/tb_topcontroller/uut/counterce" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">counterce</obj_property>
          <obj_property name="ObjectShortName">counterce</obj_property>
@@ -171,10 +169,6 @@
    <wvobject fp_name="/tb_topcontroller/uut/keyGen0/ce" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">ce</obj_property>
       <obj_property name="ObjectShortName">ce</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/setupce" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">setupce</obj_property>
-      <obj_property name="ObjectShortName">setupce</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_topcontroller/uut/keyGen0/keyinen" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">keyinen</obj_property>
@@ -295,5 +289,201 @@
    <wvobject fp_name="/tb_topcontroller/uut/roundCounter/addr" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">addr[3:0]</obj_property>
       <obj_property name="ObjectShortName">addr[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/keyin" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">keyin[7:0]</obj_property>
+      <obj_property name="ObjectShortName">keyin[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/rst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/inv" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">inv</obj_property>
+      <obj_property name="ObjectShortName">inv</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/ce" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ce</obj_property>
+      <obj_property name="ObjectShortName">ce</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/keyinen" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">keyinen</obj_property>
+      <obj_property name="ObjectShortName">keyinen</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/done" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">done</obj_property>
+      <obj_property name="ObjectShortName">done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/keyout" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">keyout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">keyout[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/rconen" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rconen</obj_property>
+      <obj_property name="ObjectShortName">rconen</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/addren" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">addren</obj_property>
+      <obj_property name="ObjectShortName">addren</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/newkey" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">newkey[7:0]</obj_property>
+      <obj_property name="ObjectShortName">newkey[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/qaddr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">qaddr[7:0]</obj_property>
+      <obj_property name="ObjectShortName">qaddr[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/q15" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">q15[7:0]</obj_property>
+      <obj_property name="ObjectShortName">q15[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/subout" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">subout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">subout[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/rcon" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">rcon[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rcon[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/rconout" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">rconout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rconout[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/rconsel" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rconsel</obj_property>
+      <obj_property name="ObjectShortName">rconsel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/qaddrfirst" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">qaddrfirst[7:0]</obj_property>
+      <obj_property name="ObjectShortName">qaddrfirst[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/qmux" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">qmux[7:0]</obj_property>
+      <obj_property name="ObjectShortName">qmux[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/calckey" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">calckey[7:0]</obj_property>
+      <obj_property name="ObjectShortName">calckey[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/addr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">addr[3:0]</obj_property>
+      <obj_property name="ObjectShortName">addr[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/frowsel" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">frowsel</obj_property>
+      <obj_property name="ObjectShortName">frowsel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/qaddrdel" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">qaddrdel[7:0]</obj_property>
+      <obj_property name="ObjectShortName">qaddrdel[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/subbytesn" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">subbytesn</obj_property>
+      <obj_property name="ObjectShortName">subbytesn</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/invdeladdri" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">invdeladdri</obj_property>
+      <obj_property name="ObjectShortName">invdeladdri</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyGen0/invdeladdr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">invdeladdr[3:0]</obj_property>
+      <obj_property name="ObjectShortName">invdeladdr[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyin" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">keyin[7:0]</obj_property>
+      <obj_property name="ObjectShortName">keyin[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyinen" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">keyinen</obj_property>
+      <obj_property name="ObjectShortName">keyinen</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/inv" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">inv</obj_property>
+      <obj_property name="ObjectShortName">inv</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/stop" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">stop</obj_property>
+      <obj_property name="ObjectShortName">stop</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/rst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/keyout" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">keyout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">keyout[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/storein" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">storein[7:0]</obj_property>
+      <obj_property name="ObjectShortName">storein[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/storeout" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">storeout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">storeout[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/genkeyin" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">genkeyin[7:0]</obj_property>
+      <obj_property name="ObjectShortName">genkeyin[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/genkeyout" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">genkeyout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">genkeyout[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/gendone" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">gendone</obj_property>
+      <obj_property name="ObjectShortName">gendone</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/rounddone" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rounddone</obj_property>
+      <obj_property name="ObjectShortName">rounddone</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/rinen" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rinen</obj_property>
+      <obj_property name="ObjectShortName">rinen</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/geninen" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">geninen</obj_property>
+      <obj_property name="ObjectShortName">geninen</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/storece" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">storece</obj_property>
+      <obj_property name="ObjectShortName">storece</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/invf" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">invf</obj_property>
+      <obj_property name="ObjectShortName">invf</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/geninv" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">geninv</obj_property>
+      <obj_property name="ObjectShortName">geninv</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/gence" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">gence</obj_property>
+      <obj_property name="ObjectShortName">gence</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/counterce" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">counterce</obj_property>
+      <obj_property name="ObjectShortName">counterce</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/ncycles" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">ncycles</obj_property>
+      <obj_property name="ObjectShortName">ncycles</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/nrounds" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">nrounds</obj_property>
+      <obj_property name="ObjectShortName">nrounds</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/syscycles" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">syscycles</obj_property>
+      <obj_property name="ObjectShortName">syscycles</obj_property>
    </wvobject>
 </wave_config>
