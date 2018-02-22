@@ -29,21 +29,25 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity register_8bit is
+entity register_Nbit is
+	 Generic ( N : positive := 8 ); -- This generic defines the length with a default value of 8
     Port ( clk, rst : in  STD_LOGIC;
-           D : in  STD_LOGIC_VECTOR (7 downto 0);
-           Q : out  STD_LOGIC_VECTOR (7 downto 0));
-end register_8bit;
+           D : in  STD_LOGIC_VECTOR (N-1 downto 0);
+           Q : out  STD_LOGIC_VECTOR (N-1 downto 0));
+end register_Nbit;
 
-architecture Behavioral of register_8bit is
+architecture Behavioral of register_Nbit is
 
 begin
-	process(clk,rst)
+	process(clk)
 		begin
-			if rst = '1' then
-				Q <= (others => '0');
-			elsif rising_edge(clk) then
-				Q <= D;
+		--synchronous reset
+			if rising_edge(clk) then 
+				if rst = '1' then
+					Q <= (others => '0'); --fill with zeros
+				else
+					Q <= D;
+				end if;
 			end if;
 		end process;
 

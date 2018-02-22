@@ -1,0 +1,9 @@
+[Inputs]
+load
+clk
+rst
+=serial_in[7:0]=
+=parallel_in[31:0]=
+[Outputs]
+=serial_out[7:0]=
+[BiDir]

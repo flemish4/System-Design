@@ -30,7 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity MixColumns is
-    Port ( clk, CE, EN, rst, SEL : in  STD_LOGIC;
+    Port ( clk, rst : in  STD_LOGIC;
 			  byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end MixColumns;
@@ -48,16 +48,16 @@ component mul2
         x2: out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
-component register_8bit
+component register_Nbit
+	 Generic ( N : positive );
     Port ( clk, rst : in  STD_LOGIC;
            D : in  STD_LOGIC_VECTOR (7 downto 0);
            Q : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
-component register_8bit_CE 
-    Port ( clk, rst, CE : in  STD_LOGIC;
-           D : in  STD_LOGIC_VECTOR (7 downto 0);
-           Q : out  STD_LOGIC_VECTOR (7 downto 0));
+component control is
+    Port ( clk, rst : in  STD_LOGIC;
+           EN, load, SEL : out  STD_LOGIC);
 end component;
 
 component mux2_8bit 
@@ -65,6 +65,13 @@ component mux2_8bit
            B : in  STD_LOGIC_VECTOR (7 downto 0);
            SEL : in  STD_LOGIC;
            X : out  STD_LOGIC_VECTOR (7 downto 0));
+end component;
+
+component parallel_load_shift_register is
+    Port ( clk,rst,load : in  STD_LOGIC;
+           parallel_in : in  STD_LOGIC_VECTOR (7 downto 0);
+           serial_in : in  STD_LOGIC_VECTOR (7 downto 0);
+           serial_out : out STD_LOGIC_VECTOR (7 downto 0));
 end component;
 ---------------------------------------------
 
@@ -74,23 +81,40 @@ signal s1 : STD_LOGIC_VECTOR (7 downto 0);
 signal s2 : STD_LOGIC_VECTOR (7 downto 0);
 signal s3 : STD_LOGIC_VECTOR (7 downto 0);
 
+signal s4 : STD_LOGIC_VECTOR (7 downto 0);
 signal s5 : STD_LOGIC_VECTOR (7 downto 0);
 signal s6 : STD_LOGIC_VECTOR (7 downto 0);
 signal s7 : STD_LOGIC_VECTOR (7 downto 0);
+
 signal s8 : STD_LOGIC_VECTOR (7 downto 0);
 signal s9 : STD_LOGIC_VECTOR (7 downto 0);
 signal s10 : STD_LOGIC_VECTOR (7 downto 0);
 signal s11 : STD_LOGIC_VECTOR (7 downto 0);
 signal s12 : STD_LOGIC_VECTOR (7 downto 0);
 signal s13 : STD_LOGIC_VECTOR (7 downto 0);
+
 signal s14 : STD_LOGIC_VECTOR (7 downto 0);
 signal s15 : STD_LOGIC_VECTOR (7 downto 0);
 
+signal EN_0 : STD_LOGIC;
+signal load_0 : STD_LOGIC;
+signal SEL_0 : STD_LOGIC;
+
+
 signal A : STD_LOGIC_VECTOR (7 downto 0);
-signal B : STD_LOGIC_VECTOR (7 downto 0);
+--signal B : STD_LOGIC_VECTOR (7 downto 0);
 ----------------------------------------------
 
 begin
+
+
+	control_0 : control
+	port map(clk => clk,
+				rst => rst,
+				EN => EN_0,
+				load => load_0,
+				SEL => SEL_0				
+				);
 	
 	mul2_0 : mul2
 	port map(x => byte_in,
@@ -107,69 +131,79 @@ begin
 	s2 <= s12 xor s9;
 	s3 <= s13 xor s8;
 	
-	reg0 : register_8bit
+	reg0 : register_Nbit
+	generic map (8)
 	port map(clk => clk,
 				rst => rst,
 				D => s0,
-				Q => B
+				Q => s4
 				);
 	
-	reg1 : register_8bit
+	reg1 : register_Nbit
+	generic map (8)
 	port map(clk => clk,
 				rst => rst,
 				D => s1,
 				Q => s5
 				);
 				
-	reg2 : register_8bit
+	reg2 : register_Nbit
+	generic map (8)
 	port map(clk => clk,
 				rst => rst,
 				D => s2,
 				Q => s6
 				);
 	
-	reg3 : register_8bit
+	reg3 : register_Nbit
+	generic map (8)
 	port map(clk => clk,
 				rst => rst,
 				D => s3,
 				Q => s7
 				);
 				
-	s11 <= s5 when EN = '1' else (others => '0'); --and wouldn't work?
-	s10 <= s6 when EN = '1' else (others => '0');
-	s9 <= s7 when EN = '1' else (others => '0');
-	s8 <= B when EN = '1' else (others => '0');
 
-	reg0_CE : register_8bit_CE
-	port map(clk => clk,
-				rst => rst,
-				CE => CE,
-				D => s7,
-				Q => s14
-				);
-	
-	reg1_CE : register_8bit_CE
-	port map(clk => clk,
-				rst => rst,
-				CE => CE,
-				D => s6,
-				Q => s15
-				);
 				
-	reg2_CE : register_8bit_CE
-	port map(clk => clk,
-				rst => rst,
-				CE => CE,
-				D => s5,
-				Q => A
-				);
+	s11 <= s5 when EN_0 = '1' else (others => '0'); --and wouldn't work?----------------!!!
+	s10 <= s6 when EN_0 = '1' else (others => '0');
+	s9 <= s7 when EN_0 = '1' else (others => '0');
+	s8 <= s4 when EN_0 = '1' else (others => '0');
+		
 	
+	
+	reg0_PLS : parallel_load_shift_register
+    port map( clk => clk,
+				  rst => rst,
+				  load => load_0,
+				  parallel_in  => s7,
+              serial_in => s7,
+				  serial_out => s14
+				  );
+	reg1_PLS : parallel_load_shift_register
+    port map( clk => clk,
+				  rst => rst,
+				  load => load_0,
+				  parallel_in  => s6,
+              serial_in => s14,
+				  serial_out => s15
+				  );
+	reg2_PLS : parallel_load_shift_register
+    port map( clk => clk,
+				  rst => rst,
+				  load => load_0,
+				  parallel_in  => s5,
+              serial_in => s15,
+				  serial_out => A
+				  );		
+				  
+
 	mux2 : mux2_8bit
 	port map(A => A,
-				B => B,
-				SEL => SEL,
+				B => s4,
+				SEL => SEL_0,
 				X => byte_out
 				);
-	 
+
 end Behavioral;
 
