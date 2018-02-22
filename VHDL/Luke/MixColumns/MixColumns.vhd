@@ -68,7 +68,7 @@ component mux2_8bit
 end component;
 
 component parallel_load_shift_register is
-    Port ( clk,rst,load : in  STD_LOGIC;
+    Port ( clk, rst, load : in  STD_LOGIC;
            parallel_in : in  STD_LOGIC_VECTOR (7 downto 0);
            serial_in : in  STD_LOGIC_VECTOR (7 downto 0);
            serial_out : out STD_LOGIC_VECTOR (7 downto 0));

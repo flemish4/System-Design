@@ -37,22 +37,22 @@ entity parallel_load_shift_register is
 end parallel_load_shift_register;
 
 architecture Behavioral of parallel_load_shift_register is
-
+	signal SR : std_logic_vector(7 downto 0);
 begin
 	process(clk)
 		begin
 		--synchronous reset
 			if rising_edge(clk) then 
 				if rst = '1' then
-					serial_out <= (others => '0'); --fill with zeros
+					SR <= (others => '0'); --fill with zeros		
 				elsif load <= '1' then
-					serial_out <= parallel_in;
+					SR <= parallel_in;
 				else
-					serial_out <= serial_in;
+					SR <= serial_in;
 				end if;
 			end if;
 		end process;
-
+		 serial_out <= SR;
 
 end Behavioral;
 
