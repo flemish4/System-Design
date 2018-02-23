@@ -45,7 +45,7 @@ begin
 			if rising_edge(clk) then 
 				if rst = '1' then
 					SR <= (others => '0'); --fill with zeros		
-				elsif load <= '1' then
+				elsif load = '1' then
 					SR <= parallel_in;
 				else
 					SR <= serial_in;

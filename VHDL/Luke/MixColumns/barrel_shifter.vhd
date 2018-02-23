@@ -29,14 +29,6 @@ use IEEE.NUMERIC_STD.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity barrel_shifter is
-	 generic (SQUENCE : in natural := 7);
-    Port ( clk, rst : in  STD_LOGIC;
-           Q : out  STD_LOGIC);
-end barrel_shifter;
-
-architecture Behavioral of barrel_shifter is
-
 --	component SRL16_8
 --		port( Q		: out  STD_LOGIC_VECTOR (7 downto 0);
 --				Q15 	: out  STD_LOGIC_VECTOR (7 downto 0);
@@ -49,10 +41,6 @@ architecture Behavioral of barrel_shifter is
 --				D 		: in  STD_LOGIC_VECTOR (7 downto 0));
 --		end component;
 
-	signal temp: std_logic_vector(3 downto 0) := std_logic_vector(to_unsigned(SQUENCE, 4));
-
-begin
- 
 -- 	adrs5: SRLC16E
 --		generic map(
 --			INIT => "0001000000000000")
@@ -77,6 +65,22 @@ begin
 --			A3 	=>	address3,
 --			CE		=>	ce,
 --			clk 	=>	clk,
+
+entity barrel_shifter is
+	 generic (SQUENCE : in natural := 7);
+    Port ( clk, rst : in  STD_LOGIC;
+           Q : out  STD_LOGIC);
+end barrel_shifter;
+
+architecture Behavioral of barrel_shifter is
+
+
+
+	signal temp: std_logic_vector(3 downto 0) := std_logic_vector(to_unsigned(SQUENCE, 4));
+
+begin
+ 
+
   process (clk)
          begin
              if rising_edge(clk) then 

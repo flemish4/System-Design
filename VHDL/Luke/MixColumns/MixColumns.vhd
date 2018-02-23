@@ -57,7 +57,7 @@ end component;
 
 component control is
     Port ( clk, rst : in  STD_LOGIC;
-           EN, load, SEL : out  STD_LOGIC);
+           EN, load : out  STD_LOGIC);
 end component;
 
 component mux2_8bit 
@@ -67,12 +67,12 @@ component mux2_8bit
            X : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
-component parallel_load_shift_register is
-    Port ( clk, rst, load : in  STD_LOGIC;
-           parallel_in : in  STD_LOGIC_VECTOR (7 downto 0);
-           serial_in : in  STD_LOGIC_VECTOR (7 downto 0);
-           serial_out : out STD_LOGIC_VECTOR (7 downto 0));
-end component;
+--component parallel_load_shift_register is
+--    Port ( clk, rst, load : in  STD_LOGIC;
+--           parallel_in : in  STD_LOGIC_VECTOR (7 downto 0);
+--           serial_in : in  STD_LOGIC_VECTOR (7 downto 0);
+--           serial_out : out STD_LOGIC_VECTOR (7 downto 0));
+--end component;
 ---------------------------------------------
 
 ---------signals-------------------------------
@@ -95,14 +95,14 @@ signal s13 : STD_LOGIC_VECTOR (7 downto 0);
 
 signal s14 : STD_LOGIC_VECTOR (7 downto 0);
 signal s15 : STD_LOGIC_VECTOR (7 downto 0);
+signal s16 : STD_LOGIC_VECTOR (7 downto 0);
+signal s17 : STD_LOGIC_VECTOR (7 downto 0);
+signal s18 : STD_LOGIC_VECTOR (7 downto 0);
+signal s19 : STD_LOGIC_VECTOR (7 downto 0);
 
 signal EN_0 : STD_LOGIC;
 signal load_0 : STD_LOGIC;
-signal SEL_0 : STD_LOGIC;
 
-
-signal A : STD_LOGIC_VECTOR (7 downto 0);
---signal B : STD_LOGIC_VECTOR (7 downto 0);
 ----------------------------------------------
 
 begin
@@ -112,8 +112,7 @@ begin
 	port map(clk => clk,
 				rst => rst,
 				EN => EN_0,
-				load => load_0,
-				SEL => SEL_0				
+				load => load_0
 				);
 	
 	mul2_0 : mul2
@@ -169,41 +168,63 @@ begin
 	s10 <= s6 when EN_0 = '1' else (others => '0');
 	s9 <= s7 when EN_0 = '1' else (others => '0');
 	s8 <= s4 when EN_0 = '1' else (others => '0');
-		
-	
-	
-	reg0_PLS : parallel_load_shift_register
-    port map( clk => clk,
-				  rst => rst,
-				  load => load_0,
-				  parallel_in  => s7,
-              serial_in => s7,
-				  serial_out => s14
-				  );
-	reg1_PLS : parallel_load_shift_register
-    port map( clk => clk,
-				  rst => rst,
-				  load => load_0,
-				  parallel_in  => s6,
-              serial_in => s14,
-				  serial_out => s15
-				  );
-	reg2_PLS : parallel_load_shift_register
-    port map( clk => clk,
-				  rst => rst,
-				  load => load_0,
-				  parallel_in  => s5,
-              serial_in => s15,
-				  serial_out => A
-				  );		
+				
 				  
+	mux0 : mux2_8bit
+	port map(A => s14,
+				B => s6,
+				SEL => load_0,
+				X => s15
+				);
+				
+	mux1 : mux2_8bit
+	port map(A => s16,
+				B => s5,
+				SEL => load_0,
+				X => s17
+				);
 
 	mux2 : mux2_8bit
-	port map(A => A,
+	port map(A => s18,
 				B => s4,
-				SEL => SEL_0,
+				SEL => load_0,
 				X => byte_out
 				);
+
+	mux3 : mux2_8bit
+	port map(A => byte_in,
+				B => s7,
+				SEL => load_0,
+				X => s19
+				);
+								
+	reg4 : register_Nbit
+	generic map (8)
+	port map(clk => clk,
+				rst => rst,
+				D => s17,
+				Q => s18
+				);
+				
+	reg5 : register_Nbit
+	generic map (8)
+	port map(clk => clk,
+				rst => rst,
+				D => s15,
+				Q => s16
+				);
+				
+				
+	reg6 : register_Nbit
+	generic map (8)
+	port map(clk => clk,
+				rst => rst,
+				D => s19,
+				Q => s14
+				);
+				
+				
+				
 
 end Behavioral;
 

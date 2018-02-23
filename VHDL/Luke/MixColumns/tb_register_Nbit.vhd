@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   02:28:01 02/21/2018
+-- Create Date:   22:06:15 02/22/2018
 -- Design Name:   
--- Module Name:   C:/Users/lukel/Desktop/Uni/Fourth Year/system design/VHDL/MixColumns/tb_mul3.vhd
+-- Module Name:   C:/Users/lukel/Desktop/Uni/Fourth Year/system design/VHDL/MixColumns/tb_register_Nbit.vhd
 -- Project Name:  MixColumns
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: mul3
+-- VHDL Test Bench Created by ISE for module: register_Nbit
 -- 
 -- Dependencies:
 -- 
@@ -30,66 +30,74 @@ USE ieee.std_logic_1164.ALL;
  
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
-USE ieee.numeric_std.ALL;
+--USE ieee.numeric_std.ALL;
  
-ENTITY tb_mul3 IS
-END tb_mul3;
+ENTITY tb_register_Nbit IS
+END tb_register_Nbit;
  
-ARCHITECTURE behavior OF tb_mul3 IS 
+ARCHITECTURE behavior OF tb_register_Nbit IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT mul3
+    COMPONENT register_Nbit
     PORT(
-         x : IN  std_logic_vector(7 downto 0);
-         x3 : OUT  std_logic_vector(7 downto 0)
+         clk : IN  std_logic;
+         rst : IN  std_logic;
+         D : IN  std_logic_vector(7 downto 0);
+         Q : OUT  std_logic_vector(7 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal x : std_logic_vector(7 downto 0) := (others => '0');
+   signal clk : std_logic := '0';
+   signal rst : std_logic := '0';
+   signal D : std_logic_vector(7 downto 0) := (others => '0');
 
  	--Outputs
-   signal x3 : std_logic_vector(7 downto 0);
-   -- No clocks detected in port list. Replace <clock> below with 
-   -- appropriate port name 
- 
-   --constant <clock>_period : time := 10 ns;
+   signal Q : std_logic_vector(7 downto 0);
+
+   -- Clock period definitions
+   constant clk_period : time := 10 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: mul3 PORT MAP (
-          x => x,
-          x3 => x3
+   uut: register_Nbit PORT MAP (
+          clk => clk,
+          rst => rst,
+          D => D,
+          Q => Q
         );
 
    -- Clock process definitions
-   --<clock>_process :process
-   --begin
-		--<clock> <= '0';
-		--wait for <clock>_period/2;
-		--<clock> <= '1';
-		--wait for <clock>_period/2;
-   --end process;
+   clk_process :process
+   begin
+		clk <= '0';
+		wait for clk_period/2;
+		clk <= '1';
+		wait for clk_period/2;
+   end process;
  
 
    -- Stimulus process
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
+		rst <= '1';
       wait for 100 ns;	
-
-     -- wait for <clock>_period*10;
+		rst <= '0';
+      wait for clk_period*10;
 
       -- insert stimulus here 
-		for i in 0 to 255 loop
-
-			x <= std_logic_vector(to_unsigned(i, 8));
-			wait for 10 ns;
-			
-		end loop;
+		rst <= '1';
+		wait for clk_period;
+		D <= "11111111";
+		wait for clk_period*2;
+		rst <= '1';
+		wait for clk_period;
+		rst <= '0';
+		
       wait;
    end process;
 

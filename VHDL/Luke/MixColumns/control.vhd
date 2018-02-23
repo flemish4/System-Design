@@ -31,7 +31,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity control is
     Port ( clk, rst : in  STD_LOGIC;
-           EN, load, SEL : out  STD_LOGIC);
+           EN, load : out  STD_LOGIC);
 end control;
 
 architecture Behavioral of control is
@@ -46,31 +46,37 @@ signal s1 : STD_LOGIC;
 signal s2 : STD_LOGIC;
 signal s3 : STD_LOGIC;
 
+component EN_signal is
+	 --generic (SQUENCE : in natural := 7);
+    Port ( clk, rst : in  STD_LOGIC;
+           Q : out  STD_LOGIC);
+end component;
+
 
 begin
 	
-	control_EN : barrel_shifter
-	generic map (7) 						-- 7 = 0111
+	control_EN : EN_signal
+	--generic map (7) 						-- 7 = 0111
 	port map(clk => clk,
 				rst => rst,
 				Q => s1);
 				
 	control_load : barrel_shifter
-	generic map (1) 						-- 1 = 0001
+	generic map (4) 						-- 1 = 0001
 	port map(clk => clk,
 				rst => rst,
 				Q => s2);
 				
-	control_SEL : barrel_shifter
-	generic map (1) 						-- 1 = 0001
-	port map(clk => clk,
-				rst => rst,
-				Q => s3);
+--	control_SEL : barrel_shifter
+--	generic map (1) 						-- 1 = 0001
+--	port map(clk => clk,
+--				rst => rst,
+--				Q => s3);
 
 
 	EN <= s1;
 	load <= s2;
-	SEL <= s3;
+	--SEL <= s3;
 
 end Behavioral;
 
