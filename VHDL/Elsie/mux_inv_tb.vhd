@@ -91,11 +91,41 @@ BEGIN
 		reset <= '0';
 		wait for clk_period;
 		
-		-- apply the inputs to the system 
+--		 apply the inputs to the system 
 		for i in 0 to 255 loop
 			d <= std_logic_vector(to_unsigned(i, 8));
 			wait for clk_period;
 		end loop; 
+		
+--		d <= "10110110";
+--		wait for clk_period;
+--		d <= "01010011";
+--		wait for clk_period;
+--		d <= "00010000";
+--		wait for clk_period;
+--		d <= "10010101";
+--		wait for clk_period;
+--		d <= "11010100";
+--		wait for clk_period;
+--		d <= "11111111";
+--		wait for clk_period;
+--		d <= "10110111";
+--		wait for clk_period;
+--		d <= "00000010";
+--		wait for clk_period;
+--		d <= "00000011";
+--		wait for clk_period;
+--		d <= "00000100";
+--		wait for clk_period;
+--		d <= "00000101";
+--		wait for clk_period;
+--		d <= "00000110";
+--		wait for clk_period;
+--		d <= "00000111";
+--		wait for clk_period;
+--		d <= "11111111";
+--		wait for clk_period;
+		
 
 
       wait;
