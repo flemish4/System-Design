@@ -78,16 +78,17 @@ BEGIN
    -- Clock process definitions
    clk_process :process
    begin
+		wait for clk_period/2;
 		clk <= '1';
 		wait for clk_period/2;
 		clk <= '0';
-		wait for clk_period/2;
    end process;
  
 
    -- Stimulus process
    stim_proc: process
    begin		
+		wait for clk_period/2;
       -- insert stimulus here 
 		-- Set the subbytes function to encrypt and test inputs
 		s <= '0';
