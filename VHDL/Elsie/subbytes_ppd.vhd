@@ -78,13 +78,13 @@ end component;
 	signal dlt : STD_LOGIC_VECTOR (7 downto 0);
 	signal dlt_i_aff : STD_LOGIC_VECTOR (7 downto 0);
 	signal mux_1 : STD_LOGIC_VECTOR (7 downto 0);
-	signal ff_1 : STD_LOGIC_VECTOR (7 downto 0);
+	signal ff_1 : STD_LOGIC_VECTOR (7 downto 0) := "00000000";
 	signal mu_inv : STD_LOGIC_VECTOR (7 downto 0);
-	signal ff_2 : STD_LOGIC_VECTOR (7 downto 0);
+	signal ff_2 : STD_LOGIC_VECTOR (7 downto 0) := "00000000";
 	signal i_dlt_aff : STD_LOGIC_VECTOR (7 downto 0);
 	signal i_dlt : STD_LOGIC_VECTOR (7 downto 0);
 	signal mux_2 : STD_LOGIC_VECTOR (7 downto 0);
-	signal ff_3 : STD_LOGIC_VECTOR (7 downto 0);
+	signal ff_3 : STD_LOGIC_VECTOR (7 downto 0) := "00000000";
 	
 begin
 	--Perform the delta transformation on the input to transfor it to the GF
@@ -158,4 +158,3 @@ begin
 	q <= ff_3;
 	
 end Behavioral;
-
