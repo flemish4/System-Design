@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    15:06:44 02/16/2018 
+-- Create Date:    16:31:37 02/25/2018 
 -- Design Name: 
--- Module Name:    delta_test - Behavioral 
+-- Module Name:    dlt_invaff - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,15 +29,15 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity delta_test is
+entity dlt_invaff is
     Port ( d : in  STD_LOGIC_VECTOR (7 downto 0);
            q : out  STD_LOGIC_VECTOR (7 downto 0);
            clk : in  STD_LOGIC;
            reset : in  STD_LOGIC);
-end delta_test;
+end dlt_invaff;
 
-architecture Behavioral of delta_test is
--- define the delt and inverse delta components that will be used in this test
+architecture Behavioral of dlt_invaff is
+-- define the delt and inverse affine components that will be used in this test
 	component delta_mat is
     Port ( d : in  STD_LOGIC_VECTOR (7 downto 0);
            q : out  STD_LOGIC_VECTOR (7 downto 0);
@@ -45,31 +45,29 @@ architecture Behavioral of delta_test is
            reset : in  STD_LOGIC);
 end component;
 
-	component inv_delta is
-    Port ( d : in  STD_LOGIC_VECTOR (7 downto 0);
-           q : out  STD_LOGIC_VECTOR (7 downto 0);
-           clk : in  STD_LOGIC;
-           reset : in  STD_LOGIC);
-end component;
+	component inv_affine is
+		 Port ( d : in  STD_LOGIC_VECTOR (7 downto 0);
+				  q : out  STD_LOGIC_VECTOR (7 downto 0);
+				  clk : in  STD_LOGIC;
+				  reset : in  STD_LOGIC);
+	end component;
 --define an intermediate signal to be used in between 
- signal b : STD_LOGIC_VECTOR (7 downto 0);
-
-begin
---module to test that the delta and inverse delta functions are working
-		--insert inputs into delta matrix first 
-		dlt : delta_mat
+	signal i : STD_LOGIC_VECTOR (7 downto 0);
+	
+begin	  
+	--First, performthe inverse affine transformation 
+		in_aff : inv_affine 
 		Port map( d => d,
-           q => b,
+           q => i,
            clk => clk,
            reset =>reset );
-			 
-		-- Pass the output of the delta into the inv_delta matrix 
-		inv_dlt : inv_delta
-		Port map( d => b,
+			  
+	--Load the output into the delta matrix 
+		dlt : delta_mat
+		Port map( d => i,
            q => q,
            clk => clk,
            reset =>reset );
-	
 
 end Behavioral;
 

@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   22:22:15 01/29/2018
+-- Create Date:   17:31:47 02/18/2018
 -- Design Name:   
--- Module Name:   C:/Users/Elsie/Documents/Word Docs/Uni Stuff/Fouth year/6225 system design/Subbytes/const_mux_4_tb.vhd
+-- Module Name:   C:/Users/Elsie/Documents/Word Docs/Uni Stuff/Fouth year/6225 system design/VHDL/subbytes/test_all_tb.vhd
 -- Project Name:  Subbytes
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: const_mux_4
+-- VHDL Test Bench Created by ISE for module: test_all
 -- 
 -- Dependencies:
 -- 
@@ -30,19 +30,19 @@ USE ieee.std_logic_1164.ALL;
  
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
-  USE ieee.numeric_std.ALL;
+USE ieee.numeric_std.ALL;
  
-ENTITY const_mux_4_tb IS
-END const_mux_4_tb;
+ENTITY test_all_tb IS
+END test_all_tb;
  
-ARCHITECTURE behavior OF const_mux_4_tb IS 
+ARCHITECTURE behavior OF test_all_tb IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT const_mux_4
+    COMPONENT test_all
     PORT(
-         d : IN  std_logic_vector(3 downto 0);
-         q : OUT  std_logic_vector(3 downto 0);
+         d : IN  std_logic_vector(7 downto 0);
+         q : OUT  std_logic_vector(7 downto 0);
          clk : IN  std_logic;
          reset : IN  std_logic
         );
@@ -50,15 +50,13 @@ ARCHITECTURE behavior OF const_mux_4_tb IS
     
 
    --Inputs
-   signal d : std_logic_vector(3 downto 0) := (others => '0');
+   signal d : std_logic_vector(7 downto 0) := (others => '0');
    signal clk : std_logic := '0';
    signal reset : std_logic := '0';
 	signal i : std_logic := '0';
-	
-	
 
  	--Outputs
-   signal q : std_logic_vector(3 downto 0);
+   signal q : std_logic_vector(7 downto 0);
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -66,7 +64,7 @@ ARCHITECTURE behavior OF const_mux_4_tb IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: const_mux_4 PORT MAP (
+   uut: test_all PORT MAP (
           d => d,
           q => q,
           clk => clk,
@@ -87,17 +85,10 @@ BEGIN
    stim_proc: process
    begin		
       -- insert stimulus here 
-		-- apply a reset pulse 
-		 reset <= '1';
-		wait for clk_period;
-		reset <= '0';
-		wait for clk_period;
-		-- apply the inputs to the system 
-		
-		for i in 0 to 15 loop
-			d <= std_logic_vector(to_unsigned(i, 4));
+		for i in 0 to 255 loop
+			d <= std_logic_vector(to_unsigned(i, 8));
 			wait for clk_period;
-		end loop; 
+		end loop;  
 
       wait;
    end process;

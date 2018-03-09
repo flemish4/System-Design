@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    15:06:44 02/16/2018 
+-- Create Date:    16:52:59 02/18/2018 
 -- Design Name: 
--- Module Name:    delta_test - Behavioral 
+-- Module Name:    test_all - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,14 +29,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity delta_test is
+entity test_all is
     Port ( d : in  STD_LOGIC_VECTOR (7 downto 0);
            q : out  STD_LOGIC_VECTOR (7 downto 0);
            clk : in  STD_LOGIC;
            reset : in  STD_LOGIC);
-end delta_test;
+end test_all;
 
-architecture Behavioral of delta_test is
+architecture Behavioral of test_all is
 -- define the delt and inverse delta components that will be used in this test
 	component delta_mat is
     Port ( d : in  STD_LOGIC_VECTOR (7 downto 0);
@@ -51,25 +51,58 @@ end component;
            clk : in  STD_LOGIC;
            reset : in  STD_LOGIC);
 end component;
+
+component aff_tran is
+    Port ( d : in  STD_LOGIC_VECTOR (7 downto 0);
+           q : out  STD_LOGIC_VECTOR (7 downto 0);
+           clk : in  STD_LOGIC;
+           reset : in  STD_LOGIC);
+end component;
+
+component mux_inv is
+    Port ( d : in  STD_LOGIC_VECTOR (7 downto 0);
+           q : out  STD_LOGIC_VECTOR (7 downto 0);
+           clk : in  STD_LOGIC;
+           reset : in  STD_LOGIC);
+end component;
+
 --define an intermediate signal to be used in between 
- signal b : STD_LOGIC_VECTOR (7 downto 0);
+	signal del : STD_LOGIC_VECTOR (7 downto 0);
+	signal mi : STD_LOGIC_VECTOR (7 downto 0);
+	signal in_del : STD_LOGIC_VECTOR (7 downto 0);
+	signal aff : STD_LOGIC_VECTOR (7 downto 0);
+	
 
 begin
---module to test that the delta and inverse delta functions are working
-		--insert inputs into delta matrix first 
-		dlt : delta_mat
+dlt : delta_mat
 		Port map( d => d,
-           q => b,
+           q => del,
+           clk => clk,
+           reset =>reset );
+			  
+mux_i : mux_inv
+		Port map( d => del,
+           q => mi,
            clk => clk,
            reset =>reset );
 			 
-		-- Pass the output of the delta into the inv_delta matrix 
-		inv_dlt : inv_delta
-		Port map( d => b,
-           q => q,
+inv_dlt : inv_delta
+	Port map( d => mi,
+		  q => in_del,
+		  clk => clk,
+		  reset =>reset );
+		  
+af_t : aff_tran
+		Port map( d => in_del,
+           q => aff,
            clk => clk,
            reset =>reset );
+			  
+	q <= aff;
+		  
+
 	
+
 
 end Behavioral;
 

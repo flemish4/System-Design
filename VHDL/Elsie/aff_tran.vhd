@@ -42,7 +42,7 @@ architecture Behavioral of aff_tran is
 	constant c : STD_LOGIC_VECTOR (7 downto 0) := "01100011";
 
 begin
-		 --Write code to implement affine transfor mation which is just a matrix multiplication 
+		 --Write code to implement affine transformation which is just a matrix multiplication 
 		 q(0) <= d(0) xor d(4) xor d(5) xor d(6) xor d(7) xor c(0); 
 		 q(1) <= d(0) xor d(1) xor d(5) xor d(6) xor d(7) xor c(1);
 		 q(2) <= d(0) xor d(1) xor d(2) xor d(6) xor d(7) xor c(2); 
