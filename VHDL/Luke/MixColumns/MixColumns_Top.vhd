@@ -30,59 +30,69 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity MixColumns_Top is
-    Port ( clk,rst,inverse : in  STD_LOGIC;
+    Port ( clk, rst, inv, CE, round10 : in  STD_LOGIC;
            byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
+			  load_count : out  STD_LOGIC;
            byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end MixColumns_Top;
 
 architecture Behavioral of MixColumns_Top is
 
+component control is
+    Port ( clk, CE : in  STD_LOGIC;
+           EN, load  : out  STD_LOGIC);
+end component;
+
 component MixColumns 
-    Port ( clk, rst : in  STD_LOGIC;
+    Port ( clk, rst, CE, EN, load, round10 : in  STD_LOGIC;
 			  byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
 component inverse_mul is
-    Port ( clk, rst : in  STD_LOGIC;
+    Port ( clk, rst, inv, CE, EN, load, round10 : in  STD_LOGIC;
            Byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            Byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
-
-component mux2_8bit     
-	 Port ( A : in  STD_LOGIC_VECTOR (7 downto 0);
-           B : in  STD_LOGIC_VECTOR (7 downto 0);
-           SEL : in  STD_LOGIC;
-           X : out  STD_LOGIC_VECTOR (7 downto 0));
-end component;
+signal EN_0 : STD_LOGIC;
+signal load_0: STD_LOGIC;
 
 signal s1 : STD_LOGIC_VECTOR (7 downto 0);
-signal s2 : STD_LOGIC_VECTOR (7 downto 0);
-
 
 begin
 
+	control_block : control
+	port map(clk => clk,
+				CE => CE,
+				EN => EN_0,
+				load => load_0
+				);
+				
+	inverse_block : inverse_mul
+	port map(clk => clk,
+				rst => rst,
+				inv => inv,
+				CE => CE,
+				EN => EN_0,
+				load => load_0,
+				round10 => round10,
+				byte_in => byte_in,
+				byte_out => s1
+				);
+				
 	mixcolumns_block : MixColumns
 	port map(clk => clk,
 				rst => rst,
+				CE => CE,
+				EN => EN_0,
+				load => load_0,
+				round10 => round10,
 				byte_in => s1,
 				byte_out => byte_out
 				);
 				
-	mux : mux2_8bit
-	port map(A => byte_in,
-				B => s2,
-				SEL => inverse,
-				X => s1
-				);
-
-	mul_5040 : inverse_mul
-	port map(clk => clk,
-				rst => rst,
-				byte_in => byte_in,
-				byte_out => s2
-				);
-
+	load_count <= load_0;
+	
 end Behavioral;
 

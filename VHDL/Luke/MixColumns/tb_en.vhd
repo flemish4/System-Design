@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   02:50:40 02/22/2018
+-- Create Date:   03:01:52 03/09/2018
 -- Design Name:   
--- Module Name:   C:/Users/lukel/Desktop/Uni/Fourth Year/system design/VHDL/MixColumns/tb_barrel_shifter.vhd
+-- Module Name:   C:/Users/lukel/Desktop/Uni/Fourth Year/system design/VHDL/MixColumns/tb_en.vhd
 -- Project Name:  MixColumns
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: barrel_shifter
+-- VHDL Test Bench Created by ISE for module: EN_signal
 -- 
 -- Dependencies:
 -- 
@@ -32,18 +32,17 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY tb_barrel_shifter IS
-END tb_barrel_shifter;
+ENTITY tb_en IS
+END tb_en;
  
-ARCHITECTURE behavior OF tb_barrel_shifter IS 
+ARCHITECTURE behavior OF tb_en IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT barrel_shifter
+    COMPONENT EN_signal
     PORT(
          clk : IN  std_logic;
          rst : IN  std_logic;
-			CE : IN  std_logic;
          Q : OUT  std_logic
         );
     END COMPONENT;
@@ -52,7 +51,7 @@ ARCHITECTURE behavior OF tb_barrel_shifter IS
    --Inputs
    signal clk : std_logic := '0';
    signal rst : std_logic := '0';
-	signal CE : std_logic := '0';
+
  	--Outputs
    signal Q : std_logic;
 
@@ -62,10 +61,9 @@ ARCHITECTURE behavior OF tb_barrel_shifter IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: barrel_shifter PORT MAP (
+   uut: EN_signal PORT MAP (
           clk => clk,
           rst => rst,
-			 CE => CE,
           Q => Q
         );
 
@@ -84,13 +82,11 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
       wait for 100 ns;	
-		CE <= '1';
+
       wait for clk_period*10;
 
       -- insert stimulus here 
-		--rst <= '1';
-		--wait for clk_period;
-		--rst <= '0';
+
       wait;
    end process;
 
