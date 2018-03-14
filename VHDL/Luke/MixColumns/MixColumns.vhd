@@ -95,6 +95,7 @@ signal s23 : STD_LOGIC_VECTOR (7 downto 0);
 
 signal EN_0 : STD_LOGIC;
 signal load_0 : STD_LOGIC;
+signal load_1 : STD_LOGIC;
 signal load_2 : STD_LOGIC;
 
 signal round10_inv : STD_LOGIC;
@@ -104,11 +105,11 @@ signal round10_inv : STD_LOGIC;
 begin
 
 	EN_0 <= EN;
-	load_0 <= load;
---	round10_inv <=  not round10;
---	load_0 <= load and round10_inv;
---	load_2 <= load and round10_inv;
---	
+	round10_inv <=  not round10;
+	load_0 <= load and round10_inv;
+	load_1 <= round10_inv;
+	load_2 <= load and round10_inv;
+	
 	
 	mul2_0 : mul2
 	port map(x => byte_in,
@@ -180,7 +181,7 @@ begin
 	mux2 : mux2_8bit
 	port map(A => s18,
 				B => s4,
-				SEL => load_0,
+				SEL => load_2,
 				X => byte_out
 				);
 
@@ -188,7 +189,7 @@ begin
 	port map(A => byte_in,
 				B => s7,
 				SEL => load_0,
-				X => s19
+				X => s20
 				);
 								
 	reg4 : register_Nbit
@@ -215,34 +216,34 @@ begin
 	port map(clk => clk,
 				rst => rst,
 				CE => CE,
-				D => s19,
+				D => s22,
 				Q => s14
 				);
 			
---	reg7 : register_Nbit
---	generic map (8)
---	port map(clk => clk,
---				rst => rst,
---				CE => CE,
---				D => byte_in,
---				Q => s21
---				);
---				
---	reg8 : register_Nbit
---	generic map (8)
---	port map(clk => clk,
---				rst => rst,
---				CE => CE,
---				D => s21,
---				Q => s23
---				);			
---				
---	mux4 : mux2_8bit
---	port map(A => s23,
---				B => s20,
---				SEL => round10_inv,
---				X => s22
---				);
+	reg7 : register_Nbit
+	generic map (8)
+	port map(clk => clk,
+				rst => rst,
+				CE => CE,
+				D => byte_in,
+				Q => s21
+				);
+				
+	reg8 : register_Nbit
+	generic map (8)
+	port map(clk => clk,
+				rst => rst,
+				CE => CE,
+				D => s21,
+				Q => s23
+				);			
+				
+	mux4 : mux2_8bit
+	port map(A => s23,
+				B => s20,
+				SEL => load_1,
+				X => s22
+				);
 
 end Behavioral;
 

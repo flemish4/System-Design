@@ -136,8 +136,8 @@ BEGIN
    begin	
 		
       rst <= '1';
-		inv <= '1';
-		round10 <= '0';
+		inv <= '0';
+		round10 <= '1';
   		wait for clk_period*2;	
  		rst <= '0';
 		
@@ -147,7 +147,7 @@ BEGIN
       -- insert stimulus here 
 		
 		for i in 0 to 15 loop
-			byte_in <= state_in_decode(i);
+			byte_in <= state_in_encode(i);
 			wait for clk_period;
 		end loop;
 

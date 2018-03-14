@@ -100,13 +100,15 @@ signal round10_inv : STD_LOGIC;
 begin
 
 	EN_0 <= EN;
-	--round10_inv <= not round10;
-	load_1 <= inv; --or round10_inv;
-	load_0 <= load and inv; --and round10_inv;
-	load_2 <= load and inv; --and round10_inv;
-
+	round10_inv <= not round10;
+	load_1 <= inv and round10_inv;
+	load_0 <= load and inv and round10_inv;
+	load_2 <= load and inv and round10_inv;
 	
-
+--	if (round10 = 0) and (inv = 1) then
+--		load_1 <= '1';
+--	end if;
+	
 	mul4_0 : mul4
 	port map(x => byte_in,
 				x4 => s12
