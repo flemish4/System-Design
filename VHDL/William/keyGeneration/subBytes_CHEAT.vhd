@@ -13,6 +13,7 @@ use IEEE.STD_LOGIC_1164.all, IEEE.NUMERIC_STD.all;
 entity SUBBYTES is
     port (CLK    : in  std_logic;
           RESET  : in  std_logic;
+          ce  : in  std_logic;
           XIN    : in  std_logic_vector( 7 downto 0 );
           --INVE    : in  std_logic;  -- NOT SUPPORTED FOR THIS
           YOUT   : out std_logic_vector( 7 downto 0) );
@@ -283,8 +284,9 @@ constant invrom  : vectype := (
 ); 
 
 -- signal defininition
-signal invout  : std_logic_vector (7 downto 0);  -- Inverse output
-signal affine  : std_logic_vector (7 downto 0);  -- affin transform output
+signal invout  : std_logic_vector (7 downto 0) := x"00" ;  -- Inverse output
+signal affine  : std_logic_vector (7 downto 0) := x"00";  -- affin transform output
+signal delay  : std_logic_vector (7 downto 0) := x"00";  -- affin transform output
 
 begin
 ----------------------------------
@@ -293,11 +295,15 @@ begin
 INVERSE: process(CLK)
 begin
     if rising_edge(CLK) then
-        if (RESET='1') then
-            invout <= "00000000";
-        else
-            invout <= invrom(to_integer(unsigned(XIN)));
-        end if;
+        if ce = '1' then
+			  if (RESET='1') then
+					invout <= "00000000";
+			  else
+					invout <= invrom(to_integer(unsigned(XIN)));
+			  end if;
+		  else 
+		      invout <= invout;
+		  end if;
     end if;
 end process INVERSE;
 
@@ -307,20 +313,39 @@ end process INVERSE;
 AFFINE_TRAN: process(CLK)
 begin
   if rising_edge(CLK) then
-     affine(7) <= invout(7) xor invout(6) xor invout(5) xor invout(4) xor invout(3) xor '0';  
-     affine(6) <= invout(6) xor invout(5) xor invout(4) xor invout(3) xor invout(2) xor '1';  
-     affine(5) <= invout(5) xor invout(4) xor invout(3) xor invout(2) xor invout(1) xor '1';  
-     affine(4) <= invout(4) xor invout(3) xor invout(2) xor invout(1) xor invout(0) xor '0';  
-     affine(3) <= invout(7) xor invout(3) xor invout(2) xor invout(1) xor invout(0) xor '0';  
-     affine(2) <= invout(7) xor invout(6) xor invout(2) xor invout(1) xor invout(0) xor '0';  
-     affine(1) <= invout(7) xor invout(6) xor invout(5) xor invout(1) xor invout(0) xor '1';  
-     affine(0) <= invout(7) xor invout(6) xor invout(5) xor invout(4) xor invout(0) xor '1';
+	  if ce = '1' then
+		  affine(7) <= invout(7) xor invout(6) xor invout(5) xor invout(4) xor invout(3) xor '0';  
+		  affine(6) <= invout(6) xor invout(5) xor invout(4) xor invout(3) xor invout(2) xor '1';  
+		  affine(5) <= invout(5) xor invout(4) xor invout(3) xor invout(2) xor invout(1) xor '1';  
+		  affine(4) <= invout(4) xor invout(3) xor invout(2) xor invout(1) xor invout(0) xor '0';  
+		  affine(3) <= invout(7) xor invout(3) xor invout(2) xor invout(1) xor invout(0) xor '0';  
+		  affine(2) <= invout(7) xor invout(6) xor invout(2) xor invout(1) xor invout(0) xor '0';  
+		  affine(1) <= invout(7) xor invout(6) xor invout(5) xor invout(1) xor invout(0) xor '1';  
+		  affine(0) <= invout(7) xor invout(6) xor invout(5) xor invout(4) xor invout(0) xor '1';
+	  else
+			affine <= affine ;
+	  end if;
   end if;
 end process AFFINE_TRAN;
 
+
+delay0: process(CLK)
+begin
+    if rising_edge(CLK) then
+        if ce = '1' then
+			  if (RESET='1') then
+					delay <= "00000000";
+			  else
+					delay <= affine;
+			  end if;
+		  else 
+		      delay <= delay;
+		  end if;
+    end if;
+end process delay0;
 ----------------------------------
 -- OUTPUT GENERATION
 ----------------------------------
-YOUT <= affine;
+YOUT <= delay;
 
 end architecture RTL;  

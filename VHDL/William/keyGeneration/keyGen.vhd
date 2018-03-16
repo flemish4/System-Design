@@ -30,10 +30,13 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity keyGen is
-	generic ( subBytesN : integer := 2);
+	generic ( subBytesN : integer := 3);
     Port ( keyIn : in  STD_LOGIC_VECTOR (7 downto 0);
            CLK : in  STD_LOGIC;
            RST : in  STD_LOGIC;
+           addrOutSel : in  STD_LOGIC;
+           addrOut : in  STD_LOGIC_VECTOR (3 downto 0);
+           roundCounter : in  STD_LOGIC_VECTOR (3 downto 0);
            INV : in  STD_LOGIC;
            --Start : in  STD_LOGIC;
 			  CE : in STD_LOGIC;
@@ -48,7 +51,7 @@ end keyGen;
 architecture Behavioral of keyGen is
 
 component keyGenController_v3 is
-	generic ( Ncycles : integer := 2);
+	generic ( Ncycles : integer := subBytesN);
     Port ( 
            ce : in  STD_LOGIC;
            keyInEn : in  STD_LOGIC;
@@ -74,25 +77,25 @@ end component;
 component addr_gen is
     Port ( 
            en : in  STD_LOGIC;
+           ce : in  STD_LOGIC;
            inv : in  STD_LOGIC;
            rst : in  STD_LOGIC;
            clk : in  STD_LOGIC;
+           QAddrSel : out  STD_LOGIC;
            addr : out  STD_LOGIC_VECTOR (3 downto 0));
 end component;
 
 component SUBBYTES is
     port (CLK    : in  std_logic;
+			 ce 	  : in std_logic;
           RESET  : in  std_logic;
           XIN    : in  std_logic_vector( 7 downto 0 );
           YOUT   : out std_logic_vector( 7 downto 0) );
-end component SUBBYTES;
+end component ;
 
-component RCon_gen is
-    Port ( en : in  STD_LOGIC;
-           clk : in  STD_LOGIC;
-           --rst : in  STD_LOGIC;
-           INV : in  STD_LOGIC;
-           rcon : out  STD_LOGIC_VECTOR (7 downto 0));
+component RCon_gen2 is
+    Port ( roundCounter : in  STD_LOGIC_VECTOR (3 downto 0);
+           RCon : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
 signal RConEn : STD_LOGIC ;
@@ -108,10 +111,13 @@ signal QAddrFirst  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal QMux  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal calcKey  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal Addr  : STD_LOGIC_VECTOR (3 downto 0) ;
+signal storeAddr  : STD_LOGIC_VECTOR (3 downto 0) ;
 signal FRowSel : STD_LOGIC;
 constant invDelAddrI : integer := subBytesN -1;
 constant invDelAddr  : std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(invDelAddrI, 4));
 signal QAddrDel  : STD_LOGIC_VECTOR (7 downto 0) ;
+signal QAddrMux  : STD_LOGIC_VECTOR (7 downto 0) ;
+signal QAddrSel  : STD_LOGIC ;
 
 begin
 
@@ -133,33 +139,33 @@ keyStore : srl16_8
     Port map ( D => newKey ,
            CE => CE,
            CLK => clk,
-           Addr => Addr,
+           Addr => storeAddr,
            Q  => QAddr,
            Q15  => Q15 );
 
 addr_generator : addr_gen 
     Port map ( 
            en => AddrEn,
+           CE => CE,
            inv => inv,
            rst => rst,
            clk => clk,
+           QAddrSel => QAddrSel,
            addr => addr );
 
 subByte : SUBBYTES 
     port map (CLK    => clk,
+           CE => CE,
           RESET  => rst,
-          XIN    => QAddr,
+          XIN    => QAddrMux,
           YOUT   => SubOut );
 
-RCon_generator : RCon_gen
-    Port map ( en => RConEn ,
-           clk => clk,
-           --rst => rst,
-           INV => INV,
+RCon_generator : RCon_gen2
+    Port map ( roundCounter => roundCounter ,
            rcon => Rcon );
 			  
 QAddrDelayer : srl16_8 
-    Port map ( D => QAddr ,
+    Port map ( D => QAddrMux ,
            CE => CE, 
            CLK => clk,
            Addr => invDelAddr,
@@ -167,7 +173,8 @@ QAddrDelayer : srl16_8
            --Q15  => Q15 
 			  );
 			    
-	keyOut <= newKey;
+	keyOut <= keyIn when keyInEn = '1' else 
+				 QAddr;--calcKey;
 	newKey <= keyIn when keyInEn = '1' else 
 				 calcKey;
 	RConOut <= subOut xor RCon;
@@ -176,6 +183,9 @@ QAddrDelayer : srl16_8
 	QMux <= QAddrDel when FRowSel = '0' else
 				  QaddrFirst;
 	calcKey <= Q15 xor QMux;
-   
+   QAddrMux <= QAddr when QAddrSel = '0' else
+					newKey;
+	storeAddr <= addr when addrOutSel = '0' else
+					addrOut;
 end Behavioral;
 

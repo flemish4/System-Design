@@ -133,7 +133,7 @@ BEGIN
    stim_proc: process
    begin		
 		wait for CLK_period/2;
-		wait for CLK_period/10;
+		wait for CLK_period/1000;
 		
 -- forward testing
 		-- hold reset state for 100 ns.
@@ -167,8 +167,8 @@ BEGIN
 --		RST <= '1';
 --      wait for CLK_period;
 --		RST <= '0';
-      wait for CLK_period*10;
-	
+--      wait for CLK_period*10;
+--	
 	for j in 0 to 2 loop
       -- insert stimulus here 
 		keyInEn <= '1';
@@ -179,8 +179,13 @@ BEGIN
 		end loop;
 		keyInEn <= '0';
 		
-      wait for CLK_period * 16 *10;
+      wait for CLK_period * 10;
+		-- ce <= '0';
+		-- wait for CLK_period *5;
+		-- ce <= '1';
+      wait for CLK_period * 6;
 		
+      wait for CLK_period * 16 *9;
 	end loop;
       wait;
    end process;

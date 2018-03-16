@@ -32,8 +32,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity keyStoreExt is
     Port ( keyIn : in  STD_LOGIC_VECTOR (7 downto 0);
            ce : in  STD_LOGIC;
-           inv : in  STD_LOGIC;
-           start : in  STD_LOGIC;
+           addr : in  STD_LOGIC_Vector (3 downto 0);
            clk : in  STD_LOGIC;
            rst : in  STD_LOGIC;
            keyOut : out  STD_LOGIC_VECTOR (7 downto 0));
@@ -49,34 +48,7 @@ component srl16_8 is
            Q15 : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
-signal counter : std_logic_vector (3 downto 0):= "0000";
-signal Addr : std_logic_vector (3 downto 0);
-signal enable : std_logic := '0';
-signal enableStart : std_logic;
 begin
-
--- Increment and reset the counter
-process (clk) begin
-	if rising_edge(clk) then
-		if enableStart = '0' then
-			counter <= (others => '0');
-		else
-			counter <= std_logic_vector(unsigned(counter) + 1);
-		end if;
-	end if;
-end process ; 
-
-process (clk) begin
-	if rising_edge(clk) then
-		if rst = '1' or counter = "1111" then
-			enable <= '0';
-		elsif start = '1' then
-			enable <= '1';
-		else
-			enable <= enable;
-		end if;
-	end if;
-end process ; 
 
 extKeyStore	 : srl16_8 
     Port map ( D => keyIn ,
@@ -87,8 +59,5 @@ extKeyStore	 : srl16_8
            --Q15  => Q15 
 			  );
 
-addr <= counter when inv = '1' else
-			not counter;
-enableStart <= enable or start;
 end Behavioral;
 

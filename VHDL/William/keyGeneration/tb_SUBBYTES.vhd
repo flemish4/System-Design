@@ -42,9 +42,10 @@ ARCHITECTURE behavior OF tb_SUBBYTES IS
     COMPONENT SUBBYTES
     PORT(
          CLK : IN  std_logic;
+         ce : IN  std_logic;
          RESET : IN  std_logic;
          XIN : IN  std_logic_vector(7 downto 0);
-         INV : IN  std_logic;
+         --INV : IN  std_logic;
          YOUT : OUT  std_logic_vector(7 downto 0)
         );
     END COMPONENT;
@@ -55,6 +56,7 @@ ARCHITECTURE behavior OF tb_SUBBYTES IS
    signal RESET : std_logic := '0';
    signal XIN : std_logic_vector(7 downto 0) := (others => '0');
    signal INV : std_logic := '0';
+   signal ce : std_logic := '1';
 
  	--Outputs
    signal YOUT : std_logic_vector(7 downto 0);
@@ -67,9 +69,10 @@ BEGIN
 	-- Instantiate the Unit Under Test (UUT)
    uut: SUBBYTES PORT MAP (
           CLK => CLK,
+          ce => ce,
           RESET => RESET,
           XIN => XIN,
-          INV => INV,
+        --  INV => INV,
           YOUT => YOUT
         );
 
@@ -89,7 +92,7 @@ BEGIN
       -- hold reset state for 100 ns.
       wait for 100 ns;	
 
-      wait for CLK_period*10;
+      wait for CLK_period*10.5;
 
       -- insert stimulus here 
 		for i in 0 to 511 loop

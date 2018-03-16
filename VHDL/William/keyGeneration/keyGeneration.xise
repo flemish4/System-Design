@@ -48,12 +48,12 @@
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="179"/>
     </file>
     <file xil_pn:name="keyGen.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="9"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="9"/>
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="7"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
     </file>
     <file xil_pn:name="addr_gen.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="6"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="6"/>
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="5"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
     </file>
     <file xil_pn:name="key_counter_v2.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
@@ -72,8 +72,8 @@
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="110"/>
     </file>
     <file xil_pn:name="RCon_gen.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="3"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="3"/>
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
     <file xil_pn:name="tb_RCon_gen.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
@@ -98,12 +98,12 @@
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="244"/>
     </file>
     <file xil_pn:name="counter.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="9"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="9"/>
     </file>
     <file xil_pn:name="counter_srl.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="11"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="11"/>
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
     <file xil_pn:name="tb_counter_srl.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
@@ -112,12 +112,12 @@
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="173"/>
     </file>
     <file xil_pn:name="delay.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="5"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
     <file xil_pn:name="pulse_extender.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="7"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
     <file xil_pn:name="tb_pulse_extender.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
@@ -126,12 +126,12 @@
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="123"/>
     </file>
     <file xil_pn:name="invF_gen.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="10"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="10"/>
-    </file>
-    <file xil_pn:name="keyStoreExt.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="8"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="8"/>
+    </file>
+    <file xil_pn:name="keyStoreExt.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="6"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="6"/>
     </file>
     <file xil_pn:name="tb_keyStoreExt.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
@@ -140,11 +140,11 @@
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="153"/>
     </file>
     <file xil_pn:name="topController.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="13"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="13"/>
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="11"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="11"/>
     </file>
     <file xil_pn:name="tb_topController.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="14"/>
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="12"/>
       <association xil_pn:name="PostMapSimulation" xil_pn:seqID="198"/>
       <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="198"/>
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="198"/>
@@ -174,8 +174,8 @@
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="272"/>
     </file>
     <file xil_pn:name="CEGen.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="12"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="12"/>
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="10"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="10"/>
     </file>
     <file xil_pn:name="tb_ceGen.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
@@ -193,11 +193,25 @@
       <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="310"/>
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="310"/>
     </file>
+    <file xil_pn:name="testBuf8_8.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+    </file>
+    <file xil_pn:name="RCon_gen2.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="3"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="3"/>
+    </file>
+    <file xil_pn:name="tb_RCon_gen2.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
+      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="258"/>
+      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="258"/>
+      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="258"/>
+    </file>
   </files>
 
   <properties>
     <property xil_pn:name="Add I/O Buffers" xil_pn:value="true" xil_pn:valueState="default"/>
-    <property xil_pn:name="Allow Logic Optimization Across Hierarchy" xil_pn:value="false" xil_pn:valueState="default"/>
+    <property xil_pn:name="Allow Logic Optimization Across Hierarchy" xil_pn:value="true" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Allow SelectMAP Pins to Persist" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Allow Unexpanded Blocks" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Allow Unmatched LOC Constraints" xil_pn:value="false" xil_pn:valueState="default"/>
@@ -242,7 +256,7 @@
     <property xil_pn:name="Create Mask File" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Create ReadBack Data Files" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Cross Clock Analysis" xil_pn:value="false" xil_pn:valueState="default"/>
-    <property xil_pn:name="Custom Waveform Configuration File Behav" xil_pn:value="000keyGen.wcfg" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="Custom Waveform Configuration File Behav" xil_pn:value="00Top.wcfg" xil_pn:valueState="non-default"/>
     <property xil_pn:name="DCI Update Mode" xil_pn:value="As Required" xil_pn:valueState="default"/>
     <property xil_pn:name="DSP Utilization Ratio" xil_pn:value="100" xil_pn:valueState="default"/>
     <property xil_pn:name="Decoder Extraction" xil_pn:value="true" xil_pn:valueState="default"/>
@@ -428,7 +442,7 @@
     <property xil_pn:name="Shift Register Extraction" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Show All Models" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Simulation Model Target" xil_pn:value="VHDL" xil_pn:valueState="default"/>
-    <property xil_pn:name="Simulation Run Time ISim" xil_pn:value="1000 ns" xil_pn:valueState="default"/>
+    <property xil_pn:name="Simulation Run Time ISim" xil_pn:value="20000 ns" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Simulation Run Time Map" xil_pn:value="1000 ns" xil_pn:valueState="default"/>
     <property xil_pn:name="Simulation Run Time Par" xil_pn:value="1000 ns" xil_pn:valueState="default"/>
     <property xil_pn:name="Simulation Run Time Translate" xil_pn:value="1000 ns" xil_pn:valueState="default"/>

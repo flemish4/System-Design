@@ -45,6 +45,7 @@ ARCHITECTURE behavior OF tb_topController IS
          keyInEn : IN  std_logic;
          inv : IN  std_logic;
          stop : IN  std_logic;
+		  --addrOutSel : in  STD_LOGIC;
          clk : IN  std_logic;
          rst : IN  std_logic;
          keyOut : OUT  std_logic_vector(7 downto 0)
@@ -59,6 +60,7 @@ ARCHITECTURE behavior OF tb_topController IS
    signal clk : std_logic := '0';
    signal rst : std_logic := '0';
    signal stop : std_logic := '0';
+   --signal addrOutSel : std_logic := '0';
 
  	--Outputs
    signal keyOut : std_logic_vector(7 downto 0);
@@ -120,7 +122,7 @@ BEGIN
 		
 		
 		wait for CLK_period/2;
-		wait for CLK_period/10;
+		wait for CLK_period/1000;
       -- hold reset state for 100 ns.
       --wait for 100 ns;
 		--RST <= '1';
@@ -129,28 +131,64 @@ BEGIN
       wait for CLK_period*10;	
 
 		keyInEn <= '1';
+		--addrOutSel <= '1';
 		for i in 0 to 15 loop
 			keyIn <= testKey0(i);
 			wait for CLK_period;
 		end loop;
 		keyInEn <= '0';
+		--addrOutSel <= '0';
+		wait for clk_period *16;
 		
-      wait for CLK_period * 16*10*2;
+		
+		for i in 0 to 20 loop
+			--addrOutSel <= '1';
+			wait for clk_period *16;
+			--addrOutSel <= '0';
+			wait for clk_period *16;
+		end loop;
+		
+		--addrOutSel <= '0';
+		
+		
+      --wait for CLK_period * 16*10*2;
 		
 		stop <= '1';
-		wait for clk_period *16;
+		wait for clk_period *32;
 		stop <='0';
 		wait for clk_period *16;
+		RST <= '1';
+      wait for CLK_period;
+		RST <= '0';
+      wait for CLK_period;
 		
 		inv <= '1';
 		keyInEn <= '1';
+		--addrOutSel <= '1';
 		for i in 0 to 15 loop
 			keyIn <= testKey0(i);
 			wait for CLK_period;
 		end loop;
 		keyInEn <= '0';
+		--addrOutSel <= '0';
+		wait for clk_period *16;
 		
-      wait for CLK_period * 16*10*3;
+		for i in 0 to 19 loop
+		--	addrOutSel <= '1';
+			wait for clk_period *16;
+		--	addrOutSel <= '0';
+			wait for clk_period *16;
+		end loop;
+		
+--		for i in 0 to 9 loop
+--			addrOutSel <= '1';
+--			ce <= '0';
+--			wait for clk_period *16;
+--			addrOutSel <= '0';
+--			ce <= '1';
+--			wait for clk_period *16;
+--		end loop;
+      --wait for CLK_period * 16*10*3;
 
 		stop <= '1';
 		wait for clk_period *16;

@@ -33,17 +33,19 @@ entity addr_gen is
     Port ( 
 			  --genEn : in STD_LOGIC;
            en : in  STD_LOGIC;
+           ce : in  STD_LOGIC;
            inv : in  STD_LOGIC;
            rst : in  STD_LOGIC;
            clk : in  STD_LOGIC;
+           QAddrSel : out  STD_LOGIC;
            addr : out  STD_LOGIC_VECTOR (3 downto 0));
 end addr_gen;
 
 architecture Behavioral of addr_gen is
 --signal enable : std_logic := '0';
 signal counter : std_logic_vector (2 downto 0):= "000";
-signal addrF : std_logic_vector (3 downto 0);
-signal addrI : std_logic_vector (3 downto 0);
+signal addrF : std_logic_vector (4 downto 0);
+signal addrI : std_logic_vector (4 downto 0);
 
 begin
 
@@ -51,30 +53,36 @@ begin
 process (clk) begin
 	if rising_edge(clk) then
 		--if rst = '1' or genEn = '0' then
-		if (rst = '1') or (counter = "100") then
-			counter <= (others => '0');
-		elsif en = '1' then
-			counter <= std_logic_vector(unsigned(counter) + 1);
-		else
+		if ce = '1' then
+			if (rst = '1') or (counter = "100") then
+				counter <= (others => '0');
+			elsif en = '1' then
+				counter <= std_logic_vector(unsigned(counter) + 1);
+			else
+				counter <= counter;
+			end if;
+		else 
 			counter <= counter;
 		end if;
 	end if;
 end process;
 
-	addrF <= 	"0000" when counter = "000" else
-					"0100" when counter = "001" else
-					"0001" when counter = "010" else
-					"0000" when counter = "011" else
-					"0000";
+	addrF <= 	"00011" when counter = "000" else
+					"00000" when counter = "001" else
+					"10000" when counter = "010" else
+					"10000" when counter = "011" else
+					"10000";
 					
-	addrI <= 	"1001" when counter = "000" else
-					"0110" when counter = "001" else
-					"1010" when counter = "010" else
-					"1010" when counter = "011" else
-					"1010" ;
+	addrI <= 	"01000" when counter = "000" else
+					"00101" when counter = "001" else
+					"01001" when counter = "010" else
+					"01001" when counter = "011" else
+					"01001" ;
 					
-	addr  <=    addrF when inv = '0' else
-					addrI;
+	addr  <=    addrF(3 downto 0) when inv = '0' else
+					addrI(3 downto 0);
+	QAddrSel <= addrF(4) when inv = '0' else
+					addrI(4);
 					
 end Behavioral;
 

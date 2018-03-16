@@ -30,7 +30,7 @@ library UNISIM;
 use UNISIM.VComponents.all;
 
 entity keyGenController_v3 is
-	generic ( Ncycles : integer := 2);
+	generic ( Ncycles : integer := 3);
     Port ( --rst : in  STD_LOGIC;
            ce : in  STD_LOGIC;
            keyInEn : in  STD_LOGIC;
@@ -46,7 +46,7 @@ end keyGenController_v3;
 
 architecture Behavioral of keyGenController_v3 is
 
-constant FRowAddrI : integer := NCycles -1;
+constant FRowAddrI : integer := NCycles ;---1;
 constant FRowAddr  : std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(FRowAddrI, 4));
 constant RConSelFAddrI : integer := 0;
 constant RConSelFAddr  : std_logic_vector (3 downto 0) := std_logic_vector(to_unsigned(RConSelFAddrI, 4));
@@ -80,7 +80,7 @@ begin
 	
 	SRLC16E_0 : SRLC16E -- generates addrGenEn and FRowSel
 		generic map (
-			INIT => "1100000000000111")
+			INIT => "1000000000001111")
 		port map (
 			Q => SRL0QAddr, -- SRL data output
 			Q15 => SRL0Q15, -- Carry output 
@@ -95,7 +95,7 @@ begin
 		
 	SRLC16E_0Inv : SRLC16E -- generates addrGenEn and FRowSel
 		generic map (
-			INIT => "0000000001111100")
+			INIT => "0000000011111000")
 		port map (
 			Q => SRL0QAddrInv, -- SRL data output
 			Q15 => SRL0Q15Inv, -- Carry output 

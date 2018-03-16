@@ -16,7 +16,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="27" />
+   <WVObjectSize size="26" />
    <wvobject fp_name="/tb_keygen_v2/keyin" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">keyin[7:0]</obj_property>
       <obj_property name="ObjectShortName">keyin[7:0]</obj_property>
@@ -108,6 +108,14 @@
          <obj_property name="ElementShortName">qaddr[7:0]</obj_property>
          <obj_property name="ObjectShortName">qaddr[7:0]</obj_property>
       </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/qaddrmux" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">qaddrmux[7:0]</obj_property>
+         <obj_property name="ObjectShortName">qaddrmux[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_keygen_v2/uut/qaddrsel" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">qaddrsel</obj_property>
+         <obj_property name="ObjectShortName">qaddrsel</obj_property>
+      </wvobject>
       <wvobject fp_name="/tb_keygen_v2/uut/qaddrdel" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">qaddrdel[7:0]</obj_property>
          <obj_property name="ObjectShortName">qaddrdel[7:0]</obj_property>
@@ -160,10 +168,6 @@
          <obj_property name="ElementShortName">invdeladdr[3:0]</obj_property>
          <obj_property name="ObjectShortName">invdeladdr[3:0]</obj_property>
       </wvobject>
-   </wvobject>
-   <wvobject fp_name="/tb_keygen_v2/setupce" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">setupce</obj_property>
-      <obj_property name="ObjectShortName">setupce</obj_property>
    </wvobject>
    <wvobject fp_name="group57" type="group">
       <obj_property name="label">controller</obj_property>
@@ -297,12 +301,12 @@
          <obj_property name="ObjectShortName">counter[2:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/tb_keygen_v2/uut/addr_generator/addrf" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">addrf[3:0]</obj_property>
-         <obj_property name="ObjectShortName">addrf[3:0]</obj_property>
+         <obj_property name="ElementShortName">addrf[4:0]</obj_property>
+         <obj_property name="ObjectShortName">addrf[4:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/tb_keygen_v2/uut/addr_generator/addri" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">addri[3:0]</obj_property>
-         <obj_property name="ObjectShortName">addri[3:0]</obj_property>
+         <obj_property name="ElementShortName">addri[4:0]</obj_property>
+         <obj_property name="ObjectShortName">addri[4:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group81" type="group">
