@@ -109,6 +109,7 @@ component counter is
            inv : in  STD_LOGIC;
            keyInEn : in  STD_LOGIC;
            done32 : out  STD_LOGIC;
+           invTrans : out  STD_LOGIC;
            addrOutSel : out  STD_LOGIC;
            RInEn : out  STD_LOGIC;
            roundDone : out  STD_LOGIC;
@@ -148,6 +149,7 @@ signal genCE : std_logic;
 signal counterCE : std_logic;
 signal ce : std_logic;
 signal addrOutSel : std_logic;
+signal invTrans : std_logic;
 
 begin
 
@@ -217,6 +219,7 @@ begin
 				  done32 => genDone,
 				  addr   => addr,
 				  RInEn   => RInEn,
+				  invTrans   => invTrans,
 				  addrOutSel => addrOutSel,
 				  roundCounter => roundCounter,
 				  roundDone => roundDone
@@ -239,7 +242,7 @@ begin
 	storeCE <= (keyInEn or (invF and addrOutSel)) ;
 	keyOut <= genKeyOut when addrOutSel = '1' else
 					delayKeyOut;
-	genInv <= inv and not invF;
+	genInv <= (inv and not invF)  or (invTrans and invF);
 	counterCE <= genDone and genCE;
 	ce <= (genCE and (not addroutsel)) or (genInEn and not genInv);
 end Behavioral;

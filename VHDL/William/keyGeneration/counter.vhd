@@ -39,6 +39,7 @@ entity counter is
            done32 : out  STD_LOGIC;
            RInEn : out  STD_LOGIC;
            addrOutSel : out  STD_LOGIC;
+           invTrans : out  STD_LOGIC;
            rst : in  STD_LOGIC;
            roundDone : out  STD_LOGIC;
            addr : out  STD_LOGIC_VECTOR (3 downto 0);
@@ -112,6 +113,8 @@ begin
 	RInEnF <= '1' when (roundCounterTemp = x"b" or roundCounterTemp = x"0") and roundCount = '0' and genCE = '1' else
 					'0';
 	RInEnI <= '1' when (((roundCounterTemp = x"9" or roundCounterTemp = x"e") and genInv = '1' and genInvRoundCount = '0') or(roundCounterTemp = x"a" and genInvRoundCount = '1'))  and genCE = '1' else
+					'0';
+	invTrans <= '1' when (roundCounterR = x"a" and roundCount = '1' and inv = '1') else
 					'0';
 	genInvRoundCount <= roundCount ; -- xor genInv;
 	addrOutSel <= not genInvRoundCount;
