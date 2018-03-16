@@ -31,7 +31,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity datapath is
     Port ( data : in  STD_LOGIC_VECTOR (7 downto 0);
-           key : in  STD_LOGIC_VECTOR (7 downto 0);
+           key0 : in  STD_LOGIC_VECTOR (7 downto 0);
+           key1 : in  STD_LOGIC_VECTOR (7 downto 0);
            s0 : in  STD_LOGIC;
            s1 : in  STD_LOGIC;
            adrs : in  STD_LOGIC_VECTOR (3 downto 0);
@@ -65,10 +66,12 @@ end component;
 end component; 
 	
 	component MixColumns_Top is
-    Port ( clk,rst,inverse : in  STD_LOGIC;
+    Port ( clk,rst,inv,CE,round10 : in  STD_LOGIC;
+			  load_count : out  STD_LOGIC;
            byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
+
 
 	component srl16_8 is
 		Port ( Q : out  STD_LOGIC_VECTOR (7 downto 0);
@@ -93,7 +96,7 @@ end component;
 	
 begin
 	--data xor key
-	x_1 <= key xor data; 
+	x_1 <= key0 xor data; 
 	
 	--implement the first multiplexer
 	mu_1 <= x_2 when (s0= '0' )
@@ -132,13 +135,14 @@ begin
 	mx_clmns : MixColumns_Top
 			Port map( byte_in  => s_r,
 				  byte_out => m_c,
-				 -- ce => mx_clmn_en,
+				  ce => mx_clmn_en,
+				  round10 => s1,
 				  inverse  => inv_en,
 				  clk => clk,
 				  rst =>reset );
 				  
 	--mic columns output xor key
-	x_2 <= key xor m_c; 
+	x_2 <= key1 xor m_c; 
 	
 	--set the output 
 	q <= x_2; 
