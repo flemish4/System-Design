@@ -42,7 +42,8 @@ ARCHITECTURE behavior OF tb_control IS
     COMPONENT control
     PORT(
          clk : IN  std_logic;
-         rst : IN  std_logic;
+         --rst : IN  std_logic;
+			CE  : IN std_logic;
          EN : OUT  std_logic;
          load : OUT  std_logic
         );
@@ -51,7 +52,8 @@ ARCHITECTURE behavior OF tb_control IS
 
    --Inputs
    signal clk : std_logic := '0';
-   signal rst : std_logic := '0';
+   --signal rst : std_logic := '0';
+	signal CE : std_logic := '0';
 
  	--Outputs
    signal EN : std_logic;
@@ -65,7 +67,8 @@ BEGIN
 	-- Instantiate the Unit Under Test (UUT)
    uut: control PORT MAP (
           clk => clk,
-          rst => rst,
+          --rst => rst,
+			 CE => CE,
           EN => EN,
           load => load
         );
@@ -85,9 +88,10 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
 		
-		rst <= '1';
+		--rst <= '1';
   		wait for clk_period*1;	
- 		rst <= '0';
+ 		--rst <= '0';
+		CE <= '1';
 		
 		wait for clk_period*2.5;
 		

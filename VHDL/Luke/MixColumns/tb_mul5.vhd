@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   02:50:40 02/22/2018
+-- Create Date:   03:57:55 03/02/2018
 -- Design Name:   
--- Module Name:   C:/Users/lukel/Desktop/Uni/Fourth Year/system design/VHDL/MixColumns/tb_barrel_shifter.vhd
+-- Module Name:   C:/Users/lukel/Desktop/Uni/Fourth Year/system design/VHDL/MixColumns/tb_mul5.vhd
 -- Project Name:  MixColumns
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: barrel_shifter
+-- VHDL Test Bench Created by ISE for module: mul5
 -- 
 -- Dependencies:
 -- 
@@ -30,53 +30,49 @@ USE ieee.std_logic_1164.ALL;
  
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
+USE ieee.numeric_std.ALL;
  
-ENTITY tb_barrel_shifter IS
-END tb_barrel_shifter;
+ENTITY tb_mul5 IS
+END tb_mul5;
  
-ARCHITECTURE behavior OF tb_barrel_shifter IS 
+ARCHITECTURE behavior OF tb_mul5 IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT barrel_shifter
+    COMPONENT mul5
     PORT(
-         clk : IN  std_logic;
-         rst : IN  std_logic;
-			CE : IN  std_logic;
-         Q : OUT  std_logic
+         x : IN  std_logic_vector(7 downto 0);
+         x5 : OUT  std_logic_vector(7 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal clk : std_logic := '0';
-   signal rst : std_logic := '0';
-	signal CE : std_logic := '0';
- 	--Outputs
-   signal Q : std_logic;
+   signal x : std_logic_vector(7 downto 0) := (others => '0');
 
-   -- Clock period definitions
-   constant clk_period : time := 10 ns;
+ 	--Outputs
+   signal x5 : std_logic_vector(7 downto 0);
+   -- No clocks detected in port list. Replace <clock> below with 
+   -- appropriate port name 
+ 
+   --constant <clock>_period : time := 10 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: barrel_shifter PORT MAP (
-          clk => clk,
-          rst => rst,
-			 CE => CE,
-          Q => Q
+   uut: mul5 PORT MAP (
+          x => x,
+          x5 => x5
         );
 
    -- Clock process definitions
-   clk_process :process
-   begin
-		clk <= '0';
-		wait for clk_period/2;
-		clk <= '1';
-		wait for clk_period/2;
-   end process;
+--   <clock>_process :process
+--   begin
+--		<clock> <= '0';
+--		wait for <clock>_period/2;
+--		<clock> <= '1';
+--		wait for <clock>_period/2;
+--   end process;
  
 
    -- Stimulus process
@@ -84,13 +80,16 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
       wait for 100 ns;	
-		CE <= '1';
-      wait for clk_period*10;
+
+      --wait for <clock>_period*10;
 
       -- insert stimulus here 
-		--rst <= '1';
-		--wait for clk_period;
-		--rst <= '0';
+		
+		for i in 0 to 255 loop
+
+			x <= std_logic_vector(to_unsigned(i, 8));
+			wait for 10 ns;
+		end loop;
       wait;
    end process;
 

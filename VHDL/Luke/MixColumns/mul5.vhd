@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    00:40:51 02/23/2018 
+-- Create Date:    03:50:31 03/02/2018 
 -- Design Name: 
--- Module Name:    EN_signal - Behavioral 
+-- Module Name:    mul5 - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -22,39 +22,37 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
-use IEEE.NUMERIC_STD.ALL;
+--use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
+entity mul5 is
+    Port ( x : in  STD_LOGIC_VECTOR (7 downto 0);
+           x5 : out  STD_LOGIC_VECTOR (7 downto 0));
+end mul5;
 
+architecture Behavioral of mul5 is
 
-entity EN_signal is
-	 --generic (SQUENCE : in natural := 7);
-    Port ( clk, rst : in  STD_LOGIC;
-           Q : out  STD_LOGIC);
-end EN_signal;
+component mul4
+	Port(x : in  STD_LOGIC_VECTOR (7 downto 0);
+        x4: out  STD_LOGIC_VECTOR (7 downto 0));
+end component;
 
-architecture Behavioral of EN_signal is
-
-signal temp: std_logic_vector(3 downto 0) := std_logic_vector(to_unsigned(11, 4));
+signal x4 : STD_LOGIC_VECTOR (7 downto 0);
 
 begin
 
-  process (clk)
-         begin
-             if rising_edge(clk) then 
-					if rst ='1' then
-                   temp <= std_logic_vector(to_unsigned(11, 4));
-					else
-						 temp <= temp(2 downto 0) & temp(3);   -- concatenation operator &
-					end if;
-            end if;
-    end process;
-	
-	Q <= temp(3);   -- MSB out
+mul4_x5 : mul4
+	port map(x => x,
+				x4 => x4
+				);
+				
+
+x5 <= x4 xor x;
+
 
 end Behavioral;
 

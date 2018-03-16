@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    00:40:51 02/23/2018 
+-- Create Date:    06:50:29 03/02/2018 
 -- Design Name: 
--- Module Name:    EN_signal - Behavioral 
+-- Module Name:    MC_inverse - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,32 +29,31 @@ use IEEE.NUMERIC_STD.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-
-
-entity EN_signal is
-	 --generic (SQUENCE : in natural := 7);
-    Port ( clk, rst : in  STD_LOGIC;
+entity MC_inverse is
+    Port ( clk,rst,inverse : in  STD_LOGIC;
            Q : out  STD_LOGIC);
-end EN_signal;
+end MC_inverse;
 
-architecture Behavioral of EN_signal is
+architecture Behavioral of MC_inverse is
 
-signal temp: std_logic_vector(3 downto 0) := std_logic_vector(to_unsigned(11, 4));
+signal temp: std_logic_vector(35 downto 0) := std_logic_vector(to_unsigned(1048575, 36)); --FFFFF
 
 begin
+
 
   process (clk)
          begin
              if rising_edge(clk) then 
-					if rst ='1' then
-                   temp <= std_logic_vector(to_unsigned(11, 4));
+					if rst = '1' then
+                   temp <= std_logic_vector(to_unsigned(1048575, 36));
+					elsif inverse = '0' then
+                   temp <= std_logic_vector(to_unsigned(1048575, 36));
 					else
-						 temp <= temp(2 downto 0) & temp(3);   -- concatenation operator &
+						 temp <= temp(34 downto 0) & temp(35);   -- concatenation operator &
 					end if;
             end if;
     end process;
 	
-	Q <= temp(3);   -- MSB out
+	Q <= temp(35);   -- MSB out
 
 end Behavioral;
-

@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   05:05:20 02/22/2018
+-- Create Date:   00:06:26 03/08/2018
 -- Design Name:   
--- Module Name:   C:/Users/lukel/Desktop/Uni/Fourth Year/system design/VHDL/MixColumns/tb_MixColumns.vhd
+-- Module Name:   C:/Users/lukel/Desktop/Uni/Fourth Year/system design/VHDL/MixColumns/tb_top.vhd
 -- Project Name:  MixColumns
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: MixColumns
+-- VHDL Test Bench Created by ISE for module: MixColumns_Top
 -- 
 -- Dependencies:
 -- 
@@ -27,36 +27,44 @@
 --------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
---USE ieee.std_logic_arith.ALL;
  
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY tb_MixColumns IS
-END tb_MixColumns;
+ENTITY tb_top IS
+END tb_top;
  
-ARCHITECTURE behavior OF tb_MixColumns IS 
+ARCHITECTURE behavior OF tb_top IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT MixColumns
+    COMPONENT MixColumns_Top
     PORT(
          clk : IN  std_logic;
          rst : IN  std_logic;
+         inv : IN  std_logic;
+			CE : IN  std_logic;
+			round10 : IN  std_logic;
          byte_in : IN  std_logic_vector(7 downto 0);
-         byte_out : OUT  std_logic_vector(7 downto 0)
+         byte_out : OUT  std_logic_vector(7 downto 0);
+			load_count : OUT  std_logic
+			
         );
     END COMPONENT;
+    
 
    --Inputs
    signal clk : std_logic := '0';
    signal rst : std_logic := '0';
+   signal inv : std_logic := '0';
+	signal CE : std_logic := '0';
+	signal round10 : std_logic := '0';
    signal byte_in : std_logic_vector(7 downto 0) := (others => '0');
 
  	--Outputs
    signal byte_out : std_logic_vector(7 downto 0);
-	
+	signal load_count : std_logic;
    -- Clock period definitions
    constant clk_period : time := 10 ns;
 	
@@ -88,7 +96,7 @@ ARCHITECTURE behavior OF tb_MixColumns IS
 	3 => x"f1", 
 	4 => x"1b", 
 	5 => x"4b", 
-	6 => x"4a", 
+	6 => x"5a", 
 	7 => x"ac", 
 	8 => x"db", 
 	9 => x"e7", 
@@ -102,13 +110,17 @@ ARCHITECTURE behavior OF tb_MixColumns IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: MixColumns PORT MAP (
+   uut: MixColumns_Top PORT MAP (
           clk => clk,
           rst => rst,
+          inv => inv,
+			 CE => CE,
+			 round10 => round10,
           byte_in => byte_in,
-          byte_out => byte_out
+          byte_out => byte_out,
+			 load_count => load_count
         );
-		  
+
    -- Clock process definitions
    clk_process :process
    begin
@@ -118,30 +130,28 @@ BEGIN
 		wait for clk_period/2;
    end process;
  
- 
 
    -- Stimulus process
    stim_proc: process
-   begin		
-	
-      --hold reset state for 100 ns.
+   begin	
+		
       rst <= '1';
-  		wait for clk_period*1.5;	
-		--wait for 100 ns;
+		inv <= '0';
+		round10 <= '1';
+  		wait for clk_period*2;	
  		rst <= '0';
 		
-		--wait for clk_period*2.5;
-		--wait for clk_period*0.1;		
-		--wait for clk_period;
+		
+		wait for clk_period*0.5;
+		CE <= '1';
       -- insert stimulus here 
-
+		
 		for i in 0 to 15 loop
 			byte_in <= state_in_encode(i);
 			wait for clk_period;
 		end loop;
 
 		byte_in <= x"00";
-
 
       wait;
    end process;
