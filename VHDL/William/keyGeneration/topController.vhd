@@ -37,7 +37,10 @@ entity topController is
            clk : in  STD_LOGIC;
            rst : in  STD_LOGIC;
            --addrOutSel : in  STD_LOGIC;
-           keyOut : out  STD_LOGIC_VECTOR (7 downto 0));
+           keyOut1 : out  STD_LOGIC_VECTOR (7 downto 0);
+           keyOut0 : out  STD_LOGIC_VECTOR (7 downto 0)
+			  
+			  );
 end topController;
 
 architecture Behavioral of topController is
@@ -66,6 +69,13 @@ component keyStoreExt is
            clk : in  STD_LOGIC;
            rst : in  STD_LOGIC;
            keyOut : out  STD_LOGIC_VECTOR (7 downto 0));
+end component;
+
+component delay is
+	generic ( del : integer := 2 ) ;
+    Port ( D : in  STD_LOGIC;
+           CLK : in  STD_LOGIC;
+           Q : out  STD_LOGIC);
 end component;
 
 component keyGen is
@@ -108,6 +118,8 @@ component counter is
            genCE : in  STD_LOGIC;
            inv : in  STD_LOGIC;
            keyInEn : in  STD_LOGIC;
+           genInEn : in  STD_LOGIC;
+           store1Out : in  STD_LOGIC;
            done32 : out  STD_LOGIC;
            invTrans : out  STD_LOGIC;
            addrOutSel : out  STD_LOGIC;
@@ -132,7 +144,8 @@ constant NRounds : integer := 11;
 constant sysCycles : integer := 6;
 
 signal storeIn  : STD_LOGIC_VECTOR (7 downto 0) ;
-signal storeOut  : STD_LOGIC_VECTOR (7 downto 0) ;
+signal store0Out  : STD_LOGIC_VECTOR (7 downto 0) ;
+signal store1Out  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal genKeyIn  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal genKeyOut  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal delayKeyOut  : STD_LOGIC_VECTOR (7 downto 0) ;
@@ -150,6 +163,8 @@ signal counterCE : std_logic;
 signal ce : std_logic;
 signal addrOutSel : std_logic;
 signal invTrans : std_logic;
+signal storeCEDel0 : std_logic;
+signal storeCEDel1 : std_logic;
 
 begin
 
@@ -168,6 +183,17 @@ begin
 				  done => gendone ,
 				  clk => clk ,
 				  ce => genCE );
+				  
+	storeCEDelayer0 : delay
+	generic map ( del => 16)
+    Port map (   D => storeCE,
+					  CLK => CLK,
+					  q => storeCEDel0);
+	storeCEDelayer1 : delay
+	generic map ( del => 16)
+    Port map (   D => storeCEDel0,
+					  CLK => CLK,
+					  q => storeCEDel1);
 
 	keyStoreExt0 : keyStoreExt
 		 Port map ( keyIn => storeIn ,
@@ -175,7 +201,16 @@ begin
 				  addr => addr ,
 				  clk => clk ,
 				  rst => rst ,
-				  keyOut => storeOut
+				  keyOut => store0Out
+				  );
+	  
+	keyStoreExt1 : keyStoreExt
+		 Port map ( keyIn => storeIn ,
+				  ce => storeCEDel1 ,
+				  addr => addr ,
+				  clk => clk ,
+				  rst => rst ,
+				  keyOut => store1Out
 				  );
 
 	keyGen0 : keyGen
@@ -221,8 +256,10 @@ begin
 				  RInEn   => RInEn,
 				  invTrans   => invTrans,
 				  addrOutSel => addrOutSel,
+				  store1Out => store1Out,
 				  roundCounter => roundCounter,
-				  roundDone => roundDone
+				  roundDone => roundDone,
+				  genInEn => genInEn
 				  );
 	
 	keyDelay	 : srl16_8 
@@ -235,12 +272,14 @@ begin
 				  );	
 				  
 	genKeyIn <= keyIn when keyInEn = '1' else
-					storeOut;
-	storeIn <= keyIn when invF = '0' else
-					genKeyOut;
+					store1Out;
+	keyOut0 <= store0Out when keyInEn = '0' else
+					keyIn;
+	storeIn <= genKeyOut; --keyIn when invF = '0' else
+					--genKeyOut;
 	genInEn <= keyInEn or RInEn;
 	storeCE <= (keyInEn or (invF and addrOutSel)) ;
-	keyOut <= genKeyOut when addrOutSel = '1' else
+	keyOut1 <= genKeyOut when addrOutSel = '1' else
 					delayKeyOut;
 	genInv <= (inv and not invF)  or (invTrans and invF);
 	counterCE <= genDone and genCE;

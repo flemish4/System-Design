@@ -48,7 +48,8 @@ ARCHITECTURE behavior OF tb_topController IS
 		  --addrOutSel : in  STD_LOGIC;
          clk : IN  std_logic;
          rst : IN  std_logic;
-         keyOut : OUT  std_logic_vector(7 downto 0)
+         keyOut0 : OUT  std_logic_vector(7 downto 0);
+         keyOut1 : OUT  std_logic_vector(7 downto 0)
         );
     END COMPONENT;
     
@@ -63,7 +64,8 @@ ARCHITECTURE behavior OF tb_topController IS
    --signal addrOutSel : std_logic := '0';
 
  	--Outputs
-   signal keyOut : std_logic_vector(7 downto 0);
+   signal keyOut0 : std_logic_vector(7 downto 0);
+   signal keyOut1 : std_logic_vector(7 downto 0);
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -97,7 +99,8 @@ BEGIN
           stop => stop,
           clk => clk,
           rst => rst,
-          keyOut => keyOut
+          keyOut0 => keyOut0,
+          keyOut1 => keyOut1
         );
 
    -- Clock process definitions

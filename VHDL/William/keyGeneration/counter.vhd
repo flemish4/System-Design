@@ -36,11 +36,13 @@ entity counter is
            genCE: in  STD_LOGIC;
            genInv : in  STD_LOGIC;
            keyInEn : in  STD_LOGIC;
+           store1Out : in  STD_LOGIC;
            done32 : out  STD_LOGIC;
            RInEn : out  STD_LOGIC;
            addrOutSel : out  STD_LOGIC;
            invTrans : out  STD_LOGIC;
            rst : in  STD_LOGIC;
+           genInEn : in  STD_LOGIC;
            roundDone : out  STD_LOGIC;
            addr : out  STD_LOGIC_VECTOR (3 downto 0);
            roundCounter : out  STD_LOGIC_VECTOR (3 downto 0)
@@ -53,6 +55,7 @@ signal roundCounterR : STD_LOGIC_VECTOR (3 downto 0) := "0000";
 signal roundCounterTemp : STD_LOGIC_VECTOR (3 downto 0);
 signal RInEnF : STD_LOGIC;
 signal RInEnI : STD_LOGIC;
+signal invTransTemp : STD_LOGIC;
 signal roundCount : STD_LOGIC := '0';
 signal halfRoundDone : STD_LOGIC;
 signal genInvRoundCount : STD_LOGIC;
@@ -75,8 +78,10 @@ begin
 		if rising_edge(clk) then
 			if ce = '1' and genInvRoundCount = '1' and halfRoundDone = '1' then
 				roundCounterR <= std_logic_vector(unsigned(roundCounterR) + 1);
-			elsif rst = '1' or roundCounterR = "1011" then
+			elsif rst = '1' or keyInEn = '1'  then
 				roundCounterR <= "0000";
+			elsif roundCounterR = "1011" then
+				roundCounterR <= "0001";
 			else
 				roundCounterR <= roundCounterR;
 			end if;
@@ -99,7 +104,7 @@ begin
 	roundCounter <= roundCounterTemp;
 	roundCounterTemp <= roundCounterR when genInv = '0' else
 						 std_logic_vector(9-unsigned(roundCounterR));
-	addr <= counterVal when keyInEn = '1' and inv = '1' else
+	addr <= counterVal when genInv = '1' else
 			not counterVal;
 
 	halfRoundDone <= '1' when counterVal = "1111" else 
@@ -110,12 +115,13 @@ begin
 	RInEn <= RInEnF when inv = '0' else
 				RInEnI;
 	
-	RInEnF <= '1' when (roundCounterTemp = x"b" or roundCounterTemp = x"0") and roundCount = '0' and genCE = '1' else
+	RInEnF <= '1' when ((((roundCounterTemp = "1011") or (roundCounterTemp = "0001")) and (roundCount = '0') and (genCE = '1')) and (not store1Out)) else
 					'0';
-	RInEnI <= '1' when (((roundCounterTemp = x"f") and inv = '1' and roundCount = '1') or (roundCounterTemp = x"a" and genInvRoundCount = '1'))  and genCE = '1' else
+	RInEnI <= '1' when (((roundCounterTemp = x"f") and inv = '1' and roundCount = '1') or (roundCounterTemp = x"a" and genInvRoundCount = '1')) and not store1Out and genCE = '1' else
 					'0';
-	invTrans <= '1' when (roundCounterR = x"a" and roundCount = '1' and inv = '1') else
+	invTransTemp <= '1' when (roundCounterR = x"a" and roundCount = '1' and inv = '1') else
 					'0';
+	invTrans <= invTransTemp;
 	genInvRoundCount <= roundCount ; -- xor genInv;
 	addrOutSel <= not genInvRoundCount;
 end Behavioral;
