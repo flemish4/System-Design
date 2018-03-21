@@ -193,9 +193,9 @@ BEGIN
 --		end loop;
       --wait for CLK_period * 16*10*3;
 
-		stop <= '1';
+		--stop <= '1';
 		wait for clk_period *16;
-		stop <='0';
+		--stop <='0';
 		
 
       wait;

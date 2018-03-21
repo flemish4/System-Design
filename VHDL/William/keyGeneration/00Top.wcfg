@@ -3,7 +3,7 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="E:/Georgina/Documents/William/System-Design/VHDL/William/keyGeneration/tb_topController_isim_beh.wdb" id="1" type="auto">
+      <db_ref path="E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/keyGeneration/tb_topController_isim_beh.wdb" id="1" type="auto">
          <top_modules>
             <top_module name="numeric_std" />
             <top_module name="std_logic_1164" />
@@ -16,9 +16,9 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="18" />
+   <WVObjectSize size="19" />
    <wave_markers>
-      <marker time="11365010000" label="" />
+      <marker time="11365000000" label="" />
    </wave_markers>
    <wvobject fp_name="/tb_topcontroller/keyin" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">keyin[7:0]</obj_property>
@@ -56,8 +56,8 @@
       <obj_property name="ElementShortName">clk_period</obj_property>
       <obj_property name="ObjectShortName">clk_period</obj_property>
    </wvobject>
-   <wvobject fp_name="group133" type="group">
-      <obj_property name="label">top inter</obj_property>
+   <wvobject fp_name="group146" type="group">
+      <obj_property name="label">Top Inter</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <wvobject fp_name="/tb_topcontroller/uut/keyin" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">keyin[7:0]</obj_property>
@@ -115,6 +115,10 @@
          <obj_property name="ElementShortName">delaykeyout[7:0]</obj_property>
          <obj_property name="ObjectShortName">delaykeyout[7:0]</obj_property>
       </wvobject>
+      <wvobject fp_name="/tb_topcontroller/uut/store0addr" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">store0addr[3:0]</obj_property>
+         <obj_property name="ObjectShortName">store0addr[3:0]</obj_property>
+      </wvobject>
       <wvobject fp_name="/tb_topcontroller/uut/addr" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">addr[3:0]</obj_property>
          <obj_property name="ObjectShortName">addr[3:0]</obj_property>
@@ -122,6 +126,10 @@
       <wvobject fp_name="/tb_topcontroller/uut/roundcounter" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">roundcounter[3:0]</obj_property>
          <obj_property name="ObjectShortName">roundcounter[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_topcontroller/uut/rconcounter" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rconcounter[3:0]</obj_property>
+         <obj_property name="ObjectShortName">rconcounter[3:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/tb_topcontroller/uut/gendone" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">gendone</obj_property>
@@ -179,6 +187,22 @@
          <obj_property name="ElementShortName">storecedel1</obj_property>
          <obj_property name="ObjectShortName">storecedel1</obj_property>
       </wvobject>
+      <wvobject fp_name="/tb_topcontroller/uut/invtransdel" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">invtransdel</obj_property>
+         <obj_property name="ObjectShortName">invtransdel</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_topcontroller/uut/store1invenclr" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">store1invenclr</obj_property>
+         <obj_property name="ObjectShortName">store1invenclr</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_topcontroller/uut/store1inven" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">store1inven</obj_property>
+         <obj_property name="ObjectShortName">store1inven</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_topcontroller/uut/store1ce" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">store1ce</obj_property>
+         <obj_property name="ObjectShortName">store1ce</obj_property>
+      </wvobject>
       <wvobject fp_name="/tb_topcontroller/uut/ncycles" type="other" db_ref_id="1">
          <obj_property name="ElementShortName">ncycles</obj_property>
          <obj_property name="ObjectShortName">ncycles</obj_property>
@@ -215,10 +239,6 @@
          <obj_property name="ElementShortName">addrout[3:0]</obj_property>
          <obj_property name="ObjectShortName">addrout[3:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_topcontroller/uut/keyGen0/roundcounter" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">roundcounter[3:0]</obj_property>
-         <obj_property name="ObjectShortName">roundcounter[3:0]</obj_property>
-      </wvobject>
       <wvobject fp_name="/tb_topcontroller/uut/keyGen0/inv" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">inv</obj_property>
          <obj_property name="ObjectShortName">inv</obj_property>
@@ -236,8 +256,10 @@
          <obj_property name="ObjectShortName">done</obj_property>
       </wvobject>
       <wvobject fp_name="/tb_topcontroller/uut/keyGen0/keyout" type="array" db_ref_id="1">
+         <obj_property name="DisplayName">label</obj_property>
          <obj_property name="ElementShortName">keyout[7:0]</obj_property>
          <obj_property name="ObjectShortName">keyout[7:0]</obj_property>
+         <obj_property name="label">keyout[7:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/tb_topcontroller/uut/keyGen0/rconen" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">rconen</obj_property>
@@ -443,5 +465,9 @@
    <wvobject fp_name="/tb_topcontroller/uut/keyStoreExt1/keyout" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">keyout[7:0]</obj_property>
       <obj_property name="ObjectShortName">keyout[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_topcontroller/uut/store0out" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">store0out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">store0out[7:0]</obj_property>
    </wvobject>
 </wave_config>

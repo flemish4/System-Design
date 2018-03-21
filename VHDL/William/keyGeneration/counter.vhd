@@ -33,10 +33,11 @@ entity counter is
     Port ( ce : in  STD_LOGIC;
            clk : in  STD_LOGIC;
            inv : in  STD_LOGIC;
+           invf : in  STD_LOGIC;
            genCE: in  STD_LOGIC;
            genInv : in  STD_LOGIC;
            keyInEn : in  STD_LOGIC;
-           store1Out : in  STD_LOGIC;
+           storeCEDel1 : in  STD_LOGIC;
            done32 : out  STD_LOGIC;
            RInEn : out  STD_LOGIC;
            addrOutSel : out  STD_LOGIC;
@@ -45,6 +46,7 @@ entity counter is
            genInEn : in  STD_LOGIC;
            roundDone : out  STD_LOGIC;
            addr : out  STD_LOGIC_VECTOR (3 downto 0);
+           RConCounter : out  STD_LOGIC_VECTOR (3 downto 0);
            roundCounter : out  STD_LOGIC_VECTOR (3 downto 0)
 			  );
 end counter;
@@ -78,7 +80,7 @@ begin
 		if rising_edge(clk) then
 			if ce = '1' and genInvRoundCount = '1' and halfRoundDone = '1' then
 				roundCounterR <= std_logic_vector(unsigned(roundCounterR) + 1);
-			elsif rst = '1' or keyInEn = '1'  then
+			elsif rst = '1' or keyInEn = '1' or (roundCounterR = "0001" and storecedel1 = '1' and genInv = '1') then
 				roundCounterR <= "0000";
 			elsif roundCounterR = "1011" then
 				roundCounterR <= "0001";
@@ -103,8 +105,10 @@ begin
 	
 	roundCounter <= roundCounterTemp;
 	roundCounterTemp <= roundCounterR when genInv = '0' else
+						 std_logic_vector(10-unsigned(roundCounterR));
+	RConCounter <= roundCounterR when genInv = '0' else
 						 std_logic_vector(9-unsigned(roundCounterR));
-	addr <= counterVal when genInv = '1' else
+	addr <= counterVal when (invf or genInv) = '1' else
 			not counterVal;
 
 	halfRoundDone <= '1' when counterVal = "1111" else 
@@ -115,9 +119,9 @@ begin
 	RInEn <= RInEnF when inv = '0' else
 				RInEnI;
 	
-	RInEnF <= '1' when ((((roundCounterTemp = "1011") or (roundCounterTemp = "0001")) and (roundCount = '0') and (genCE = '1')) and (not store1Out)) else
+	RInEnF <= '1' when ((((roundCounterTemp = "1011") or (roundCounterTemp = "0001")) and (roundCount = '0') and (genCE = '1')) and (storeCEDel1 = '0')) else
 					'0';
-	RInEnI <= '1' when (((roundCounterTemp = x"f") and inv = '1' and roundCount = '1') or (roundCounterTemp = x"a" and genInvRoundCount = '1')) and not store1Out and genCE = '1' else
+	RInEnI <= '1' when ((roundCounterTemp = x"f") and inv = '1' and roundCount = '1') and storeCEDel1  = '0' and genCE = '1' else
 					'0';
 	invTransTemp <= '1' when (roundCounterR = x"a" and roundCount = '1' and inv = '1') else
 					'0';

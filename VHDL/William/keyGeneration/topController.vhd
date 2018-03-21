@@ -54,6 +54,14 @@ component invF_gen is
            invF : out  STD_LOGIC);
 end component;
 
+component FF is
+    Port ( en : in  STD_LOGIC;
+           clr : in  STD_LOGIC;
+           rst : in  STD_LOGIC;
+           clk : in  STD_LOGIC;
+           q : out  STD_LOGIC);
+end component;
+
 component CEGen is
     Port ( keyInEn : in  STD_LOGIC;
            stop : in  STD_LOGIC;
@@ -86,7 +94,7 @@ component keyGen is
            INV : in  STD_LOGIC;
            addrOutSel : in  STD_LOGIC;
            addrOut : in  STD_LOGIC_VECTOR (3 downto 0);
-           roundCounter : in  STD_LOGIC_VECTOR (3 downto 0);
+           RConCounter : in  STD_LOGIC_VECTOR (3 downto 0);
 			  CE : in STD_LOGIC;
 			  keyInEn : in STD_LOGIC;
 			  done : out STD_LOGIC;
@@ -117,16 +125,18 @@ component counter is
            genInv : in  STD_LOGIC;
            genCE : in  STD_LOGIC;
            inv : in  STD_LOGIC;
+           invf : in  STD_LOGIC;
            keyInEn : in  STD_LOGIC;
            genInEn : in  STD_LOGIC;
-           store1Out : in  STD_LOGIC;
+           storeCEDel1 : in  STD_LOGIC;
            done32 : out  STD_LOGIC;
            invTrans : out  STD_LOGIC;
            addrOutSel : out  STD_LOGIC;
            RInEn : out  STD_LOGIC;
            roundDone : out  STD_LOGIC;
            addr : out  STD_LOGIC_VECTOR (3 downto 0);
-           roundCounter : out  STD_LOGIC_VECTOR (3 downto 0)
+           roundCounter : out  STD_LOGIC_VECTOR (3 downto 0);
+           RConCounter : out  STD_LOGIC_VECTOR (3 downto 0)
 			  );
 end component;
 
@@ -149,8 +159,10 @@ signal store1Out  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal genKeyIn  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal genKeyOut  : STD_LOGIC_VECTOR (7 downto 0) ;
 signal delayKeyOut  : STD_LOGIC_VECTOR (7 downto 0) ;
+signal store0Addr  : STD_LOGIC_VECTOR (3 downto 0) ;
 signal addr  : STD_LOGIC_VECTOR (3 downto 0) ;
 signal roundCounter  : STD_LOGIC_VECTOR (3 downto 0) ;
+signal RConCounter  : STD_LOGIC_VECTOR (3 downto 0) ;
 signal genDone : STD_LOGIC ;
 signal roundDone : STD_LOGIC ;
 signal RInEn : STD_LOGIC ;
@@ -165,6 +177,11 @@ signal addrOutSel : std_logic;
 signal invTrans : std_logic;
 signal storeCEDel0 : std_logic;
 signal storeCEDel1 : std_logic;
+signal invTransDel : std_logic;
+signal store1InvEnClr : std_logic;
+signal store1InvEn : std_logic;
+signal store1CE : std_logic;
+signal store1CEInv : std_logic;
 
 begin
 
@@ -176,6 +193,15 @@ begin
 				  rst => rst ,
 				  invF => invF
 				  );
+				  
+				
+	 store1InvEnFF : FF
+		 Port map ( en => invF,
+				  clr => store1InvEnClr ,
+				  rst => rst ,
+				  clk => clk ,
+				  q => store1InvEn
+				  ); 
 				  
 	CEGen_0 : CEGen 
 		 Port map ( keyInEn => keyInEn ,
@@ -194,6 +220,11 @@ begin
     Port map (   D => storeCEDel0,
 					  CLK => CLK,
 					  q => storeCEDel1);
+	invTransDelayer : delay
+	generic map ( del => 16)
+    Port map (   D => invTrans,
+					  CLK => CLK,
+					  q => invTransDel);
 
 	keyStoreExt0 : keyStoreExt
 		 Port map ( keyIn => storeIn ,
@@ -206,8 +237,8 @@ begin
 	  
 	keyStoreExt1 : keyStoreExt
 		 Port map ( keyIn => storeIn ,
-				  ce => storeCEDel1 ,
-				  addr => addr ,
+				  ce => store1CE ,
+				  addr => store0Addr ,
 				  clk => clk ,
 				  rst => rst ,
 				  keyOut => store1Out
@@ -222,7 +253,7 @@ begin
 				  ce => ce ,
 				  addrOutSel => addrOutSel,
 				  addrOut => addr,
-				  roundCounter => roundCounter,
+				  RConCounter => RConCounter,
 				  keyInEn => genInEn ,
 				  --done => genDone ,
 				  keyout => genKeyOut
@@ -250,14 +281,16 @@ begin
 				  genInv => genInv,
 				  genCE => genCE,
 				  inv => inv,
+				  invf => invf,
 				  keyInEN => keyInEN,
 				  done32 => genDone,
 				  addr   => addr,
 				  RInEn   => RInEn,
 				  invTrans   => invTrans,
 				  addrOutSel => addrOutSel,
-				  store1Out => store1Out,
+				  storeCEDel1 => storeCEDel1,
 				  roundCounter => roundCounter,
+				  RConCounter => RConCounter,
 				  roundDone => roundDone,
 				  genInEn => genInEn
 				  );
@@ -274,15 +307,24 @@ begin
 	genKeyIn <= keyIn when keyInEn = '1' else
 					store1Out;
 	keyOut0 <= store0Out when keyInEn = '0' else
+					genKeyOut when invTransDel = '1' else
 					keyIn;
 	storeIn <= genKeyOut; --keyIn when invF = '0' else
 					--genKeyOut;
-	genInEn <= keyInEn or RInEn;
-	storeCE <= (keyInEn or (invF and addrOutSel)) ;
+	genInEn <= keyInEn or RInEn or invTrans;
+	storeCE <= (keyInEn or (invF and addroutsel)) ;
 	keyOut1 <= genKeyOut when addrOutSel = '1' else
 					delayKeyOut;
 	genInv <= (inv and not invF)  or (invTrans and invF);
 	counterCE <= genDone and genCE;
 	ce <= (genCE and (not addroutsel)) or (genInEn and not genInv);
+	store0Addr <= not addr when invf = '1' else
+						addr;
+	store1InvEnClr <= '1' when genInv = '1' and (roundCounter = "1001") and counterce = '1' else
+							'0';
+	store1CEInv <= '1' when store1InvEn = '1' and ((roundCounter = "1001" and addroutsel = '1') or roundCounter = "1010") else
+						'0';
+	store1CE <= store1CEInv when (inv = '1') else
+					storeCEDel1;
 end Behavioral;
 

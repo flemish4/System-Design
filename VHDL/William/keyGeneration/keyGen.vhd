@@ -36,7 +36,7 @@ entity keyGen is
            RST : in  STD_LOGIC;
            addrOutSel : in  STD_LOGIC;
            addrOut : in  STD_LOGIC_VECTOR (3 downto 0);
-           roundCounter : in  STD_LOGIC_VECTOR (3 downto 0);
+           RConCounter : in  STD_LOGIC_VECTOR (3 downto 0);
            INV : in  STD_LOGIC;
            --Start : in  STD_LOGIC;
 			  CE : in STD_LOGIC;
@@ -94,7 +94,7 @@ component SUBBYTES is
 end component ;
 
 component RCon_gen2 is
-    Port ( roundCounter : in  STD_LOGIC_VECTOR (3 downto 0);
+    Port ( RConCounter : in  STD_LOGIC_VECTOR (3 downto 0);
            RCon : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
@@ -161,7 +161,7 @@ subByte : SUBBYTES
           YOUT   => SubOut );
 
 RCon_generator : RCon_gen2
-    Port map ( roundCounter => roundCounter ,
+    Port map ( RConCounter => RConCounter ,
            rcon => Rcon );
 			  
 QAddrDelayer : srl16_8 
