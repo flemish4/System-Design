@@ -76,10 +76,7 @@ end component;
 	component srl16_8 is
 		Port ( Q : out  STD_LOGIC_VECTOR (7 downto 0);
            Q15 : out  STD_LOGIC_VECTOR (7 downto 0);
-           A0 : in  STD_LOGIC;
-           A1 : in  STD_LOGIC;
-           A2 : in  STD_LOGIC;
-           A3 : in  STD_LOGIC;
+           addr : in STD_LOGIC_VECTOR (3 downto 0);
            CE : in  STD_LOGIC;
            clk : in  STD_LOGIC;
            D : in  STD_LOGIC_VECTOR (7 downto 0));
@@ -114,10 +111,7 @@ begin
 	-- insert a buffer here 
 	b_uffer : srl16_8
 			Port map( Q  => buff_1,
-				  A0 => adrs(0),
-				  A1 => adrs(1),
-				  A2 => adrs(2),
-				  A3 => adrs(3),
+				  addr => adrs,
 				  ce => clk_en,
 				  clk => clk,
 				  d => s_b );
@@ -137,7 +131,7 @@ begin
 				  byte_out => m_c,
 				  ce => mx_clmn_en,
 				  round10 => s1,
-				  inverse  => inv_en,
+				  inv  => inv_en,
 				  clk => clk,
 				  rst =>reset );
 				  
