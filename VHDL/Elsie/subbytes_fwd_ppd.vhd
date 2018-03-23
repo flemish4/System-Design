@@ -33,6 +33,7 @@ entity subbytes_fwd_ppd is
     Port ( d : in  STD_LOGIC_VECTOR (7 downto 0);
            q : out  STD_LOGIC_VECTOR (7 downto 0);
            clk : in  STD_LOGIC;
+           ce : in  STD_LOGIC;
            reset : in  STD_LOGIC);
 end subbytes_fwd_ppd;
 
@@ -77,7 +78,7 @@ begin
 				  
 	--Insert a flipflop here 
 	process(clk) begin 
-		if rising_edge(clk) then 
+		if rising_edge(clk) and ce = '1' then 
 			ff_1 <= dlt;
 		end if;
 	end process;
@@ -91,7 +92,7 @@ begin
 				  
 	--Implement a second flipflop here
 	process(clk) begin 
-		if rising_edge(clk) then 
+		if rising_edge(clk) and ce = '1' then 
 			ff_2 <= mu_inv;
 		end if;
 	end process;
@@ -105,7 +106,7 @@ begin
 			  
 	--Implement the last flipflop
 	process(clk) begin 
-		if rising_edge(clk) then 
+		if rising_edge(clk) and ce = '1' then 
 			ff_3 <= i_dlt_aff;
 		end if;
 	end process;

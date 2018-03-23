@@ -85,13 +85,13 @@ component addr_gen is
            addr : out  STD_LOGIC_VECTOR (3 downto 0));
 end component;
 
-component SUBBYTES is
-    port (CLK    : in  std_logic;
-			 ce 	  : in std_logic;
-          RESET  : in  std_logic;
-          XIN    : in  std_logic_vector( 7 downto 0 );
-          YOUT   : out std_logic_vector( 7 downto 0) );
-end component ;
+component subbytes_fwd_ppd is
+    Port ( d : in  STD_LOGIC_VECTOR (7 downto 0);
+           q : out  STD_LOGIC_VECTOR (7 downto 0);
+           clk : in  STD_LOGIC;
+           ce : in  STD_LOGIC;
+           reset : in  STD_LOGIC);
+end component;
 
 component RCon_gen2 is
     Port ( RConCounter : in  STD_LOGIC_VECTOR (3 downto 0);
@@ -153,12 +153,12 @@ addr_generator : addr_gen
            QAddrSel => QAddrSel,
            addr => addr );
 
-subByte : SUBBYTES 
+subByte : subbytes_fwd_ppd 
     port map (CLK    => clk,
            CE => CE,
           RESET  => rst,
-          XIN    => QAddrMux,
-          YOUT   => SubOut );
+          d    => QAddrMux,
+          q   => SubOut );
 
 RCon_generator : RCon_gen2
     Port map ( RConCounter => RConCounter ,

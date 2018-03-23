@@ -36,10 +36,15 @@ entity topController is
            stop : in  STD_LOGIC;
            clk : in  STD_LOGIC;
            rst : in  STD_LOGIC;
-           --addrOutSel : in  STD_LOGIC;
            keyOut1 : out  STD_LOGIC_VECTOR (7 downto 0);
-           keyOut0 : out  STD_LOGIC_VECTOR (7 downto 0)
-			  
+           keyOut0 : out  STD_LOGIC_VECTOR (7 downto 0);
+				dpS0 : out STD_LOGIC;
+				dpS1 : out STD_LOGIC;
+				dpAdrs : out STD_LOGIC_VECTOR (3 downto 0);
+				dpmxclmnen : out STD_LOGIC;
+				dpclken : out STD_LOGIC;
+				dpshftren : out STD_LOGIC;
+				dpsubbytesen : out STD_LOGIC
 			  );
 end topController;
 

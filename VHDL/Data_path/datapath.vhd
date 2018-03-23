@@ -37,10 +37,10 @@ entity datapath is
            s1 : in  STD_LOGIC;
            adrs : in  STD_LOGIC_VECTOR (3 downto 0);
            shft_r_en : in  STD_LOGIC;
+           subBytesEn : in  STD_LOGIC;
            inv_en : in  STD_LOGIC;
            mx_clmn_en : in  STD_LOGIC;
            q : out  STD_LOGIC_VECTOR (7 downto 0);
-           mx_clmn_signl : out  STD_LOGIC;
            clk : in  STD_LOGIC;
            clk_en : in  STD_LOGIC;
            reset : in  STD_LOGIC);
@@ -53,6 +53,7 @@ architecture Behavioral of datapath is
            q : out  STD_LOGIC_VECTOR (7 downto 0);
            s : in  STD_LOGIC;
            clk : in  STD_LOGIC;
+           ce : in  STD_LOGIC;
            reset : in  STD_LOGIC);
 end component;
 
@@ -96,15 +97,15 @@ begin
 	x_1 <= key0 xor data; 
 	
 	--implement the first multiplexer
-	mu_1 <= x_2 when (s0= '0' )
-	else 
-	  x_1;
+	mu_1 <= x_2 when (s0= '0' ) else 
+			  x_1;
 	  
 	-- Feed the output to the subbytes block
 	sub_b : subbytes_ppd
 			Port map( d => mu_1,
 				  q => s_b,
 				  s => inv_en,
+				  ce => subBytesEn,
 				  clk => clk,
 				  reset =>reset );
 				  
@@ -114,11 +115,11 @@ begin
 				  addr => adrs,
 				  ce => clk_en,
 				  clk => clk,
-				  d => s_b );
+				  d => m_c );
 	
 	-- Perform the shift rows operation 
 	shft_rw : shift_rows
-			Port map( bits_in  => buff_1,
+			Port map( bits_in  => s_b,
 				  bits_out => s_r,
 				  ce => shft_r_en,
 				  inv  => inv_en,
@@ -136,7 +137,7 @@ begin
 				  rst =>reset );
 				  
 	--mic columns output xor key
-	x_2 <= key1 xor m_c; 
+	x_2 <= key1 xor buff_1; 
 	
 	--set the output 
 	q <= x_2; 

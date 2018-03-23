@@ -34,6 +34,7 @@ entity subbytes_ppd is
            q : out  STD_LOGIC_VECTOR (7 downto 0);
            s : in  STD_LOGIC;
            clk : in  STD_LOGIC;
+           ce : in  STD_LOGIC;
            reset : in  STD_LOGIC);
 end subbytes_ppd;
 
@@ -108,7 +109,7 @@ begin
 	  
 	--Insert a flipflop here 
 	process(clk) begin 
-		if rising_edge(clk) then 
+		if rising_edge(clk) and ce = '1' then 
 			ff_1 <= mux_1;
 		end if;
 	end process;
@@ -122,7 +123,7 @@ begin
 				  
 	--Implement a second flipflop here
 	process(clk) begin 
-		if rising_edge(clk) then 
+		if rising_edge(clk) and ce = '1' then 
 			ff_2 <= mu_inv;
 		end if;
 	end process;
@@ -149,7 +150,7 @@ begin
 	  
 	--Implement the last flipflop
 	process(clk) begin 
-		if rising_edge(clk) then 
+		if rising_edge(clk) and ce = '1' then 
 			ff_3 <= mux_2;
 		end if;
 	end process;
