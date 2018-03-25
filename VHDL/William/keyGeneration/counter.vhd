@@ -45,14 +45,16 @@ entity counter is
            rst : in  STD_LOGIC;
            genInEn : in  STD_LOGIC;
            roundDone : out  STD_LOGIC;
+           counterVal : out  STD_LOGIC_VECTOR (3 downto 0);
            addr : out  STD_LOGIC_VECTOR (3 downto 0);
            RConCounter : out  STD_LOGIC_VECTOR (3 downto 0);
+           upCounter : out  STD_LOGIC_VECTOR (3 downto 0);
            roundCounter : out  STD_LOGIC_VECTOR (3 downto 0)
 			  );
 end counter;
 
 architecture Behavioral of counter is
-signal counterVal : STD_LOGIC_VECTOR (3 downto 0) := "0000";
+signal counterValR : STD_LOGIC_VECTOR (3 downto 0) := "0000";
 signal roundCounterR : STD_LOGIC_VECTOR (3 downto 0) := "0000";
 signal roundCounterTemp : STD_LOGIC_VECTOR (3 downto 0);
 signal RInEnF : STD_LOGIC;
@@ -66,11 +68,11 @@ begin
 	begin
 		if rising_edge(clk) then
 			if ce = '1' then
-				counterVal <= std_logic_vector(unsigned(counterVal) + 1);
-			elsif rst = '1' or counterVal = "1111" then
-				counterVal <= "0000";
+				counterValR <= std_logic_vector(unsigned(counterValR) + 1);
+			elsif rst = '1' or counterValR = "1111" then
+				counterValR <= "0000";
 			else
-				counterVal <= counterVal;
+				counterValR <= counterValR;
 			end if;
 		end if;
 	end process;
@@ -103,15 +105,16 @@ begin
 		end if;
 	end process;
 	
+	upCounter <= roundCounterR;
 	roundCounter <= roundCounterTemp;
 	roundCounterTemp <= roundCounterR when genInv = '0' else
 						 std_logic_vector(10-unsigned(roundCounterR));
 	RConCounter <= roundCounterR when genInv = '0' else
 						 std_logic_vector(9-unsigned(roundCounterR));
-	addr <= counterVal when (invf or genInv) = '1' else
-			not counterVal;
+	addr <= counterValR when (invf or genInv) = '1' else
+			not counterValR;
 
-	halfRoundDone <= '1' when counterVal = "1111" else 
+	halfRoundDone <= '1' when counterValR = "1111" else 
 							'0';
 	done32 <= genInvRoundCount and halfRoundDone;
 	roundDone <= '1' when roundCounterR = "1011" else
@@ -128,5 +131,6 @@ begin
 	invTrans <= invTransTemp;
 	genInvRoundCount <= roundCount ; -- xor genInv;
 	addrOutSel <= not genInvRoundCount;
+	counterVal <= counterValR;
 end Behavioral;
 

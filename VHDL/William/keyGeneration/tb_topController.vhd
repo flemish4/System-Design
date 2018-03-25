@@ -39,33 +39,51 @@ ARCHITECTURE behavior OF tb_topController IS
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT topController
-    PORT(
-         keyIn : IN  std_logic_vector(7 downto 0);
-         keyInEn : IN  std_logic;
-         inv : IN  std_logic;
-         stop : IN  std_logic;
-		  --addrOutSel : in  STD_LOGIC;
-         clk : IN  std_logic;
-         rst : IN  std_logic;
-         keyOut0 : OUT  std_logic_vector(7 downto 0);
-         keyOut1 : OUT  std_logic_vector(7 downto 0)
-        );
-    END COMPONENT;
+component topController is
+    Port ( 
+				keyIn : in  STD_LOGIC_VECTOR (7 downto 0);
+				inv : in  STD_LOGIC;
+				stop : in  STD_LOGIC;
+				keyInEn : in  STD_LOGIC;
+				dataInEn : in  STD_LOGIC;
+				keyInReady : out  STD_LOGIC;
+				dataInReady : out  STD_LOGIC;
+				clk : in  STD_LOGIC;
+				rst : in  STD_LOGIC;
+				keyOut1 : out  STD_LOGIC_VECTOR (7 downto 0);
+				keyOut0 : out  STD_LOGIC_VECTOR (7 downto 0);
+				dpS0 : out STD_LOGIC;
+				dpS1 : out STD_LOGIC;
+				dpAdrs : out STD_LOGIC_VECTOR (3 downto 0);
+				dpmxclmnen : out STD_LOGIC;
+				dpclken : out STD_LOGIC;
+				dpshftren : out STD_LOGIC;
+				dpsubbytesen : out STD_LOGIC
+			  );
+end component;
     
 
    --Inputs
    signal keyIn : std_logic_vector(7 downto 0) := (others => '0');
-   signal keyInEn : std_logic := '0';
    signal inv : std_logic := '0';
+   signal stop : std_logic := '0';
+   signal keyInEn : std_logic := '0';
+   signal dataInEn : std_logic := '0';
    signal clk : std_logic := '0';
    signal rst : std_logic := '0';
-   signal stop : std_logic := '0';
-   --signal addrOutSel : std_logic := '0';
 
  	--Outputs
-   signal keyOut0 : std_logic_vector(7 downto 0);
+   signal keyInReady : std_logic;
+   signal dataInReady : std_logic;
    signal keyOut1 : std_logic_vector(7 downto 0);
+   signal keyOut0 : std_logic_vector(7 downto 0);
+   signal dpS0 : std_logic;
+   signal dpS1 : std_logic;
+   signal dpAdrs : std_logic_vector(3 downto 0);
+   signal dpmxclmnen : std_logic;
+   signal dpclken : std_logic;
+   signal dpshftren : std_logic;
+   signal dpsubbytesen : std_logic;
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -94,13 +112,23 @@ BEGIN
 	-- Instantiate the Unit Under Test (UUT)
    uut: topController PORT MAP (
           keyIn => keyIn,
-          keyInEn => keyInEn,
           inv => inv,
           stop => stop,
+          keyInEn => keyInEn,
+          dataInEn => dataInEn,
+          keyInReady => keyInReady,
+          dataInReady => dataInReady,
           clk => clk,
           rst => rst,
+          keyOut1 => keyOut1,
           keyOut0 => keyOut0,
-          keyOut1 => keyOut1
+          dpS0 => dpS0,
+          dpS1 => dpS1,
+          dpAdrs => dpAdrs,
+          dpmxclmnen => dpmxclmnen,
+          dpclken => dpclken,
+          dpshftren => dpshftren,
+          dpsubbytesen => dpsubbytesen
         );
 
    -- Clock process definitions
@@ -134,12 +162,14 @@ BEGIN
       wait for CLK_period*10;	
 
 		keyInEn <= '1';
+		dataInEn <= '1';
 		--addrOutSel <= '1';
 		for i in 0 to 15 loop
 			keyIn <= testKey0(i);
 			wait for CLK_period;
 		end loop;
 		keyInEn <= '0';
+		dataInEn <= '0';
 		--addrOutSel <= '0';
 		wait for clk_period *16;
 		

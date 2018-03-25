@@ -37,7 +37,7 @@ entity AES_core is
            rst : in  STD_LOGIC;
            keyInEn : in  STD_LOGIC;
            dataInEn : in  STD_LOGIC;
-           keyInReady : out  STD_LOGIC_VECTOR (7 downto 0);
+           keyInReady : out  STD_LOGIC;
            dataInReady : out  STD_LOGIC;
            q : out  STD_LOGIC_VECTOR (7 downto 0);
            qReady : out  STD_LOGIC);
@@ -65,6 +65,9 @@ component topController is
            keyInEn : in  STD_LOGIC;
            inv : in  STD_LOGIC;
            stop : in  STD_LOGIC;
+           keyInReady : out  STD_LOGIC;
+           dataInReady : out  STD_LOGIC;
+           dataInEn : in  STD_LOGIC;
            clk : in  STD_LOGIC;
            rst : in  STD_LOGIC;
            keyOut1 : out  STD_LOGIC_VECTOR (7 downto 0);
@@ -98,6 +101,9 @@ controller : topController
            keyInEn => keyInEn ,
            inv  => inv ,
            stop => '0' ,
+           keyInReady  => keyInReady ,
+           dataInReady => dataInReady ,
+           dataInEn => dataInEn ,
            clk => clk ,
            rst => rst ,
            keyOut1 => key0 ,

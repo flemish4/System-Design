@@ -31,9 +31,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity topController is
     Port ( keyIn : in  STD_LOGIC_VECTOR (7 downto 0);
-           keyInEn : in  STD_LOGIC;
            inv : in  STD_LOGIC;
            stop : in  STD_LOGIC;
+           keyInEn : in  STD_LOGIC;
+           dataInEn : in  STD_LOGIC;
+           keyInReady : out  STD_LOGIC;
+           dataInReady : out  STD_LOGIC;
            clk : in  STD_LOGIC;
            rst : in  STD_LOGIC;
            keyOut1 : out  STD_LOGIC_VECTOR (7 downto 0);
@@ -139,6 +142,8 @@ component counter is
            addrOutSel : out  STD_LOGIC;
            RInEn : out  STD_LOGIC;
            roundDone : out  STD_LOGIC;
+           counterVal : out  STD_LOGIC_VECTOR (3 downto 0);
+           upCounter : out  STD_LOGIC_VECTOR (3 downto 0);
            addr : out  STD_LOGIC_VECTOR (3 downto 0);
            roundCounter : out  STD_LOGIC_VECTOR (3 downto 0);
            RConCounter : out  STD_LOGIC_VECTOR (3 downto 0)
@@ -168,6 +173,8 @@ signal store0Addr  : STD_LOGIC_VECTOR (3 downto 0) ;
 signal addr  : STD_LOGIC_VECTOR (3 downto 0) ;
 signal roundCounter  : STD_LOGIC_VECTOR (3 downto 0) ;
 signal RConCounter  : STD_LOGIC_VECTOR (3 downto 0) ;
+signal upCounter  : STD_LOGIC_VECTOR (3 downto 0) ;
+signal counterVal  : STD_LOGIC_VECTOR (3 downto 0) ;
 signal genDone : STD_LOGIC ;
 signal roundDone : STD_LOGIC ;
 signal RInEn : STD_LOGIC ;
@@ -187,7 +194,16 @@ signal store1InvEnClr : std_logic;
 signal store1InvEn : std_logic;
 signal store1CE : std_logic;
 signal store1CEInv : std_logic;
-
+signal keyInReadySet : std_logic;
+signal keyInReadyClr : std_logic;
+signal globalCEEnable : std_logic;
+signal dataInReadyTemp : std_logic;
+signal genCER : std_logic;
+signal globalCEClear : std_logic;
+signal dataReadyStart : std_logic;
+signal dpmxclmnenSet : std_logic;
+signal dpshtrenSet : std_logic;
+ 
 begin
 
 	invFGen0 : invF_gen
@@ -208,13 +224,33 @@ begin
 				  q => store1InvEn
 				  ); 
 				  
-	CEGen_0 : CEGen 
-		 Port map ( keyInEn => keyInEn ,
-				  stop => stop ,
-				  done => gendone ,
+--	CEGen_0 : CEGen 
+--		 Port map ( keyInEn => keyInEn ,
+--				  stop => stop ,
+--				  done => gendone ,
+--				  clk => clk ,
+--				  ce => genCE );
+	globalCEEnable <= dataInEn and dataInReadyTemp;
+	globalCEClear <= '1' when genDone = '1' and upCounter = "1010" else
+						  '0';
+	genCE <= genCER or globalCEEnable;
+	 CE_gen : FF
+		 Port map ( en => globalCEEnable,
+				  clr => globalCEClear ,
+				  rst => rst ,
 				  clk => clk ,
-				  ce => genCE );
+				  q => genCER
+				  ); 	
 				  
+--	dataReadyStartClear <= '1' when upCounter = "0001" else
+--						  '0';
+	 dataReadyStart_gen : FF
+		 Port map ( en => keyInReadySet,
+				  clr => roundDone ,
+				  rst => rst ,
+				  clk => clk ,
+				  q => dataReadyStart
+				  ); 	
 	storeCEDelayer0 : delay
 	generic map ( del => 16)
     Port map (   D => storeCE,
@@ -295,6 +331,8 @@ begin
 				  addrOutSel => addrOutSel,
 				  storeCEDel1 => storeCEDel1,
 				  roundCounter => roundCounter,
+				  counterVal => counterVal,
+				  upCounter => upCounter,
 				  RConCounter => RConCounter,
 				  roundDone => roundDone,
 				  genInEn => genInEn
@@ -331,5 +369,45 @@ begin
 						'0';
 	store1CE <= store1CEInv when (inv = '1') else
 					storeCEDel1;
+					
+	-- External Control signals
+	
+	dataInReadyTemp <= '1' when (((upCounter = "1011") or (upCounter = "0001" and dataReadyStart = '0') or (upCounter = "0000" )) and ((genInv = '1') or (inv = '0'))) else
+							 '0';
+	dataInReady <= dataInReadyTemp;
+	keyInReadySet <= not genCE;		
+	keyInReadyClr <= 	'1' when counterVal = x"F" else
+							'0';
+	keyInReadyFF : FF
+		Port map ( 	en => keyInReadySet,
+						clr => keyInReadyCLr ,
+						rst => rst ,
+						clk => clk ,
+						q => keyInReady
+						); 
+	
+	dpadrs <= "1101" when inv = '0' else
+			  "1001";
+	dpsubBytesEn <= genCE;
+	dpclkEn <= genCE;
+	dps0 <= dataInReadyTemp and dataInEn;
+	
+	dpshtrenSet <= '1' when counterVal = "0010" else '0';
+	dpshftrenGen : FF
+		Port map ( 	en => dpshtrenSet,
+						clr => '0' ,
+						rst => rst ,
+						clk => clk ,
+						q => dpshftren
+						); 
+	dpmxclmnenSet <= '1' when counterVal = "1100" else '0';
+	dpmxclmnenGen : FF
+		Port map ( 	en => dpmxclmnenSet,
+						clr => '0' ,
+						rst => rst ,
+						clk => clk ,
+						q => dpmxclmnen
+						); 
+	
 end Behavioral;
 
