@@ -29,13 +29,16 @@ use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VComponents.all;
 
-entity buffer8 is
-    Port ( clk, CE : in  STD_LOGIC;
-			  Q : out  STD_LOGIC_VECTOR (7 downto 0);
-           D : in  STD_LOGIC_VECTOR (7 downto 0));
-end buffer8;
+entity srl16_8  is
+    Port ( D : in  STD_LOGIC_VECTOR (7 downto 0);
+           CE : in  STD_LOGIC;
+           CLK : in  STD_LOGIC;
+           Addr : in  STD_LOGIC_VECTOR (3 downto 0);
+           Q : out  STD_LOGIC_VECTOR (7 downto 0);
+           Q15 : out  STD_LOGIC_VECTOR (7 downto 0));
+end srl16_8;
 
-architecture Behavioral of buffer8 is
+architecture Behavioral of srl16_8 is
 
 begin
 	GEN_SRLS:
@@ -45,11 +48,11 @@ begin
 			INIT => X"0000")
 		port map (
 			Q => Q(i), -- SRL data output
-			--Q15 => Q15(i), -- Carry output (connect to next SRL)
-			A0 => '0', -- Select[0] input
-			A1 => '0', -- Select[1] input
-			A2 => '0', -- Select[2] input
-			A3 => '0', -- Select[3] input
+			Q15 => Q15(i), -- Carry output (connect to next SRL)
+			A0 => Addr(0), -- Select[0] input
+			A1 => Addr(1), -- Select[1] input
+			A2 => Addr(2), -- Select[2] input
+			A3 => Addr(3), -- Select[3] input
 			CE => CE, -- Clock enable input
 			CLK => CLK, -- Clock input
 			D => D(i) -- SRL data input

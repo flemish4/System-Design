@@ -137,7 +137,7 @@ BEGIN
 		
       rst <= '1';
 		inv <= '0';
-		round10 <= '1';
+		round10 <= '0';
   		wait for clk_period*2;	
  		rst <= '0';
 		
@@ -150,12 +150,18 @@ BEGIN
 			wait for clk_period;
 		end loop;
 		
---		round10 <= '1';
---		
---		for i in 0 to 15 loop
---			byte_in <= state_in_encode(i);
---			wait for clk_period;
---		end loop;
+		
+		for i in 0 to 7 loop
+			byte_in <= state_in_encode(i);
+			wait for clk_period;
+		end loop;
+		
+		round10 <= '1';
+
+		for i in 8 to 15 loop
+			byte_in <= state_in_encode(i);
+			wait for clk_period;
+		end loop;
 		byte_in <= x"00";
 
       wait;

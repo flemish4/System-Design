@@ -55,10 +55,13 @@ component inverse_mul is
            Byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
-component buffer8 is
-    Port ( clk, CE : in  STD_LOGIC;
-           D : in  STD_LOGIC_VECTOR (7 downto 0);
-           Q : out  STD_LOGIC_VECTOR (7 downto 0));
+component srl16_8  is
+    Port ( D : in  STD_LOGIC_VECTOR (7 downto 0);
+           CE : in  STD_LOGIC;
+           CLK : in  STD_LOGIC;
+           Addr : in  STD_LOGIC_VECTOR (3 downto 0);
+           Q : out  STD_LOGIC_VECTOR (7 downto 0);
+           Q15 : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
 component mux2_8bit 
@@ -83,6 +86,8 @@ signal s8 : STD_LOGIC_VECTOR (7 downto 0);
 signal s9 : STD_LOGIC_VECTOR (7 downto 0);
 signal s10 : STD_LOGIC_VECTOR (7 downto 0);
 signal s11 : STD_LOGIC_VECTOR (7 downto 0);
+signal byte_out_0 : STD_LOGIC_VECTOR (7 downto 0);
+
 
 begin
 
@@ -114,74 +119,29 @@ begin
 				byte_out => s2
 				);
 				
-	buffer_1: buffer8
+	buffer_1: srl16_8 
 	port map(clk => clk,
 				CE => CE,
 				D => byte_in,
-				Q => s3
-				);
-				
-	buffer_2: buffer8
-	port map(clk => clk,
-				CE => CE,
-				D => s3,
-				Q => s4
-				);
-				
-	buffer_3: buffer8
-	port map(clk => clk,
-				CE => CE,
-				D => s4,
-				Q => s5
+				Q => s3,
+				addr => "1000"
 				);
 
-	buffer_4: buffer8
-	port map(clk => clk,
-				CE => CE,
-				D => s5,
-				Q => s6
-				);
-				
-	buffer_5: buffer8
-	port map(clk => clk,
-				CE => CE,
-				D => s6,
-				Q => s7
-				);
-				
-	buffer_6: buffer8
-	port map(clk => clk,
-				CE => CE,
-				D => s7,
-				Q => s8
-				);					
-	buffer_7: buffer8
-	port map(clk => clk,
-				CE => CE,
-				D => s8,
-				Q => s9
-				);
-				
-	buffer_8: buffer8
-	port map(clk => clk,
-				CE => CE,
-				D => s9,
-				Q => s10
-				);
-				
-	buffer_9: buffer8
-	port map(clk => clk,
-				CE => CE,
-				D => s10,
-				Q => s11
-				);				
 	mux0 : mux2_8bit
 	port map(A => s2,
-				B => s11,
+				B => s3,
 				SEL => round10,
-				X => byte_out
+				X => byte_out_0
 				);
 				
+	byte_out <= byte_out_0;
+--	process (clk)
+--         begin
+--             if rising_edge(clk) then 
+--                   	byte_out <= byte_out_0;					
+--            end if;
+--    end process;
+	
 	load_count <= load_0;
 	
 end Behavioral;
