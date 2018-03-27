@@ -44,21 +44,45 @@ component control is
 end component;
 
 component MixColumns 
-    Port ( clk, rst, CE, EN, load, round10 : in  STD_LOGIC;
+    Port ( clk, rst, CE, EN, load : in  STD_LOGIC;
 			  byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
 component inverse_mul is
-    Port ( clk, rst, inv, CE, EN, load, round10 : in  STD_LOGIC;
+    Port ( clk, rst, inv, CE, EN, load : in  STD_LOGIC;
            Byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            Byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
+end component;
+
+component buffer8 is
+    Port ( clk, CE : in  STD_LOGIC;
+           D : in  STD_LOGIC_VECTOR (7 downto 0);
+           Q : out  STD_LOGIC_VECTOR (7 downto 0));
+end component;
+
+component mux2_8bit 
+    Port ( A : in  STD_LOGIC_VECTOR (7 downto 0);
+           B : in  STD_LOGIC_VECTOR (7 downto 0);
+           SEL : in  STD_LOGIC;
+           X : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
 signal EN_0 : STD_LOGIC;
 signal load_0: STD_LOGIC;
 
 signal s1 : STD_LOGIC_VECTOR (7 downto 0);
+signal s2 : STD_LOGIC_VECTOR (7 downto 0);
+signal s3 : STD_LOGIC_VECTOR (7 downto 0);
+
+signal s4 : STD_LOGIC_VECTOR (7 downto 0);
+signal s5 : STD_LOGIC_VECTOR (7 downto 0);
+signal s6 : STD_LOGIC_VECTOR (7 downto 0);
+signal s7 : STD_LOGIC_VECTOR (7 downto 0);
+signal s8 : STD_LOGIC_VECTOR (7 downto 0);
+signal s9 : STD_LOGIC_VECTOR (7 downto 0);
+signal s10 : STD_LOGIC_VECTOR (7 downto 0);
+signal s11 : STD_LOGIC_VECTOR (7 downto 0);
 
 begin
 
@@ -76,7 +100,6 @@ begin
 				CE => CE,
 				EN => EN_0,
 				load => load_0,
-				round10 => round10,
 				byte_in => byte_in,
 				byte_out => s1
 				);
@@ -87,9 +110,76 @@ begin
 				CE => CE,
 				EN => EN_0,
 				load => load_0,
-				round10 => round10,
 				byte_in => s1,
-				byte_out => byte_out
+				byte_out => s2
+				);
+				
+	buffer_1: buffer8
+	port map(clk => clk,
+				CE => CE,
+				D => byte_in,
+				Q => s3
+				);
+				
+	buffer_2: buffer8
+	port map(clk => clk,
+				CE => CE,
+				D => s3,
+				Q => s4
+				);
+				
+	buffer_3: buffer8
+	port map(clk => clk,
+				CE => CE,
+				D => s4,
+				Q => s5
+				);
+
+	buffer_4: buffer8
+	port map(clk => clk,
+				CE => CE,
+				D => s5,
+				Q => s6
+				);
+				
+	buffer_5: buffer8
+	port map(clk => clk,
+				CE => CE,
+				D => s6,
+				Q => s7
+				);
+				
+	buffer_6: buffer8
+	port map(clk => clk,
+				CE => CE,
+				D => s7,
+				Q => s8
+				);					
+	buffer_7: buffer8
+	port map(clk => clk,
+				CE => CE,
+				D => s8,
+				Q => s9
+				);
+				
+	buffer_8: buffer8
+	port map(clk => clk,
+				CE => CE,
+				D => s9,
+				Q => s10
+				);
+				
+	buffer_9: buffer8
+	port map(clk => clk,
+				CE => CE,
+				D => s10,
+				Q => s11
+				);				
+	mux0 : mux2_8bit
+	port map(A => s2,
+				B => s11,
+				SEL => round10,
+				X => byte_out
 				);
 				
 	load_count <= load_0;
