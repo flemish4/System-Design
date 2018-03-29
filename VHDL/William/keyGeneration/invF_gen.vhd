@@ -53,6 +53,6 @@ begin
 		end if;
 	end process;
 
-	invF <= (en or invFR) and not clr;
+	invF <= (en or invFR) and not clr and inv;
 end Behavioral;
 

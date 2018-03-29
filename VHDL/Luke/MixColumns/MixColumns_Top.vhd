@@ -54,11 +54,22 @@ component inverse_mul is
            Byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            Byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
-
+	
+component SRL16_8
+	port( Q		: out  STD_LOGIC_VECTOR (7 downto 0);
+			Q15 	: out  STD_LOGIC_VECTOR (7 downto 0);
+			addr 	: in  STD_LOGIC_VECTOR (3 downto 0);
+			CE 	: in  STD_LOGIC;
+			clk 	: in  STD_LOGIC;
+			D 		: in  STD_LOGIC_VECTOR (7 downto 0));
+end component;
+		
 signal EN_0 : STD_LOGIC;
 signal load_0: STD_LOGIC;
 
 signal s1 : STD_LOGIC_VECTOR (7 downto 0);
+signal mixOut : STD_LOGIC_VECTOR (7 downto 0);
+signal bypassOut : STD_LOGIC_VECTOR (7 downto 0);
 
 begin
 
@@ -76,7 +87,7 @@ begin
 				CE => CE,
 				EN => EN_0,
 				load => load_0,
-				round10 => round10,
+				round10 => '0',
 				byte_in => byte_in,
 				byte_out => s1
 				);
@@ -87,12 +98,23 @@ begin
 				CE => CE,
 				EN => EN_0,
 				load => load_0,
-				round10 => round10,
+				round10 => '0',
 				byte_in => s1,
-				byte_out => byte_out
+				byte_out => mixOut
 				);
 				
+	bypassReg: SRL16_8
+		port map(
+			Q		=> bypassOut,
+			--Q15	=>	Q15x,
+			addr	=>	"1000",
+			CE		=>	ce,
+			clk 	=>	clk,
+			D 		=>	byte_in);
+			
 	load_count <= load_0;
 	
+	byte_out <= mixOut when round10 = '0' else
+					bypassOut;
 end Behavioral;
 

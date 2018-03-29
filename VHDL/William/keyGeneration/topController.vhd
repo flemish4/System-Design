@@ -43,10 +43,12 @@ entity topController is
            keyOut0 : out  STD_LOGIC_VECTOR (7 downto 0);
 				dpS0 : out STD_LOGIC;
 				dpS1 : out STD_LOGIC;
+				dpS2 : out STD_LOGIC;
 				dpAdrs : out STD_LOGIC_VECTOR (3 downto 0);
 				dpmxclmnen : out STD_LOGIC;
 				dpclken : out STD_LOGIC;
 				dpshftren : out STD_LOGIC;
+				dpqReady : out STD_LOGIC;
 				dpsubbytesen : out STD_LOGIC
 			  );
 end topController;
@@ -200,9 +202,15 @@ signal globalCEEnable : std_logic;
 signal dataInReadyTemp : std_logic;
 signal genCER : std_logic;
 signal globalCEClear : std_logic;
-signal dataReadyStart : std_logic;
 signal dpmxclmnenSet : std_logic;
 signal dpshtrenSet : std_logic;
+signal dps2Set : std_logic;
+signal dps2Clr : std_logic;
+signal keyInReadyInv : std_logic;
+signal dataInReadySet : std_logic;
+signal dataInReadyClr : std_logic;
+signal dpshftrenR : std_logic;
+signal dpmxclmnenR : std_logic;
  
 begin
 
@@ -230,9 +238,8 @@ begin
 --				  done => gendone ,
 --				  clk => clk ,
 --				  ce => genCE );
-	globalCEEnable <= dataInEn and dataInReadyTemp;
-	globalCEClear <= '1' when genDone = '1' and upCounter = "1010" else
-						  '0';
+	globalCEEnable <= (dataInEn and dataInReadyTemp) or (keyInEn and not keyInReadyInv);
+	globalCEClear <= '0' ; -- '1' when (upCounter = "1001" and counterVal = "1111" and ce = '1') else '0';
 	genCE <= genCER or globalCEEnable;
 	 CE_gen : FF
 		 Port map ( en => globalCEEnable,
@@ -242,15 +249,7 @@ begin
 				  q => genCER
 				  ); 	
 				  
---	dataReadyStartClear <= '1' when upCounter = "0001" else
---						  '0';
-	 dataReadyStart_gen : FF
-		 Port map ( en => keyInReadySet,
-				  clr => roundDone ,
-				  rst => rst ,
-				  clk => clk ,
-				  q => dataReadyStart
-				  ); 	
+
 	storeCEDelayer0 : delay
 	generic map ( del => 16)
     Port map (   D => storeCE,
@@ -358,7 +357,7 @@ begin
 	storeCE <= (keyInEn or (invF and addroutsel)) ;
 	keyOut1 <= genKeyOut when addrOutSel = '1' else
 					delayKeyOut;
-	genInv <= (inv and not invF)  or (invTrans and invF);
+	genInv <= (inv and not invF and gence)  or (invTrans and invF);
 	counterCE <= genDone and genCE;
 	ce <= (genCE and (not addroutsel)) or (genInEn and not genInv);
 	store0Addr <= not addr when invf = '1' else
@@ -372,42 +371,70 @@ begin
 					
 	-- External Control signals
 	
-	dataInReadyTemp <= '1' when (((upCounter = "1011") or (upCounter = "0001" and dataReadyStart = '0') or (upCounter = "0000" )) and ((genInv = '1') or (inv = '0'))) else
-							 '0';
+	--dataInReadyTemp <= '1' when (((upCounter = "1011") or (upCounter = "0001" and dataReadyStart = '0') or (upCounter = "0000" )) and ((genInv = '1') or (inv = '0'))) else
+	--						 '0';
 	dataInReady <= dataInReadyTemp;
+	
+	--dataInReadySet <= '1' when (((genCE = '0' or upCounter = "1001") and inv = '0') or (genInv = '1' and upCounter = "1010" and counterVal = "1110" and ce = '1'))  else '0';
+	dataInReadySet <= '1' when (inv = '0' and (genCE = '0' or (upCounter = "1001" and counterVal = "1110" and ce = '1'))) or (( ((upCounter = "1010" and invf = '1') or (upCounter = "1001" and invf = '0')) and genInv = '1' and counterVal = "1110" and ce = '1')) else '0';
+	dataInReadyClr <= '1' when (((((upCounter = "0000" or upCounter = "1010") and counterVal = "1111")) and inv = '0') or ((upCounter = "0000" or (upCounter = "1010" and invF = '0')) and counterVal = "1111" and inv = '1')) and ce = '1' and addrOutSel = '0' else '0';
+	dataInReadyFF : FF
+		Port map ( 	en => dataInReadySet,
+						clr => dataInReadyClr ,
+						rst => rst ,
+						clk => clk ,
+						q => dataInReadyTemp
+						);
+						
 	keyInReadySet <= not genCE;		
 	keyInReadyClr <= 	'1' when counterVal = x"F" else
 							'0';
-	keyInReadyFF : FF
-		Port map ( 	en => keyInReadySet,
-						clr => keyInReadyCLr ,
+	keyInReadyInvFF : FF
+		Port map ( 	en => keyInReadyCLr,
+						clr => '0' ,
 						rst => rst ,
 						clk => clk ,
-						q => keyInReady
+						q => keyInReadyInv
 						); 
+	keyInReady <= not keyInReadyInv;
 	
-	dpadrs <= "1101" when inv = '0' else
-			  "1001";
+	dpadrs <= "0111"; --"1101" when inv = '0' else
+			  --"1001";
 	dpsubBytesEn <= genCE;
 	dpclkEn <= genCE;
-	dps0 <= dataInReadyTemp and dataInEn;
-	
-	dpshtrenSet <= '1' when counterVal = "0010" else '0';
+	dps0 <= (not inv) and dataInReadyTemp and dataInEn;
+	dpshtrenSet <= '1' when (counterVal = "0010" and inv = '0') or (counterVal = "0011" and inv = '1') else '0';
 	dpshftrenGen : FF
 		Port map ( 	en => dpshtrenSet,
 						clr => '0' ,
 						rst => rst ,
 						clk => clk ,
-						q => dpshftren
+						q => dpshftrenR
 						); 
-	dpmxclmnenSet <= '1' when counterVal = "1100" else '0';
+	dpshftren <= dpshftrenR and genCE;
+	
+	dpmxclmnenSet <= '1' when (counterVal = "1101" and inv = '0') or (counterVal = "0010" and inv = '1') else '0';
 	dpmxclmnenGen : FF
 		Port map ( 	en => dpmxclmnenSet,
 						clr => '0' ,
 						rst => rst ,
 						clk => clk ,
-						q => dpmxclmnen
+						q => dpmxclmnenR
 						); 
+	dpmxclmnen <= dpmxclmnenR and gence;
+	-- dps2 <= '1' when upCounter = "1010" else '0';
 	
+	dps2Set <= '1' when (upCounter = "1001" and counterVal = "0111" and ce = '1' and inv = '0') or ( inv = '1' and (upcounter = "0000" or (upCounter = "1010" and invf = '0')) and counterVal = "1000") else '0';
+	dps2Clr <= '1' when (upCounter = "1010" and counterVal = "0111" and ce = '1' and inv = '0') or ( inv = '1' and upcounter = "0001" and counterVal = "1000") else '0';
+	dps2FF : FF
+		Port map ( 	en => dps2Set,
+						clr => dps2Clr ,
+						rst => rst ,
+						clk => clk ,
+						q => dps2
+						);
+						
+	dpS1 <= inv and dataInReadyTemp and dataInEn;
+	dpqReady <= dataInEn;
 end Behavioral;
 

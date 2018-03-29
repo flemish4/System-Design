@@ -50,12 +50,14 @@ component datapath is
            key1 : in  STD_LOGIC_VECTOR (7 downto 0);
            s0 : in  STD_LOGIC;
            s1 : in  STD_LOGIC;
+           s2 : in  STD_LOGIC;
            adrs : in  STD_LOGIC_VECTOR (3 downto 0);
            shft_r_en : in  STD_LOGIC;
            subBytesEn : in  STD_LOGIC;
            inv_en : in  STD_LOGIC;
            mx_clmn_en : in  STD_LOGIC;
            q : out  STD_LOGIC_VECTOR (7 downto 0);
+           inv : in  STD_LOGIC;
            clk : in  STD_LOGIC;
            clk_en : in  STD_LOGIC;
            reset : in  STD_LOGIC);
@@ -74,10 +76,12 @@ component topController is
            keyOut0 : out  STD_LOGIC_VECTOR (7 downto 0);
 				dpS0 : out STD_LOGIC;
 				dpS1 : out STD_LOGIC;
+				dpS2 : out  STD_LOGIC;
 				dpAdrs : out STD_LOGIC_VECTOR (3 downto 0);
 				dpmxclmnen : out STD_LOGIC;
 				dpclken : out STD_LOGIC;
 				dpshftren : out STD_LOGIC;
+				dpqReady : out STD_LOGIC;
 				dpsubbytesen : out STD_LOGIC
 			  );
 end component;
@@ -86,6 +90,7 @@ signal key0 : STD_LOGIC_VECTOR (7 downto 0);
 signal key1 : STD_LOGIC_VECTOR (7 downto 0);
 signal dpS0 : STD_LOGIC;
 signal dpS1 : STD_LOGIC;
+signal dpS2 : STD_LOGIC;
 signal dpAdrs : STD_LOGIC_VECTOR (3 downto 0);
 signal dpmxclmnen : STD_LOGIC;
 signal dpclken : STD_LOGIC;
@@ -106,13 +111,15 @@ controller : topController
            dataInEn => dataInEn ,
            clk => clk ,
            rst => rst ,
-           keyOut1 => key0 ,
-           keyOut0 => key1 ,
+           keyOut1 => key1 ,
+           keyOut0 => key0 ,
 			  dpS0 => dpS0,
 			  dpS1 => dpS1,
+			  dpS2 => dpS2,
 			  dpAdrs => dpAdrs,
 			  dpmxclmnen => dpmxclmnen,
 			  dpshftren => dpshftren,
+			  dpqReady => qReady,
 			  dpsubbytesen => dpsubbytesen,
 			  dpclken => dpclken
 			  );
@@ -123,12 +130,14 @@ dataPath0 : datapath
            key1 => key1 ,
            s0 => dpS0 ,
            s1 => dpS1 ,
+           s2 => dpS2 ,
            adrs => dpAdrs ,
            shft_r_en => dpshftren ,
            subBytesEn => dpsubbytesen ,
            inv_en => inv ,
            mx_clmn_en  => dpmxclmnen ,
            q => q ,
+           inv => inv ,
            clk => clk ,
            clk_en => dpclken ,
            reset => rst 

@@ -81,6 +81,26 @@ end component;
 			14 => x"77", 
 			15 => x"6F" 
 		);
+		
+		constant testData1  : vectype := (															
+
+			0 => x"29", 
+			1 => x"C3", 
+			2 => x"50", 
+			3 => x"5F", 
+			4 => x"57", 
+			5 => x"14", 
+			6 => x"20", 
+			7 => x"F6", 
+			8 => x"40", 
+			9 => x"22", 
+			10 => x"99", 
+			11 => x"B3", 
+			12 => x"1A", 
+			13 => x"02", 
+			14 => x"D7", 
+			15 => x"3A" 
+		);
   BEGIN
 
   -- Component Instantiation
@@ -112,8 +132,12 @@ core0 : AES_core
   --  Test Bench Statements
      key : PROCESS
      BEGIN
-
-        wait for 100 ns; -- wait until global set/reset completes
+			inv <= '0'; ----- optional 
+			--rst <= '1'; 
+			wait for 20 ns;
+			--rst <= '0';
+			wait for 20 ns;
+		  wait for 60 ns; -- wait until global set/reset completes
 			wait for clk_period * 0.50001;
 			
 			while True loop
@@ -145,11 +169,19 @@ core0 : AES_core
 				if dataInReady = '1' then
 					dataInEn <= '1';
 					for j in 0 to 15 loop
-						dataIn <= testData0(j);
+						if inv = '0' then
+							dataIn <= testData0(j); --- testData0 for forward
+						else 
+							dataIn <= testData1(j); --- testData0 for forward
+						end if;	
 						wait for CLK_period;
 					end loop;
 					for j in 0 to 15 loop
-						dataIn <= testData0(j);
+						if inv = '0' then
+							dataIn <= testData0(j); --- testData0 for forward
+						else 
+							dataIn <= testData1(j); --- testData0 for forward
+						end if;	
 						wait for CLK_period;
 					end loop;
 					dataInEn <= '0';

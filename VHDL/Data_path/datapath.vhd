@@ -35,12 +35,14 @@ entity datapath is
            key1 : in  STD_LOGIC_VECTOR (7 downto 0);
            s0 : in  STD_LOGIC;
            s1 : in  STD_LOGIC;
+           s2 : in  STD_LOGIC;
            adrs : in  STD_LOGIC_VECTOR (3 downto 0);
            shft_r_en : in  STD_LOGIC;
            subBytesEn : in  STD_LOGIC;
            inv_en : in  STD_LOGIC;
            mx_clmn_en : in  STD_LOGIC;
            q : out  STD_LOGIC_VECTOR (7 downto 0);
+           inv : in  STD_LOGIC;
            clk : in  STD_LOGIC;
            clk_en : in  STD_LOGIC;
            reset : in  STD_LOGIC);
@@ -91,14 +93,18 @@ end component;
 	signal s_r : STD_LOGIC_VECTOR (7 downto 0); -- output from the shift row block
 	signal m_c : STD_LOGIC_VECTOR (7 downto 0); -- output from the mix columns block
 	signal x_2 : STD_LOGIC_VECTOR (7 downto 0); -- output from m_c xor key which is fed back into the first multiplexer
+	signal mix_in : STD_LOGIC_VECTOR (7 downto 0); -- input to mix columns - can be x_1 or s_r
+	signal mix_in_inv : STD_LOGIC_VECTOR (7 downto 0); -- input to mix columns - can be x_1 or s_r
+	signal keyXorIn : STD_LOGIC_VECTOR (7 downto 0); -- input to mix columns - can be x_1 or s_r
 	
 begin
 	--data xor key
 	x_1 <= key0 xor data; 
 	
 	--implement the first multiplexer
-	mu_1 <= x_2 when (s0= '0' ) else 
-			  x_1;
+	mu_1 <= x_2 when (s0 = '0' and inv = '0' ) else 
+			  x_1 when (s0 = '1' and inv = '0') else
+			  buff_1;
 	  
 	-- Feed the output to the subbytes block
 	sub_b : subbytes_ppd
@@ -128,19 +134,27 @@ begin
 				  
 	-- Perform the mix column operation 
 	mx_clmns : MixColumns_Top
-			Port map( byte_in  => s_r,
+			Port map( byte_in  => mix_in,
 				  byte_out => m_c,
 				  ce => mx_clmn_en,
-				  round10 => s1,
+				  round10 => s2,
 				  inv  => inv_en,
 				  clk => clk,
 				  rst =>reset );
 				  
+   -- mux input to mix columns for inverse
+	mix_in_inv <= x_2 when s1 = '0' else
+				 x_1;
+   mix_in <= s_r when inv = '0' else
+				 mix_in_inv;
 	--mic columns output xor key
-	x_2 <= key1 xor buff_1; 
+	keyXorIn <= buff_1 when inv = '0' else
+					s_r;
+	x_2 <= key1 xor keyXorIn;
 	
 	--set the output 
-	q <= x_2; 
+	q <= x_2 when inv_en = '0' else 
+			s_r;
 			
 
 end Behavioral;

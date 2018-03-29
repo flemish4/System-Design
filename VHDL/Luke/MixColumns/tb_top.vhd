@@ -72,24 +72,42 @@ ARCHITECTURE behavior OF tb_top IS
 	type my_type is array (0 to 15) of std_logic_vector (7 downto 0);
 	-- state_in
 	constant state_in_encode  : my_type := (
-	0 => x"49", 		
-	1 => x"db", 
-	2 => x"87", 
-	3 => x"3b", 
-	4 => x"45", 
-	5 => x"39", 
-	6 => x"53", 
-	7 => x"89", 
-	8 => x"7f", 
-	9 => x"02", 
-	10 => x"d2", 
+	0 => x"d4", 		
+	1 => x"bf", 
+	2 => x"5d", 
+	3 => x"30", 
+	4 => x"e0", 
+	5 => x"b4", 
+	6 => x"52", 
+	7 => x"ae", 
+	8 => x"b8", 
+	9 => x"41", 
+	10 => x"11", 
 	11 => x"f1", 
-	12 => x"77", 
-	13 => x"de", 
-	14 => x"96", 
-	15 => x"1a");
+	12 => x"1e", 
+	13 => x"27", 
+	14 => x"98", 
+	15 => x"e5");
+	constant state_in_encode1  : my_type := ( 															
+
+	0 => x"63", 		
+	1 => x"2F", 
+	2 => x"AF", 
+	3 => x"A2", 
+	4 => x"EB", 
+	5 => x"93", 
+	6 => x"C7", 
+	7 => x"20", 
+	8 => x"9F", 
+	9 => x"92", 
+	10 => x"AB", 
+	11 => x"CB", 
+	12 => x"A0", 
+	13 => x"C0", 
+	14 => x"30", 
+	15 => x"2B");
 	
-	constant state_in_decode  : my_type := (
+	constant state_in_decode  : my_type := ( 
 	0 => x"58", 		
 	1 => x"4d", 
 	2 => x"ca", 
@@ -106,6 +124,24 @@ ARCHITECTURE behavior OF tb_top IS
 	13 => x"6b", 
 	14 => x"b0", 
 	15 => x"e5");
+	
+	constant state_in_decode1  : my_type := (
+	0 => x"B6", 		
+	1 => x"84", 
+	2 => x"34", 
+	3 => x"E8", 
+	4 => x"E7", 
+	5 => x"88", 
+	6 => x"60", 
+	7 => x"D7", 
+	8 => x"51", 
+	9 => x"98", 
+	10 => x"66", 
+	11 => x"70", 
+	12 => x"8C", 
+	13 => x"CA", 
+	14 => x"FB", 
+	15 => x"51");
  
 BEGIN
  
@@ -137,17 +173,17 @@ BEGIN
 		
       rst <= '1';
 		inv <= '0';
-		round10 <= '1';
+		round10 <= '0';
   		wait for clk_period*2;	
  		rst <= '0';
 		
 		
-		wait for clk_period*0.5;
+		wait for clk_period*0.501;
 		CE <= '1';
       -- insert stimulus here 
-		
+		wait for clk_period;
 		for i in 0 to 15 loop
-			byte_in <= state_in_encode(i);
+			byte_in <= state_in_encode1(i);
 			wait for clk_period;
 		end loop;
 
