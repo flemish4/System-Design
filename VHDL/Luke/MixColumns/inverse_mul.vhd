@@ -30,7 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity inverse_mul is
-    Port ( clk, rst, inv, CE, EN, load, round10 : in  STD_LOGIC;
+    Port ( clk, rst, inv, CE, EN, load : in  STD_LOGIC;
            Byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            Byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end inverse_mul;
@@ -41,11 +41,6 @@ component mul4
 	Port(x : in  STD_LOGIC_VECTOR (7 downto 0);
         x4: out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
-
---component mul5
---	Port(x : in  STD_LOGIC_VECTOR (7 downto 0);
---        x5: out  STD_LOGIC_VECTOR (7 downto 0));
---end component;
 
 component register_Nbit
 	 Generic ( N : positive );
@@ -81,33 +76,22 @@ signal s15 : STD_LOGIC_VECTOR (7 downto 0);
 signal s16 : STD_LOGIC_VECTOR (7 downto 0);
 signal s17 : STD_LOGIC_VECTOR (7 downto 0);
 signal s18 : STD_LOGIC_VECTOR (7 downto 0);
---signal s19 : STD_LOGIC_VECTOR (7 downto 0);
 
 signal s20 : STD_LOGIC_VECTOR (7 downto 0);
 signal s21 : STD_LOGIC_VECTOR (7 downto 0);
 signal s22 : STD_LOGIC_VECTOR (7 downto 0);
 signal s23 : STD_LOGIC_VECTOR (7 downto 0);
 
-
-
 signal EN_0 : STD_LOGIC;
 signal load_0 : STD_LOGIC;
 signal load_2 : STD_LOGIC;
 signal load_1 : STD_LOGIC;
-signal round10_inv : STD_LOGIC;
-
 
 begin
 
 	EN_0 <= EN;
-	round10_inv <= not round10;
-	load_1 <= inv and round10_inv;
-	load_0 <= load and inv and round10_inv;
-	load_2 <= load and inv and round10_inv;
-	
---	if (round10 = 0) and (inv = 1) then
---		load_1 <= '1';
---	end if;
+	load_0 <= load and inv;
+	load_1 <= inv;
 	
 	mul4_0 : mul4
 	port map(x => byte_in,
@@ -176,7 +160,7 @@ begin
 	mux2 : mux2_8bit
 	port map(A => s18,
 				B => s4,
-				SEL => load_2,
+				SEL => load_0,
 				X => byte_out
 				);
 

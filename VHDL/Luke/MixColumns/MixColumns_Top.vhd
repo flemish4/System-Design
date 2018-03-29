@@ -44,32 +44,40 @@ component control is
 end component;
 
 component MixColumns 
-    Port ( clk, rst, CE, EN, load, round10 : in  STD_LOGIC;
+    Port ( clk, rst, CE, EN, load : in  STD_LOGIC;
 			  byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
 component inverse_mul is
-    Port ( clk, rst, inv, CE, EN, load, round10 : in  STD_LOGIC;
+    Port ( clk, rst, inv, CE, EN, load : in  STD_LOGIC;
            Byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            Byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
-	
-component SRL16_8
-	port( Q		: out  STD_LOGIC_VECTOR (7 downto 0);
-			Q15 	: out  STD_LOGIC_VECTOR (7 downto 0);
-			addr 	: in  STD_LOGIC_VECTOR (3 downto 0);
-			CE 	: in  STD_LOGIC;
-			clk 	: in  STD_LOGIC;
-			D 		: in  STD_LOGIC_VECTOR (7 downto 0));
+
+component srl16_8  is
+    Port ( D : in  STD_LOGIC_VECTOR (7 downto 0);
+           CE : in  STD_LOGIC;
+           CLK : in  STD_LOGIC;
+           Addr : in  STD_LOGIC_VECTOR (3 downto 0);
+           Q : out  STD_LOGIC_VECTOR (7 downto 0);
+           Q15 : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
-		
+
+component mux2_8bit 
+    Port ( A : in  STD_LOGIC_VECTOR (7 downto 0);
+           B : in  STD_LOGIC_VECTOR (7 downto 0);
+           SEL : in  STD_LOGIC;
+           X : out  STD_LOGIC_VECTOR (7 downto 0));
+end component;
+
 signal EN_0 : STD_LOGIC;
 signal load_0: STD_LOGIC;
 
 signal s1 : STD_LOGIC_VECTOR (7 downto 0);
 signal mixOut : STD_LOGIC_VECTOR (7 downto 0);
 signal bypassOut : STD_LOGIC_VECTOR (7 downto 0);
+
 
 begin
 
@@ -87,7 +95,6 @@ begin
 				CE => CE,
 				EN => EN_0,
 				load => load_0,
-				round10 => '0',
 				byte_in => byte_in,
 				byte_out => s1
 				);
@@ -98,7 +105,6 @@ begin
 				CE => CE,
 				EN => EN_0,
 				load => load_0,
-				round10 => '0',
 				byte_in => s1,
 				byte_out => mixOut
 				);
@@ -111,7 +117,14 @@ begin
 			CE		=>	ce,
 			clk 	=>	clk,
 			D 		=>	byte_in);
-			
+
+--	process (clk)
+--         begin
+--             if rising_edge(clk) then 
+--                   	byte_out <= byte_out_0;					
+--            end if;
+--    end process;
+	
 	load_count <= load_0;
 	
 	byte_out <= mixOut when round10 = '0' else

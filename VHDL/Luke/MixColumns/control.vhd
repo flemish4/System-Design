@@ -57,23 +57,6 @@ begin
 			CE		=>	CE,
 			CLK 	=>	clk,
 			D 		=>	load_out); 
-			
-				
---	EN_srl16: SRLC16E
---		generic map(
---			INIT => "0000000000000111")
---		port map(
---			Q		=> EN_out,
---			A0		=>	'1',
---			A1		=>	'1',
---			A2		=>	'0',
---			A3 	=>	'0',
---			CE		=>	CE,
---			CLK 	=>	clk,
---			D 		=>	EN_out); 
-
---	EN <= EN_out;
---	load <= load_out;
 	
 	 process (clk)
          begin
