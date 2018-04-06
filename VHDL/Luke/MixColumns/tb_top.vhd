@@ -172,7 +172,7 @@ BEGIN
    begin	
 		
       rst <= '1';
-		inv <= '0';
+		inv <= '1';
 		round10 <= '0';
   		wait for clk_period*2;
  		rst <= '0';
@@ -182,20 +182,24 @@ BEGIN
 		CE <= '1';
 
 		-- insert stimulus here 
+		--First input state, 16 bytes------------------------------------------
 		for i in 0 to 15 loop
-			byte_in <= state_in_encode(i);
+			byte_in <= state_in_decode(i);
 			wait for clk_period;
 		end loop;
 		
-		--start 10th round input bytes
+		--Second input state, 16 bytes------------------------------------------
+		-- If decoding 
+		--set inv <= '1' at the input of the state
+		inv <= '0';
 		for i in 0 to 7 loop
 			byte_in <= state_in_encode(i);
 			wait for clk_period;
 		end loop;
 		
-		--after 8 cycles set 10th round high
-		round10 <= '1';
-
+		--If 10th round
+		--after 8 cycles set round10 <= '1';
+		--round10 <= '1';
 		for i in 8 to 15 loop
 			byte_in <= state_in_encode(i);
 			wait for clk_period;

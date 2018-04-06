@@ -31,7 +31,8 @@ use UNISIM.VComponents.all;
 
 entity control is
     Port ( clk, CE, rst : in  STD_LOGIC;
-           EN, load, EN_inv, load_inv : out  STD_LOGIC);
+           --EN_inv, load_inv : out  STD_LOGIC;
+			  EN, load : out  STD_LOGIC);
 end control;
 
 architecture Behavioral of control is
@@ -84,11 +85,11 @@ begin
 					EN <=  not load_out;
 					load <= load_out;
 	
---					EN_inv <=  not load_inv_out;
---					load_inv <= load_inv_out;
+					--EN_inv <=  not load_inv_out;
+					--load_inv <= load_inv_out;
 					
-					EN_inv <=  not load_out;
-					load_inv <= load_out;
+--					EN_inv <=  not load_out;
+--					load_inv <= load_out;
 --				end if;
 --	end process;
 ---------------------------------------------------------------------------------------------
