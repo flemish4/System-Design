@@ -187,18 +187,19 @@ BEGIN
 			wait for clk_period;
 		end loop;
 		
+		--start 10th round input bytes
+		for i in 0 to 7 loop
+			byte_in <= state_in_encode(i);
+			wait for clk_period;
+		end loop;
 		
---		for i in 0 to 7 loop
---			byte_in <= state_in_encode(i);
---			wait for clk_period;
---		end loop;
---		
---		round10 <= '1';
---
---		for i in 8 to 15 loop
---			byte_in <= state_in_encode(i);
---			wait for clk_period;
---		end loop;
+		--after 8 cycles set 10th round high
+		round10 <= '1';
+
+		for i in 8 to 15 loop
+			byte_in <= state_in_encode(i);
+			wait for clk_period;
+		end loop;
 		byte_in <= x"00";
 
       wait;

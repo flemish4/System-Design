@@ -30,7 +30,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity MixColumns is
-    Port ( clk, rst, CE, EN, load, inv, EN_inv, load_inv : in  STD_LOGIC;
+    Port ( clk, rst, CE, EN, load : in  STD_LOGIC;
+			  inv, EN_inv, load_inv : in  STD_LOGIC;
 			  byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end MixColumns;
@@ -90,12 +91,14 @@ signal load_0 : STD_LOGIC;
 ----------------------------------------------
 
 begin
+
 	EN_0 <= EN_inv when inv = '1' else
 			  EN;
 	load_0 <= load_inv when inv = '1' else
 				 load;
 	
-
+--	EN_0 <= EN;
+--	load_0 <= load;
 	
 	mul2_0 : mul2
 	port map(x => byte_in,

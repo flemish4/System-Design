@@ -57,18 +57,18 @@ begin
 			CLK 	=>	clk,
 			D 		=>	load_out); 
 			
-	load_inv_srl16: SRLC16E
-		generic map(
-			INIT => "0000000000001000")
-		port map(
-			Q		=> load_inv_out,
-			A0		=>	'1',
-			A1		=>	'1',
-			A2		=>	'0',
-			A3 	=>	'0',
-			CE		=>	CE,
-			CLK 	=>	clk,
-			D 		=>	load_inv_out); 
+--	load_inv_srl16: SRLC16E
+--		generic map(
+--			INIT => "0000000000001000")
+--		port map(
+--			Q		=> load_inv_out,
+--			A0		=>	'1',
+--			A1		=>	'1',
+--			A2		=>	'0',
+--			A3 	=>	'0',
+--			CE		=>	CE,
+--			CLK 	=>	clk,
+--			D 		=>	load_inv_out); 
 	
 --	 process (clk)
 --         begin
@@ -84,8 +84,11 @@ begin
 					EN <=  not load_out;
 					load <= load_out;
 	
-					EN_inv <=  not load_inv_out;
-					load_inv <= load_inv_out;
+--					EN_inv <=  not load_inv_out;
+--					load_inv <= load_inv_out;
+					
+					EN_inv <=  not load_out;
+					load_inv <= load_out;
 --				end if;
 --	end process;
 ---------------------------------------------------------------------------------------------

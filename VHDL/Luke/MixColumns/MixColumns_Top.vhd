@@ -44,7 +44,8 @@ component control is
 end component;
 
 component MixColumns 
-    Port ( clk, rst, CE, EN, load, inv, EN_inv, load_inv  : in  STD_LOGIC;
+    Port ( clk, rst, CE, EN, load : in  STD_LOGIC; 
+			  inv, EN_inv, load_inv  : in  STD_LOGIC;
 			  byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
@@ -121,7 +122,7 @@ begin
 		port map(
 			Q		=> bypassOut,
 			--Q15	=>	Q15x,
-			addr	=>	"1000",
+			addr	=>	"0111",--"1000",
 			CE		=>	CE,
 			clk 	=>	clk,
 			D 		=>	byte_in);
