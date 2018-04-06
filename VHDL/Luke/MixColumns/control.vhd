@@ -30,21 +30,20 @@ library UNISIM;
 use UNISIM.VComponents.all;
 
 entity control is
-    Port ( clk, CE : in  STD_LOGIC;
-           EN, load : out  STD_LOGIC);
+    Port ( clk, CE, rst : in  STD_LOGIC;
+           EN, load, EN_inv, load_inv : out  STD_LOGIC);
 end control;
 
 architecture Behavioral of control is
 
-
-
-signal EN_out: STD_LOGIC;
+--signal EN_out: STD_LOGIC;
 signal load_out : STD_LOGIC;
+signal load_inv_out : STD_LOGIC;
+
 --signal temp_load : std_logic_vector(3 downto 0) := std_logic_vector(to_unsigned(4, 4));
 --signal temp_EN: std_logic_vector(3 downto 0) := std_logic_vector(to_unsigned(11, 4));
 
 begin
-
 	load_srl16: SRLC16E
 		generic map(
 			INIT => "0000000000001000")
@@ -57,46 +56,68 @@ begin
 			CE		=>	CE,
 			CLK 	=>	clk,
 			D 		=>	load_out); 
+			
+	load_inv_srl16: SRLC16E
+		generic map(
+			INIT => "0000000000001000")
+		port map(
+			Q		=> load_inv_out,
+			A0		=>	'1',
+			A1		=>	'1',
+			A2		=>	'0',
+			A3 	=>	'0',
+			CE		=>	CE,
+			CLK 	=>	clk,
+			D 		=>	load_inv_out); 
 	
-	 process (clk)
-         begin
-             if rising_edge(clk) then 
-                   --temp_load <= temp_load(2 downto 0) & temp_load(3);   -- concatenation operator &
-							EN <=  not load_out;
-							load <= load_out;
-					
-            end if;
-    end process;
-	
----------------------------------------------------------------------------------------------
 --	 process (clk)
 --         begin
 --             if rising_edge(clk) then 
---					if rst ='1' then
---                   temp_load <= std_logic_vector(to_unsigned(4, 4));
---					else
---                   temp_load <= temp_load(2 downto 0) & temp_load(3);   -- concatenation operator &
---                  
---					end if;
+--							EN <=  not load_out;
+--							load <= load_out;
 --            end if;
 --    end process;
---	 
---	 load <= temp_load(3);
---	 
---	 process (clk)
---         begin
---             if rising_edge(clk) then 
---					if rst ='1' then
---                   temp_EN <= std_logic_vector(to_unsigned(11, 4));
---					else
---                   temp_EN <= temp_EN(2 downto 0) & temp_EN(3);   -- concatenation operator &
---                  
---					end if;
---            end if;
---    end process;
---	 
---	 EN <= temp_EN(3);
 
+--	process (clk)
+--       begin
+--           if rising_edge(clk) then 
+					EN <=  not load_out;
+					load <= load_out;
+	
+					EN_inv <=  not load_inv_out;
+					load_inv <= load_inv_out;
+--				end if;
+--	end process;
+---------------------------------------------------------------------------------------------
+--		 process (clk)
+--				begin
+--					 if rising_edge(clk) then 
+--						if rst ='1' then
+--							 temp_load <= std_logic_vector(to_unsigned(4, 4));
+--						else--if CE = '1' then
+--							 temp_load <= temp_load(2 downto 0) & temp_load(3);   -- concatenation operator &
+--							
+--						end if;
+--					end if;
+--		 end process;
+--		 
+--		 load <= temp_load(3);
+--		 
+--		 process (clk)
+--				begin
+--					 if rising_edge(clk) then 
+--						if rst ='1' then
+--							 temp_EN <= std_logic_vector(to_unsigned(11, 4));
+--						else--if CE = '1' then
+--							 temp_EN <= temp_EN(2 downto 0) & temp_EN(3);   -- concatenation operator &
+--							
+--						end if;
+--					end if;
+--		 end process;
+--		 
+--		 EN <= temp_EN(3);
+--
+--
 
 end Behavioral;
 

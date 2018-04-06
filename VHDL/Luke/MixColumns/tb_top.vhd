@@ -72,22 +72,22 @@ ARCHITECTURE behavior OF tb_top IS
 	type my_type is array (0 to 15) of std_logic_vector (7 downto 0);
 	-- state_in
 	constant state_in_encode  : my_type := (
-	0 => x"d4", 		
-	1 => x"bf", 
-	2 => x"5d", 
-	3 => x"30", 
-	4 => x"e0", 
-	5 => x"b4", 
-	6 => x"52", 
-	7 => x"ae", 
-	8 => x"b8", 
-	9 => x"41", 
-	10 => x"11", 
+	0 => x"49", 		
+	1 => x"db", 
+	2 => x"87", 
+	3 => x"3b", 
+	4 => x"45", 
+	5 => x"39", 
+	6 => x"53", 
+	7 => x"89", 
+	8 => x"7f", 
+	9 => x"02", 
+	10 => x"d2", 
 	11 => x"f1", 
-	12 => x"1e", 
-	13 => x"27", 
-	14 => x"98", 
-	15 => x"e5");
+	12 => x"77", 
+	13 => x"de", 
+	14 => x"96", 
+	15 => x"1a");
 	constant state_in_encode1  : my_type := ( 															
 
 	0 => x"63", 		
@@ -116,7 +116,7 @@ ARCHITECTURE behavior OF tb_top IS
 	5 => x"4b", 
 	6 => x"5a", 
 	7 => x"ac", 
-	8 => x"db", 
+	8 => x"db",
 	9 => x"e7", 
 	10 => x"ca", 
 	11 => x"a8", 
@@ -174,29 +174,31 @@ BEGIN
       rst <= '1';
 		inv <= '0';
 		round10 <= '0';
-  		wait for clk_period*2;	
+  		wait for clk_period*2;
  		rst <= '0';
-				
+		
 		wait for clk_period*0.501;
+		
 		CE <= '1';
-      -- insert stimulus here 
-		for i in 0 to 15 loop
-			byte_in <= state_in_encode1(i);
-			wait for clk_period;
-		end loop;
-		
-		
-		for i in 0 to 7 loop
-			byte_in <= state_in_encode(i);
-			wait for clk_period;
-		end loop;
-		
-		round10 <= '1';
 
-		for i in 8 to 15 loop
+		-- insert stimulus here 
+		for i in 0 to 15 loop
 			byte_in <= state_in_encode(i);
 			wait for clk_period;
 		end loop;
+		
+		
+--		for i in 0 to 7 loop
+--			byte_in <= state_in_encode(i);
+--			wait for clk_period;
+--		end loop;
+--		
+--		round10 <= '1';
+--
+--		for i in 8 to 15 loop
+--			byte_in <= state_in_encode(i);
+--			wait for clk_period;
+--		end loop;
 		byte_in <= x"00";
 
       wait;

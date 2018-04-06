@@ -177,8 +177,12 @@ void mixColumns(unsigned char* state) {
     unsigned char b[16];
     unsigned char c;
     unsigned char h;
-    int i;
-
+    int i,k;
+	printf("MC_IN: ");
+        for (k=0;k<16;k++) {
+            printf("%02x", state[k]);
+        }
+        printf("\n");
     for (c = 0; c < 16; c++) {
         //copy state to a
         a[c] = state[c];
@@ -201,7 +205,11 @@ void mixColumns(unsigned char* state) {
     state[i+3] = b[i+3] ^ a[i+2] ^ a[i+1] ^ b[i] ^ a[i];
 
     }
-
+	printf("MC_out: ");
+        for (k=0;k<16;k++) {
+            printf("%02x", state[k]);
+        }
+        printf("\n");
 }
 
 

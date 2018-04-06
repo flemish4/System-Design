@@ -84,7 +84,6 @@ signal s23 : STD_LOGIC_VECTOR (7 downto 0);
 
 signal EN_0 : STD_LOGIC;
 signal load_0 : STD_LOGIC;
-signal load_2 : STD_LOGIC;
 signal load_1 : STD_LOGIC;
 
 begin
@@ -98,7 +97,10 @@ begin
 				x4 => s12
 				);
 	
+	--multiply by 5
 	s13 <= s12 xor byte_in;
+	
+	--
 	s1 <= s12 xor s10;
 	s3 <= s13 xor s8;
 	
@@ -199,21 +201,21 @@ begin
 				Q => s14
 				);
 				
-	reg7 : register_Nbit
-	generic map (8)
-	port map(clk => clk,
-				rst => rst,
-				CE => CE,
-				D => byte_in,
-				Q => s21
-				);
+--	reg7 : register_Nbit
+--	generic map (8)
+--	port map(clk => clk,
+--				rst => rst,
+--				CE => CE,
+--				D => byte_in,
+--				Q => s21
+--				);
 				
 	reg8 : register_Nbit
 	generic map (8)
 	port map(clk => clk,
 				rst => rst,
 				CE => CE,
-				D => s21,
+				D => byte_in,--s21,
 				Q => s23
 				);			
 				

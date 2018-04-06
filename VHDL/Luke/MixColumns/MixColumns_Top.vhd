@@ -39,12 +39,12 @@ end MixColumns_Top;
 architecture Behavioral of MixColumns_Top is
 
 component control is
-    Port ( clk, CE : in  STD_LOGIC;
-           EN, load  : out  STD_LOGIC);
+    Port ( clk, CE, rst : in  STD_LOGIC;
+           EN, load, EN_inv, load_inv  : out  STD_LOGIC);
 end component;
 
 component MixColumns 
-    Port ( clk, rst, CE, EN, load : in  STD_LOGIC;
+    Port ( clk, rst, CE, EN, load, inv, EN_inv, load_inv  : in  STD_LOGIC;
 			  byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end component;
@@ -73,6 +73,8 @@ end component;
 
 signal EN_0 : STD_LOGIC;
 signal load_0: STD_LOGIC;
+signal EN_inv : STD_LOGIC;
+signal load_inv: STD_LOGIC;
 
 signal s1 : STD_LOGIC_VECTOR (7 downto 0);
 signal mixOut : STD_LOGIC_VECTOR (7 downto 0);
@@ -84,8 +86,11 @@ begin
 	control_block : control
 	port map(clk => clk,
 				CE => CE,
+				rst => rst,
 				EN => EN_0,
-				load => load_0
+				load => load_0,
+				EN_inv => EN_inv,
+				load_inv => load_inv
 				);
 				
 	inverse_block : inverse_mul
@@ -93,8 +98,8 @@ begin
 				rst => rst,
 				inv => inv,
 				CE => CE,
-				EN => EN_0,
-				load => load_0,
+				EN => EN_inv,
+				load => load_inv,
 				byte_in => byte_in,
 				byte_out => s1
 				);
@@ -103,8 +108,11 @@ begin
 	port map(clk => clk,
 				rst => rst,
 				CE => CE,
+				inv => inv,
 				EN => EN_0,
 				load => load_0,
+				EN_inv => EN_inv,
+				load_inv => load_inv,
 				byte_in => s1,
 				byte_out => mixOut
 				);
@@ -114,7 +122,7 @@ begin
 			Q		=> bypassOut,
 			--Q15	=>	Q15x,
 			addr	=>	"1000",
-			CE		=>	ce,
+			CE		=>	CE,
 			clk 	=>	clk,
 			D 		=>	byte_in);
 
