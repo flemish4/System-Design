@@ -31,6 +31,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity MixColumns is
     Port ( clk, rst, CE, EN, load : in  STD_LOGIC;
+			  --inv, EN_inv, load_inv : in  STD_LOGIC;
 			  byte_in : in  STD_LOGIC_VECTOR (7 downto 0);
            byte_out : out  STD_LOGIC_VECTOR (7 downto 0));
 end MixColumns;
@@ -91,6 +92,11 @@ signal load_0 : STD_LOGIC;
 
 begin
 
+--	EN_0 <= EN_inv when inv = '1' else
+--			  EN;
+--	load_0 <= load_inv when inv = '1' else
+--				 load;
+	
 	EN_0 <= EN;
 	load_0 <= load;
 	
@@ -99,7 +105,10 @@ begin
 				x2 => s13
 				);
 	
-	s12 <= s13 xor	byte_in;		
+	--multiply by 3
+	s12 <= s13 xor	byte_in;
+		
+	--
 	s0 <= byte_in xor s11;
 	s1 <= byte_in xor s10;
 	s2 <= s12 xor s9;
