@@ -398,7 +398,7 @@ begin
 						); 
 	keyInReady <= not keyInReadyInv;
 	
-	dpadrs <= "0111"; --"1101" when inv = '0' else
+	dpadrs <= "1000"; --"1101" when inv = '0' else
 			  --"1001";
 	dpsubBytesEn <= genCE;
 	dpclkEn <= genCE;
@@ -413,7 +413,7 @@ begin
 						); 
 	dpshftren <= dpshftrenR and genCE;
 	
-	dpmxclmnenSet <= '1' when (counterVal = "1101" and inv = '0') or (counterVal = "0010" and inv = '1') else '0';
+	dpmxclmnenSet <= '1' when (counterVal = "1110" and inv = '0') or (counterVal = "0011" and inv = '1') else '0';
 	dpmxclmnenGen : FF
 		Port map ( 	en => dpmxclmnenSet,
 						clr => '0' ,
@@ -424,8 +424,8 @@ begin
 	dpmxclmnen <= dpmxclmnenR and gence;
 	-- dps2 <= '1' when upCounter = "1010" else '0';
 	
-	dps2Set <= '1' when (upCounter = "1001" and counterVal = "0111" and ce = '1' and inv = '0') or ( inv = '1' and (upcounter = "0000" or (upCounter = "1010" and invf = '0')) and counterVal = "1000") else '0';
-	dps2Clr <= '1' when (upCounter = "1010" and counterVal = "0111" and ce = '1' and inv = '0') or ( inv = '1' and upcounter = "0001" and counterVal = "1000") else '0';
+	dps2Set <= '1' when (upCounter = "1001" and counterVal = "0110" and ce = '1' and inv = '0') or ( inv = '1' and (upcounter = "0000" or (upCounter = "1010" and invf = '0')) and counterVal = "0111") else '0';
+	dps2Clr <= '1' when (upCounter = "1010" and counterVal = "0110" and ce = '1' and inv = '0') or ( inv = '1' and upcounter = "0001" and counterVal = "0111") else '0';
 	dps2FF : FF
 		Port map ( 	en => dps2Set,
 						clr => dps2Clr ,

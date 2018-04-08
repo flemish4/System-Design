@@ -62,24 +62,41 @@ ARCHITECTURE behavior OF tb_shift_rows IS
    constant clk_period : time := 10 ns;
   	-- type definition for 256 word x 8 bit Inverse ROM 
 	type vectype is array (0 to 15) of std_logic_vector (7 downto 0);
-	-- ROM invrom 
+--	-- ROM invrom 
+--	constant testData0  : vectype := (
+--	0 => x"00", 
+--	1 => x"01", 
+--	2 => x"02", 
+--	3 => x"03", 
+--	4 => x"04", 
+--	5 => x"05", 
+--	6 => x"06", 
+--	7 => x"07", 
+--	8 => x"08", 
+--	9 => x"09", 
+--	10 => x"0A", 
+--	11 => x"0B", 
+--	12 => x"0C", 
+--	13 => x"0D", 
+--	14 => x"0E", 
+--	15 => x"0F" );	
 	constant testData0  : vectype := (
-	0 => x"00", 
-	1 => x"01", 
-	2 => x"02", 
-	3 => x"03", 
-	4 => x"04", 
-	5 => x"05", 
-	6 => x"06", 
-	7 => x"07", 
-	8 => x"08", 
-	9 => x"09", 
-	10 => x"0A", 
-	11 => x"0B", 
-	12 => x"0C", 
-	13 => x"0D", 
-	14 => x"0E", 
-	15 => x"0F" );	
+	0 => x"09", 
+	1 => x"D1", 
+	2 => x"E6", 
+	3 => x"89", 
+	4 => x"A2", 
+	5 => x"FC", 
+	6 => x"30", 
+	7 => x"78", 
+	8 => x"F0", 
+	9 => x"3B", 
+	10 => x"8B", 
+	11 => x"65", 
+	12 => x"7B", 
+	13 => x"66", 
+	14 => x"9A", 
+	15 => x"C4" );	
 
 BEGIN
  
@@ -114,7 +131,7 @@ BEGIN
 
       -- insert stimulus here 
 		ce <= '1';
-		inv <= '0'; 
+		inv <= '1'; 
 		for j in 0 to 2 loop
 			for i in 0 to 15 loop
 				bits_in <= testData0(i);

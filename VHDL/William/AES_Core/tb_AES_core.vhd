@@ -132,7 +132,7 @@ core0 : AES_core
   --  Test Bench Statements
      key : PROCESS
      BEGIN
-			inv <= '0'; ----- optional 
+			inv <= '1'; ----- optional 
 			--rst <= '1'; 
 			wait for 20 ns;
 			--rst <= '0';

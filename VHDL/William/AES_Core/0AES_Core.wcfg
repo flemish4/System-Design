@@ -18,7 +18,10 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="31" />
+   <WVObjectSize size="20" />
+   <wave_markers>
+      <marker time="3825000000" label="" />
+   </wave_markers>
    <wvobject fp_name="group65" type="group">
       <obj_property name="label">Top</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -455,65 +458,13 @@
          <obj_property name="ObjectShortName">keyxorin[7:0]</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/clk" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">clk</obj_property>
-      <obj_property name="ObjectShortName">clk</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/rst" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">rst</obj_property>
-      <obj_property name="ObjectShortName">rst</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/inv" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">inv</obj_property>
-      <obj_property name="ObjectShortName">inv</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/ce" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">ce</obj_property>
-      <obj_property name="ObjectShortName">ce</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/round10" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">round10</obj_property>
-      <obj_property name="ObjectShortName">round10</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/byte_in" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">byte_in[7:0]</obj_property>
-      <obj_property name="ObjectShortName">byte_in[7:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/load_count" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">load_count</obj_property>
-      <obj_property name="ObjectShortName">load_count</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/byte_out" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">byte_out[7:0]</obj_property>
-      <obj_property name="ObjectShortName">byte_out[7:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/en_0" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">en_0</obj_property>
-      <obj_property name="ObjectShortName">en_0</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/load_0" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">load_0</obj_property>
-      <obj_property name="ObjectShortName">load_0</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/s1" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s1[7:0]</obj_property>
-      <obj_property name="ObjectShortName">s1[7:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/mixout" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">mixout[7:0]</obj_property>
-      <obj_property name="ObjectShortName">mixout[7:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/bypassout" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">bypassout[7:0]</obj_property>
-      <obj_property name="ObjectShortName">bypassout[7:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="divider155" type="divider">
+   <wvobject fp_name="divider165" type="divider">
       <obj_property name="label">New Divider</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="BkColor">#000000</obj_property>
       <obj_property name="TextColor">230 230 230</obj_property>
    </wvobject>
-   <wvobject fp_name="divider154" type="divider">
+   <wvobject fp_name="divider164" type="divider">
       <obj_property name="label">New Divider</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="BkColor">#000000</obj_property>
@@ -558,6 +509,14 @@
    <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/load_0" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">load_0</obj_property>
       <obj_property name="ObjectShortName">load_0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/en_inv" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">en_inv</obj_property>
+      <obj_property name="ObjectShortName">en_inv</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/load_inv" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">load_inv</obj_property>
+      <obj_property name="ObjectShortName">load_inv</obj_property>
    </wvobject>
    <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/s1" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">s1[7:0]</obj_property>

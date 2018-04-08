@@ -153,8 +153,7 @@ begin
 	x_2 <= key1 xor keyXorIn;
 	
 	--set the output 
-	q <= x_2 when inv_en = '0' else 
-			s_r;
+	q <= x_2;
 			
 
 end Behavioral;

@@ -37,7 +37,7 @@ entity register_Nbit is
 end register_Nbit;
 
 architecture Behavioral of register_Nbit is
-
+signal QR : STD_LOGIC_VECTOR (N-1 downto 0) := x"00";
 begin
 
 	process(clk)
@@ -45,12 +45,13 @@ begin
 		--synchronous reset
 			if rising_edge(clk) then 
 				if rst = '1' then
-					Q <= (others => '0'); --fill with zeros
+					QR <= (others => '0'); --fill with zeros
 				elsif CE = '1' then
-					Q <= D;
+					QR <= D;
 				end if;
 			end if;
 		end process;
 
+	Q <= QR;
 end Behavioral;
 
