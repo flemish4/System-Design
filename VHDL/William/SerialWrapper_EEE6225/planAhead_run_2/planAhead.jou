@@ -1,0 +1,23 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7
+# Build 321239 by xbuild on Fri Sep 27 19:31:35 MDT 2013
+# Start of session at: Mon Apr 09 15:12:19 2018
+# Process ID: 14736
+# Log file: E:/Georgina/Documents/William/System-Design/VHDL/William/SerialWrapper_EEE6225/planAhead_run_2/planAhead.log
+# Journal file: E:/Georgina/Documents/William/System-Design/VHDL/William/SerialWrapper_EEE6225/planAhead_run_2/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source E:/Georgina/Documents/William/System-Design/VHDL/William/SerialWrapper_EEE6225/pa.fromNetlist.tcl
+set_property package_pin "" [get_ports [list  TXD]]
+startgroup
+set_property package_pin N18 [get_ports RXD]
+endgroup
+startgroup
+set_property package_pin N17 [get_ports TXD]
+endgroup
+set_property is_loc_fixed false [get_ports [list  TXD]]
+set_property is_loc_fixed true [get_ports [list  TXD]]
+save_constraints
+set_property offchip_term NONE [get_ports [list TXD]]
+set_property offchip_term FP_VTT_50 [get_ports [list TXD]]
+save_constraints

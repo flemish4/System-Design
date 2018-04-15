@@ -8,6 +8,5 @@ add_files -norecurse { {E:/Georgina/Documents/William/System-Design/VHDL/William
 set_param project.pinAheadLayout  yes
 set_property target_constrs_file "E:/Georgina/Documents/William/System-Design/VHDL/William/SerialWrapper_EEE6225/Nexys3(spartan6)/Nexys3Constraints.ucf" [current_fileset -constrset]
 add_files [list {E:/Georgina/Documents/William/System-Design/VHDL/William/SerialWrapper_EEE6225/Nexys3(spartan6)/Nexys3_master.ucf}] -fileset [get_property constrset [current_run]]
-add_files [list {E:/Georgina/Documents/William/System-Design/VHDL/William/SerialWrapper_EEE6225/Nexys3(spartan6)/Nexys3_master.ucf}] -fileset [get_property constrset [current_run]]
 add_files [list {E:/Georgina/Documents/William/System-Design/VHDL/William/SerialWrapper_EEE6225/Nexys3(spartan6)/Nexys3Constraints.ucf}] -fileset [get_property constrset [current_run]]
 link_design
