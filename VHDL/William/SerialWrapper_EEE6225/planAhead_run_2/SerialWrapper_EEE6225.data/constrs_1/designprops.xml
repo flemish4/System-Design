@@ -6,7 +6,6 @@
 		<Mode Id="JTAG"/>
 	</ConfigModes>
 	<PortProps>
-		<Port Name="TXD" OffChipTerm="FP_VTT_50"/>
 	</PortProps>
 </Compat>
 

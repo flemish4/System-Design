@@ -8,11 +8,11 @@
         <Attr Name="UsedInImplementation" Val="1"/>
       </FileInfo>
     </File>
-    <File Path="$PDATADIR/sources_1/ports.xml">
-      <FileInfo SFType="PortsDb"/>
-    </File>
-    <File Path="$PDATADIR/sources_1/chipscope.xml">
-      <FileInfo SFType="ChipscopeDb"/>
+    <File Path="$PPRDIR/../top_level_noUART.ngc">
+      <FileInfo>
+        <Attr Name="UsedInSynthesis" Val="1"/>
+        <Attr Name="UsedInImplementation" Val="1"/>
+      </FileInfo>
     </File>
     <Config>
       <Option Name="DesignMode" Val="GateLvl"/>

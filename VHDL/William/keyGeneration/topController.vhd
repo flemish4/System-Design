@@ -211,6 +211,7 @@ signal dataInReadySet : std_logic;
 signal dataInReadyClr : std_logic;
 signal dpshftrenR : std_logic;
 signal dpmxclmnenR : std_logic;
+signal stopForData : std_logic;
  
 begin
 
@@ -240,7 +241,7 @@ begin
 --				  ce => genCE );
 	globalCEEnable <= (dataInEn and dataInReadyTemp) or (keyInEn and not keyInReadyInv);
 	globalCEClear <= '0' ; -- '1' when (upCounter = "1001" and counterVal = "1111" and ce = '1') else '0';
-	genCE <= genCER or globalCEEnable;
+	genCE <= (genCER or globalCEEnable) and stopForData;
 	 CE_gen : FF
 		 Port map ( en => globalCEEnable,
 				  clr => globalCEClear ,
@@ -353,7 +354,7 @@ begin
 					keyIn;
 	storeIn <= genKeyOut; --keyIn when invF = '0' else
 					--genKeyOut;
-	genInEn <= keyInEn or RInEn or invTrans;
+	genInEn <= (keyInEn and not keyInReadyInv) or RInEn or invTrans;
 	storeCE <= (keyInEn or (invF and addroutsel)) ;
 	keyOut1 <= genKeyOut when addrOutSel = '1' else
 					delayKeyOut;
@@ -396,12 +397,13 @@ begin
 						clk => clk ,
 						q => keyInReadyInv
 						); 
-	keyInReady <= not keyInReadyInv;
+	keyInReady <= not keyInReadyInv and not keyInReadyClr;
+	
 	
 	dpadrs <= "1000"; --"1101" when inv = '0' else
 			  --"1001";
-	dpsubBytesEn <= genCE;
-	dpclkEn <= genCE;
+	dpsubBytesEn <= genCE ;
+	dpclkEn <= genCE ;
 	dps0 <= (not inv) and dataInReadyTemp and dataInEn;
 	dpshtrenSet <= '1' when (counterVal = "0010" and inv = '0') or (counterVal = "0011" and inv = '1') else '0';
 	dpshftrenGen : FF
@@ -411,7 +413,7 @@ begin
 						clk => clk ,
 						q => dpshftrenR
 						); 
-	dpshftren <= dpshftrenR and genCE;
+	dpshftren <= dpshftrenR and genCE ;
 	
 	dpmxclmnenSet <= '1' when (counterVal = "1110" and inv = '0') or (counterVal = "0011" and inv = '1') else '0';
 	dpmxclmnenGen : FF
@@ -421,7 +423,7 @@ begin
 						clk => clk ,
 						q => dpmxclmnenR
 						); 
-	dpmxclmnen <= dpmxclmnenR and gence;
+	dpmxclmnen <= dpmxclmnenR and gence ;
 	-- dps2 <= '1' when upCounter = "1010" else '0';
 	
 	dps2Set <= '1' when (upCounter = "1001" and counterVal = "0110" and ce = '1' and inv = '0') or ( inv = '1' and (upcounter = "0000" or (upCounter = "1010" and invf = '0')) and counterVal = "0111") else '0';
@@ -435,6 +437,9 @@ begin
 						);
 						
 	dpS1 <= inv and dataInReadyTemp and dataInEn;
-	dpqReady <= dataInEn;
+	dpqReady <= dataInEn and dataInReadyTemp;
+	
+	
+	stopForData <= (not dataInReadyTemp or dataInEn) or genDone;-- not (dataInReadyTemp and not dataInEn);
 end Behavioral;
 

@@ -14,6 +14,8 @@
 		<Port Id="clk" Dir="IN"/>
 		<Port Id="rst" Dir="IN"/>
 		<Port Id="RXD" Dir="IN"/>
+		<Port Id="LED_sel" Dir="IN"/>
+		<Port Id="inv" Dir="IN"/>
 		<Port Id="TXD" Dir="OUT"/>
 	</Ifc>
 </Interface>

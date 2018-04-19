@@ -24,6 +24,8 @@ entity top_level is
 			  rst  : in std_logic; -- active high for Digilent board
 	 		  LED  : out std_logic_vector(7 downto 0);
            RXD  : in std_logic;
+           LED_sel  : in std_logic;
+           inv  : in std_logic;
            TXD  : out std_logic);
 end top_level;
 
@@ -61,15 +63,42 @@ architecture RTL of top_level is
 	end component;
 
 	
-	component AES_UUT is
+	component AES_core_interface is
     Port ( clk,rst : in std_logic;
-           AES_encode : in std_logic;
            AES_key : in std_logic_vector(127 downto 0);
            AES_input_data : in std_logic_vector(127 downto 0);
            AES_output_data : out std_logic_vector(127 downto 0);
            AES_KeyReady : in std_logic;
            AES_InputDataReady : in std_logic;
-           AES_OutputDataReady : out std_logic);
+           AES_OutputDataReady : out std_logic;
+			  
+           AES_Core_KeyInReady : in std_logic;
+			  AES_Core_KeyInEn	 : out std_logic;
+			  AES_Core_KeyIn	 : out std_logic_vector(7 downto 0);
+			  
+           AES_Core_DataInReady : in std_logic;
+			  AES_Core_DataInEn	 : out std_logic;
+			  AES_Core_DataIn	 : out std_logic_vector(7 downto 0);
+			  
+           AES_Core_DataOutReady : in std_logic;
+			  AES_Core_DataOut	 : in std_logic_vector(7 downto 0)	  
+			  
+			  );
+	end component;
+
+
+	component AES_core is
+		 Port ( dataIn : in  STD_LOGIC_VECTOR (7 downto 0);
+				  keyIn : in  STD_LOGIC_VECTOR (7 downto 0);
+				  inv : in  STD_LOGIC;
+				  clk : in  STD_LOGIC;
+				  rst : in  STD_LOGIC;
+				  keyInEn : in  STD_LOGIC;
+				  dataInEn : in  STD_LOGIC;
+				  keyInReady : out  STD_LOGIC;
+				  dataInReady : out  STD_LOGIC;
+				  q : out  STD_LOGIC_VECTOR (7 downto 0);
+				  qReady : out  STD_LOGIC);
 	end component;
 
 ------------------------------------------------------------------------
@@ -79,7 +108,11 @@ architecture RTL of top_level is
    signal AES_encode : std_logic;
    signal AES_key, AES_input_data, AES_output_data : std_logic_vector(127 downto 0);
    signal AES_KeyReady, AES_InputDataReady, AES_OutputDataReady : std_logic;
-
+   signal  AES_Core_KeyInReady , AES_Core_KeyInEn  , AES_Core_DataInReady  , AES_Core_DataInEn  , AES_Core_DataOutReady  : std_logic;
+   signal  AES_Core_KeyIn , AES_Core_DataIn, AES_Core_DataOut  : std_logic_vector(7 downto 0);
+			  
+	signal AES_LED : std_logic_vector(7 downto 0) := "00000000";
+	signal LEDUART : std_logic_vector(7 downto 0) := "00000000";
 	--signal rst : std_logic; -- required for active low input on Xess boards
 
 ------------------------------------------------------------------------
@@ -95,7 +128,7 @@ begin
 	Interface: serial_io generic map ( Clock_Frequency_Hz )
 	 port map ( clk=>clk, rst=>rst,
          		serialTxD => TXD, serialRxD => RXD,
-					LED => LED,
+					LED => LEDUART,
           		AES_encode => AES_encode,
 					AES_key => AES_key,
 					AES_input_data => AES_input_data,
@@ -106,10 +139,50 @@ begin
 
 	-- Intantiate the wrapper for the AES Unit Under Test
 
-	UUT: AES_UUT port map (
-							clk, rst,
-							AES_encode, AES_key,
-							AES_input_data, AES_output_data,
-							AES_KeyReady, AES_InputDataReady, AES_OutputDataReady );
+	AES_Core_interface0: AES_core_interface port map (
+			  clk => clk ,
+			  rst => rst ,
+           AES_key => AES_key ,
+           AES_input_data => AES_input_data ,
+           AES_output_data => AES_output_data ,
+           AES_KeyReady => AES_KeyReady ,
+           AES_InputDataReady => AES_InputDataReady ,
+           AES_OutputDataReady => AES_OutputDataReady ,
+			  
+           AES_Core_KeyInReady => AES_Core_KeyInReady ,
+			  AES_Core_KeyInEn	 => AES_Core_KeyInEn ,
+			  AES_Core_KeyIn	 => AES_Core_KeyIn ,
+			  
+           AES_Core_DataInReady => AES_Core_DataInReady ,
+			  AES_Core_DataInEn	 => AES_Core_DataInEn ,
+			  AES_Core_DataIn	 => AES_Core_DataIn ,
+			  
+           AES_Core_DataOutReady => AES_Core_DataOutReady ,
+			  AES_Core_DataOut	 => AES_Core_DataOut
+				);
+				
+	core0 : AES_core 
+		 Port map ( 
+				  dataIn => AES_Core_DataIn,
+				  keyIn => AES_Core_KeyIn,
+				  inv => inv,
+				  clk => clk,
+				  rst => rst,
+				  keyInEn => AES_Core_KeyInEn,
+				  dataInEn => AES_Core_DataInEn,
+				  keyInReady => AES_Core_KeyInReady,
+				  dataInReady => AES_Core_DataInReady,
+				  q => AES_Core_DataOut,
+				  qReady => AES_Core_DataOutReady
+				  );
 
+	LED <= AES_LED when LED_sel = '0' else
+			LEDUART;
+	
+	AES_LED(0) <= AES_Core_KeyInEn;
+	AES_LED(1) <= AES_Core_KeyInReady;
+	AES_LED(2) <= AES_Core_DataInEn;
+	AES_LED(3) <= AES_Core_DataInReady;
+	AES_LED(7) <= '1';
+				
 end RTL;

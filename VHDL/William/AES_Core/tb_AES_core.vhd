@@ -142,6 +142,7 @@ core0 : AES_core
 			
 			while True loop
 				if keyInReady = '1' then
+					wait for CLK_period *3;
 					keyInEn <= '1';
 					for i in 0 to 15 loop
 						keyIn <= testKey0(i);
@@ -167,6 +168,7 @@ core0 : AES_core
 			wait for clk_period * 0.50001;
 			while True loop
 				if dataInReady = '1' then
+					wait for CLK_period *3;
 					dataInEn <= '1';
 					for j in 0 to 15 loop
 						if inv = '0' then
