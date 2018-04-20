@@ -42,10 +42,10 @@ signal R : STD_LOGIC := '0';
 begin
 	process (clk) begin
 		if rising_edge(clk) then
-			if en = '1'  then
-				R <= '1';
-			elsif clr = '1' or rst = '1' then
+			if clr = '1' or rst = '1' then
 				R <= '0';
+			elsif en = '1'  then
+				R <= '1';
 			else
 				R <= R;
 			end if;

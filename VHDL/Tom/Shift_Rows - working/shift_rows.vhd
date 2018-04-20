@@ -96,17 +96,17 @@ begin
 
 	count_8bit: count
 		port map( 	clk		=>	clk,
-						reset		=>	reset,
+						reset		=>	'0',
 						ce			=>	ce,
 						counter 	=> counter);
 
 	address0 <= '1';
 	address1 <= '1';
-	address2 <= counter;
+	address2 <= not counter;
 	
 	adrs3: SRLC16E
 		generic map(
-			INIT => "1001100110011001")
+			INIT => "0011001100110011")
 		port map(
 			Q		=> adrs3Q,
 			Q15	=> adrs3Q15,
@@ -123,7 +123,7 @@ begin
 
 	adrs4: SRLC16E
 		generic map(
-			INIT => "0000001001100000")
+			INIT => "0000000001001100")
 		port map(
 			Q15	=> adrs4Q15,
 			A0		=>	'1',
@@ -136,7 +136,7 @@ begin
 					
 	adrs4i: SRLC16E
 		generic map(
-			INIT => "0000001000110000")
+			INIT => "0000000001000110")
 		port map(
 			Q		=> adrs4Qi,
 			Q15	=> adrs4Q15i,
@@ -153,7 +153,7 @@ begin
 
 	adrs5: SRLC16E
 		generic map(
-			INIT => "0000000000000001")
+			INIT => "0010000000000000")
 		port map(
 			Q		=> adrs5Q,
 			Q15	=> adrs5Q15,

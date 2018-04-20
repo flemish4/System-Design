@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="E:/OneDrive/PC Documents/Important/University/Year 4/EEE6225/System-Design/VHDL/William/SerialWrapper_EEE6225/tb_AES_Core_interface_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="std_logic_1164" />
+            <top_module name="tb_aes_core_interface" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="5" />
+   <wvobject fp_name="group78" type="group">
+      <obj_property name="label">Top</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_aes_core_interface/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_encode" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_encode</obj_property>
+         <obj_property name="ObjectShortName">aes_encode</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_key" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_key[127:0]</obj_property>
+         <obj_property name="ObjectShortName">aes_key[127:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_input_data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_input_data[127:0]</obj_property>
+         <obj_property name="ObjectShortName">aes_input_data[127:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_keyready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_keyready</obj_property>
+         <obj_property name="ObjectShortName">aes_keyready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_inputdataready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_inputdataready</obj_property>
+         <obj_property name="ObjectShortName">aes_inputdataready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_core_keyinready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_keyinready</obj_property>
+         <obj_property name="ObjectShortName">aes_core_keyinready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_core_datainready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_datainready</obj_property>
+         <obj_property name="ObjectShortName">aes_core_datainready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_core_dataoutready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_dataoutready</obj_property>
+         <obj_property name="ObjectShortName">aes_core_dataoutready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_core_dataout" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_dataout[7:0]</obj_property>
+         <obj_property name="ObjectShortName">aes_core_dataout[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_output_data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_output_data[127:0]</obj_property>
+         <obj_property name="ObjectShortName">aes_output_data[127:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_outputdataready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_outputdataready</obj_property>
+         <obj_property name="ObjectShortName">aes_outputdataready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_core_keyinen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_keyinen</obj_property>
+         <obj_property name="ObjectShortName">aes_core_keyinen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_core_keyin" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_keyin[7:0]</obj_property>
+         <obj_property name="ObjectShortName">aes_core_keyin[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_core_datainen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_datainen</obj_property>
+         <obj_property name="ObjectShortName">aes_core_datainen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/aes_core_datain" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_datain[7:0]</obj_property>
+         <obj_property name="ObjectShortName">aes_core_datain[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/clk_period" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">clk_period</obj_property>
+         <obj_property name="ObjectShortName">clk_period</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group96" type="group">
+      <obj_property name="label">UUT</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_aes_core_interface/uut/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_encode" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_encode</obj_property>
+         <obj_property name="ObjectShortName">aes_encode</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_key" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_key[127:0]</obj_property>
+         <obj_property name="ObjectShortName">aes_key[127:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_input_data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_input_data[127:0]</obj_property>
+         <obj_property name="ObjectShortName">aes_input_data[127:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_output_data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_output_data[127:0]</obj_property>
+         <obj_property name="ObjectShortName">aes_output_data[127:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_keyready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_keyready</obj_property>
+         <obj_property name="ObjectShortName">aes_keyready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_inputdataready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_inputdataready</obj_property>
+         <obj_property name="ObjectShortName">aes_inputdataready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_outputdataready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_outputdataready</obj_property>
+         <obj_property name="ObjectShortName">aes_outputdataready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_core_keyinready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_keyinready</obj_property>
+         <obj_property name="ObjectShortName">aes_core_keyinready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_core_keyinen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_keyinen</obj_property>
+         <obj_property name="ObjectShortName">aes_core_keyinen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_core_keyin" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_keyin[7:0]</obj_property>
+         <obj_property name="ObjectShortName">aes_core_keyin[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_core_datainready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_datainready</obj_property>
+         <obj_property name="ObjectShortName">aes_core_datainready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_core_datainen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_datainen</obj_property>
+         <obj_property name="ObjectShortName">aes_core_datainen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_core_datain" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_datain[7:0]</obj_property>
+         <obj_property name="ObjectShortName">aes_core_datain[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_core_dataoutready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_dataoutready</obj_property>
+         <obj_property name="ObjectShortName">aes_core_dataoutready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/aes_core_dataout" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">aes_core_dataout[7:0]</obj_property>
+         <obj_property name="ObjectShortName">aes_core_dataout[7:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group105" type="group">
+      <obj_property name="label">KeyStore</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_aes_core_interface/uut/keyStore/d" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">d[127:0]</obj_property>
+         <obj_property name="ObjectShortName">d[127:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/keyStore/q" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">q[7:0]</obj_property>
+         <obj_property name="ObjectShortName">q[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/keyStore/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/keyStore/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/keyStore/dready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dready</obj_property>
+         <obj_property name="ObjectShortName">dready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/keyStore/qready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">qready</obj_property>
+         <obj_property name="ObjectShortName">qready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/keyStore/qen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">qen</obj_property>
+         <obj_property name="ObjectShortName">qen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/keyStore/store" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">store[127:0]</obj_property>
+         <obj_property name="ObjectShortName">store[127:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group114" type="group">
+      <obj_property name="label">DataInStore</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataInStore/d" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">d[127:0]</obj_property>
+         <obj_property name="ObjectShortName">d[127:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataInStore/q" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">q[7:0]</obj_property>
+         <obj_property name="ObjectShortName">q[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataInStore/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataInStore/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataInStore/dready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dready</obj_property>
+         <obj_property name="ObjectShortName">dready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataInStore/qready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">qready</obj_property>
+         <obj_property name="ObjectShortName">qready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataInStore/qen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">qen</obj_property>
+         <obj_property name="ObjectShortName">qen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataInStore/store" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">store[127:0]</obj_property>
+         <obj_property name="ObjectShortName">store[127:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group123" type="group">
+      <obj_property name="label">DataOutStore</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataOutStore/d" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">d[7:0]</obj_property>
+         <obj_property name="ObjectShortName">d[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataOutStore/q" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">q[127:0]</obj_property>
+         <obj_property name="ObjectShortName">q[127:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataOutStore/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataOutStore/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataOutStore/dready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dready</obj_property>
+         <obj_property name="ObjectShortName">dready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataOutStore/qready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">qready</obj_property>
+         <obj_property name="ObjectShortName">qready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataOutStore/store" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">store[127:0]</obj_property>
+         <obj_property name="ObjectShortName">store[127:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_aes_core_interface/uut/dataOutStore/dreadyr" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dreadyr</obj_property>
+         <obj_property name="ObjectShortName">dreadyr</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

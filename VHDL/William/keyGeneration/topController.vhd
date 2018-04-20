@@ -212,6 +212,8 @@ signal dataInReadyClr : std_logic;
 signal dpshftrenR : std_logic;
 signal dpmxclmnenR : std_logic;
 signal stopForData : std_logic;
+signal resetRunClr : std_logic;
+signal resetRun : std_logic := '0' ;
  
 begin
 
@@ -220,7 +222,7 @@ begin
 				  clr => roundDone ,
 				  inv => inv ,
 				  clk => clk ,
-				  rst => rst ,
+				  rst => resetRunClr ,
 				  invF => invF
 				  );
 				  
@@ -228,7 +230,7 @@ begin
 	 store1InvEnFF : FF
 		 Port map ( en => invF,
 				  clr => store1InvEnClr ,
-				  rst => rst ,
+				  rst => resetRunClr ,
 				  clk => clk ,
 				  q => store1InvEn
 				  ); 
@@ -241,11 +243,11 @@ begin
 --				  ce => genCE );
 	globalCEEnable <= (dataInEn and dataInReadyTemp) or (keyInEn and not keyInReadyInv);
 	globalCEClear <= '0' ; -- '1' when (upCounter = "1001" and counterVal = "1111" and ce = '1') else '0';
-	genCE <= (genCER or globalCEEnable) and stopForData;
+	genCE <= ((genCER or globalCEEnable) and stopForData) or resetRun;
 	 CE_gen : FF
 		 Port map ( en => globalCEEnable,
 				  clr => globalCEClear ,
-				  rst => rst ,
+				  rst => resetRunClr ,
 				  clk => clk ,
 				  q => genCER
 				  ); 	
@@ -272,7 +274,7 @@ begin
 				  ce => storeCE ,
 				  addr => addr ,
 				  clk => clk ,
-				  rst => rst ,
+				  rst => resetRunClr ,
 				  keyOut => store0Out
 				  );
 	  
@@ -281,7 +283,7 @@ begin
 				  ce => store1CE ,
 				  addr => store0Addr ,
 				  clk => clk ,
-				  rst => rst ,
+				  rst => resetRunClr ,
 				  keyOut => store1Out
 				  );
 
@@ -289,7 +291,7 @@ begin
 		generic map ( subBytesN => NCycles)
 		 Port map ( keyIn => genKeyIn,
 				  CLK => clk ,
-				  RST => rst ,
+				  RST => resetRunClr ,
 				  INV => genInv ,
 				  ce => ce ,
 				  addrOutSel => addrOutSel,
@@ -318,7 +320,7 @@ begin
 	counter0 : counter 
 		 Port map( ce => gence,
 				  clk => clk,
-				  rst => rst,
+				  rst => resetRunClr,
 				  genInv => genInv,
 				  genCE => genCE,
 				  inv => inv,
@@ -374,30 +376,30 @@ begin
 	
 	--dataInReadyTemp <= '1' when (((upCounter = "1011") or (upCounter = "0001" and dataReadyStart = '0') or (upCounter = "0000" )) and ((genInv = '1') or (inv = '0'))) else
 	--						 '0';
-	dataInReady <= dataInReadyTemp;
+	dataInReady <= (dataInReadyTemp or dataInReadySet) and not resetRun;
 	
 	--dataInReadySet <= '1' when (((genCE = '0' or upCounter = "1001") and inv = '0') or (genInv = '1' and upCounter = "1010" and counterVal = "1110" and ce = '1'))  else '0';
-	dataInReadySet <= '1' when (inv = '0' and (genCE = '0' or (upCounter = "1001" and counterVal = "1110" and ce = '1'))) or (( ((upCounter = "1010" and invf = '1') or (upCounter = "1001" and invf = '0')) and genInv = '1' and counterVal = "1110" and ce = '1')) else '0';
+	dataInReadySet <= '1' when (inv = '0' and (genCE = '0' or (upCounter = "1001" and counterVal = "1110" and ce = '1'))) or (( ((upCounter = "1010" and invf = '1') or (upCounter = "1001" and invf = '0')) and genInv = '1' and counterVal = "1111" and ce = '1')) else '0';
 	dataInReadyClr <= '1' when (((((upCounter = "0000" or upCounter = "1010") and counterVal = "1111")) and inv = '0') or ((upCounter = "0000" or (upCounter = "1010" and invF = '0')) and counterVal = "1111" and inv = '1')) and ce = '1' and addrOutSel = '0' else '0';
 	dataInReadyFF : FF
 		Port map ( 	en => dataInReadySet,
 						clr => dataInReadyClr ,
-						rst => rst ,
+						rst => resetRunClr ,
 						clk => clk ,
 						q => dataInReadyTemp
 						);
 						
-	keyInReadySet <= not genCE;		
+	keyInReadySet <= (not genCE);		
 	keyInReadyClr <= 	'1' when counterVal = x"F" else
 							'0';
 	keyInReadyInvFF : FF
 		Port map ( 	en => keyInReadyCLr,
 						clr => '0' ,
-						rst => rst ,
+						rst => resetRunClr ,
 						clk => clk ,
 						q => keyInReadyInv
 						); 
-	keyInReady <= not keyInReadyInv and not keyInReadyClr;
+	keyInReady <= not keyInReadyInv and not keyInReadyClr and not resetRun;
 	
 	
 	dpadrs <= "1000"; --"1101" when inv = '0' else
@@ -405,25 +407,25 @@ begin
 	dpsubBytesEn <= genCE ;
 	dpclkEn <= genCE ;
 	dps0 <= (not inv) and dataInReadyTemp and dataInEn;
-	dpshtrenSet <= '1' when (counterVal = "0010" and inv = '0') or (counterVal = "0011" and inv = '1') else '0';
-	dpshftrenGen : FF
-		Port map ( 	en => dpshtrenSet,
-						clr => '0' ,
-						rst => rst ,
-						clk => clk ,
-						q => dpshftrenR
-						); 
-	dpshftren <= dpshftrenR and genCE ;
+--	dpshtrenSet <= '1' when (counterVal = "0010" and inv = '0') or (counterVal = "0011" and inv = '1') else '0';
+--	dpshftrenGen : FF
+--		Port map ( 	en => dpshtrenSet,
+--						clr => '0' ,
+--						rst => resetRunClr ,
+--						clk => clk ,
+--						q => dpshftrenR
+--						); 
+	dpshftren <= genCE ; -- dpshftrenR and genCE ;
 	
 	dpmxclmnenSet <= '1' when (counterVal = "1110" and inv = '0') or (counterVal = "0011" and inv = '1') else '0';
 	dpmxclmnenGen : FF
 		Port map ( 	en => dpmxclmnenSet,
 						clr => '0' ,
-						rst => rst ,
+						rst => resetRunClr ,
 						clk => clk ,
 						q => dpmxclmnenR
 						); 
-	dpmxclmnen <= dpmxclmnenR and gence ;
+	dpmxclmnen <= gence ; -- dpmxclmnenR and gence;
 	-- dps2 <= '1' when upCounter = "1010" else '0';
 	
 	dps2Set <= '1' when (upCounter = "1001" and counterVal = "0110" and ce = '1' and inv = '0') or ( inv = '1' and (upcounter = "0000" or (upCounter = "1010" and invf = '0')) and counterVal = "0111") else '0';
@@ -431,15 +433,28 @@ begin
 	dps2FF : FF
 		Port map ( 	en => dps2Set,
 						clr => dps2Clr ,
-						rst => rst ,
+						rst => resetRunClr ,
 						clk => clk ,
 						q => dps2
 						);
 						
 	dpS1 <= inv and dataInReadyTemp and dataInEn;
-	dpqReady <= dataInEn and dataInReadyTemp;
+	dpqReady <= dataInEn and dataInReadyTemp and not resetRun;
 	
 	
 	stopForData <= (not dataInReadyTemp or dataInEn) or genDone;-- not (dataInReadyTemp and not dataInEn);
+	
+	
+	
+	
+	--resetRunClr <= '1' when (upCounter = "1010" and counterVal = "0010" and ce = '1' and resetRun = '1') else '0';
+	resetRunClr <= '1' when (upCounter = "1010" and counterVal = "1111" and ce = '1' and resetRun = '1') else '0';
+	resetRunFF : FF
+		Port map ( 	en => rst,
+						clr => resetRunClr ,
+						rst => '0' ,
+						clk => clk ,
+						q => resetRun
+						);
 end Behavioral;
 

@@ -67,9 +67,11 @@ begin
 	process (clk) 
 	begin
 		if rising_edge(clk) then
-			if ce = '1' then
+			if rst = '1' then
+				counterValR <= "0000";
+			elsif ce = '1' then
 				counterValR <= std_logic_vector(unsigned(counterValR) + 1);
-			elsif rst = '1' or counterValR = "1111" then
+			elsif counterValR = "1111" then
 				counterValR <= "0000";
 			else
 				counterValR <= counterValR;
@@ -80,7 +82,9 @@ begin
 	process (clk) 
 	begin
 		if rising_edge(clk) then
-			if ce = '1' and genInvRoundCount = '1' and halfRoundDone = '1' then
+			if rst = '1' then
+				roundCounterR <= "0000";
+			elsif ce = '1' and genInvRoundCount = '1' and halfRoundDone = '1' then
 				roundCounterR <= std_logic_vector(unsigned(roundCounterR) + 1);
 			elsif rst = '1' or keyInEn = '1' or (roundCounterR = "0001" and storecedel1 = '1' and genInv = '1') then
 				roundCounterR <= "0000";

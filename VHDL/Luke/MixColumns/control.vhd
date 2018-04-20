@@ -47,7 +47,7 @@ signal load_inv_out : STD_LOGIC;
 begin
 	load_srl16: SRLC16E
 		generic map(
-			INIT => "0000000000001000")
+			INIT => "0000000000000001")
 		port map(
 			Q		=> load_out,
 			A0		=>	'1',
