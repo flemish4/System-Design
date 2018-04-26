@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="E:/Georgina/Documents/William/System-Design/VHDL/William/AES_core/testbench_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+            <top_module name="std_logic_arith" />
+            <top_module name="std_logic_unsigned" />
+            <top_module name="testbench" />
+            <top_module name="textio" />
+            <top_module name="vcomponents" />
+            <top_module name="vital_primitives" />
+            <top_module name="vital_timing" />
+            <top_module name="vpkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="20" />
+   <wave_markers>
+      <marker time="3825000000" label="" />
+   </wave_markers>
+   <wvobject fp_name="group65" type="group">
+      <obj_property name="label">Top</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/testbench/core0/datain" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">datain[7:0]</obj_property>
+         <obj_property name="ObjectShortName">datain[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/keyin" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">keyin[7:0]</obj_property>
+         <obj_property name="ObjectShortName">keyin[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/inv" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">inv</obj_property>
+         <obj_property name="ObjectShortName">inv</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/keyinen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">keyinen</obj_property>
+         <obj_property name="ObjectShortName">keyinen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/datainen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">datainen</obj_property>
+         <obj_property name="ObjectShortName">datainen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/keyinready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">keyinready</obj_property>
+         <obj_property name="ObjectShortName">keyinready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/datainready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">datainready</obj_property>
+         <obj_property name="ObjectShortName">datainready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/q" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">q[7:0]</obj_property>
+         <obj_property name="ObjectShortName">q[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/qready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">qready</obj_property>
+         <obj_property name="ObjectShortName">qready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/key0" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">key0[7:0]</obj_property>
+         <obj_property name="ObjectShortName">key0[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/key1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">key1[7:0]</obj_property>
+         <obj_property name="ObjectShortName">key1[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dps0" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dps0</obj_property>
+         <obj_property name="ObjectShortName">dps0</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dps1" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dps1</obj_property>
+         <obj_property name="ObjectShortName">dps1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dpadrs" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">dpadrs[3:0]</obj_property>
+         <obj_property name="ObjectShortName">dpadrs[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dpmxclmnen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dpmxclmnen</obj_property>
+         <obj_property name="ObjectShortName">dpmxclmnen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dpclken" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dpclken</obj_property>
+         <obj_property name="ObjectShortName">dpclken</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dpshftren" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dpshftren</obj_property>
+         <obj_property name="ObjectShortName">dpshftren</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dpsubbytesen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dpsubbytesen</obj_property>
+         <obj_property name="ObjectShortName">dpsubbytesen</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group127" type="group">
+      <obj_property name="label">Controller</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/testbench/core0/controller/keyin" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">keyin[7:0]</obj_property>
+         <obj_property name="ObjectShortName">keyin[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/inv" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">inv</obj_property>
+         <obj_property name="ObjectShortName">inv</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/stop" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">stop</obj_property>
+         <obj_property name="ObjectShortName">stop</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/keyinen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">keyinen</obj_property>
+         <obj_property name="ObjectShortName">keyinen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/datainen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">datainen</obj_property>
+         <obj_property name="ObjectShortName">datainen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/keyinready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">keyinready</obj_property>
+         <obj_property name="ObjectShortName">keyinready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/datainready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">datainready</obj_property>
+         <obj_property name="ObjectShortName">datainready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/keyout1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">keyout1[7:0]</obj_property>
+         <obj_property name="ObjectShortName">keyout1[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/keyout0" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">keyout0[7:0]</obj_property>
+         <obj_property name="ObjectShortName">keyout0[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/dps0" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dps0</obj_property>
+         <obj_property name="ObjectShortName">dps0</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/dps1" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dps1</obj_property>
+         <obj_property name="ObjectShortName">dps1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/dpadrs" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">dpadrs[3:0]</obj_property>
+         <obj_property name="ObjectShortName">dpadrs[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/dpmxclmnen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dpmxclmnen</obj_property>
+         <obj_property name="ObjectShortName">dpmxclmnen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/dpclken" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dpclken</obj_property>
+         <obj_property name="ObjectShortName">dpclken</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/dpshftren" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dpshftren</obj_property>
+         <obj_property name="ObjectShortName">dpshftren</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/dpsubbytesen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dpsubbytesen</obj_property>
+         <obj_property name="ObjectShortName">dpsubbytesen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/storein" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">storein[7:0]</obj_property>
+         <obj_property name="ObjectShortName">storein[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/store0out" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">store0out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">store0out[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/store1out" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">store1out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">store1out[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/genkeyin" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">genkeyin[7:0]</obj_property>
+         <obj_property name="ObjectShortName">genkeyin[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/genkeyout" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">genkeyout[7:0]</obj_property>
+         <obj_property name="ObjectShortName">genkeyout[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/delaykeyout" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">delaykeyout[7:0]</obj_property>
+         <obj_property name="ObjectShortName">delaykeyout[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/store0addr" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">store0addr[3:0]</obj_property>
+         <obj_property name="ObjectShortName">store0addr[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/addr" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">addr[3:0]</obj_property>
+         <obj_property name="ObjectShortName">addr[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/roundcounter" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">roundcounter[3:0]</obj_property>
+         <obj_property name="ObjectShortName">roundcounter[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/rconcounter" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rconcounter[3:0]</obj_property>
+         <obj_property name="ObjectShortName">rconcounter[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/upcounter" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">upcounter[3:0]</obj_property>
+         <obj_property name="ObjectShortName">upcounter[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/counterval" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">counterval[3:0]</obj_property>
+         <obj_property name="ObjectShortName">counterval[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/gendone" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">gendone</obj_property>
+         <obj_property name="ObjectShortName">gendone</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/rounddone" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rounddone</obj_property>
+         <obj_property name="ObjectShortName">rounddone</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/rinen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rinen</obj_property>
+         <obj_property name="ObjectShortName">rinen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/geninen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">geninen</obj_property>
+         <obj_property name="ObjectShortName">geninen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/storece" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">storece</obj_property>
+         <obj_property name="ObjectShortName">storece</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/invf" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">invf</obj_property>
+         <obj_property name="ObjectShortName">invf</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/geninv" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">geninv</obj_property>
+         <obj_property name="ObjectShortName">geninv</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/gence" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">gence</obj_property>
+         <obj_property name="ObjectShortName">gence</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/counterce" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">counterce</obj_property>
+         <obj_property name="ObjectShortName">counterce</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/ce" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ce</obj_property>
+         <obj_property name="ObjectShortName">ce</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/addroutsel" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">addroutsel</obj_property>
+         <obj_property name="ObjectShortName">addroutsel</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/invtrans" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">invtrans</obj_property>
+         <obj_property name="ObjectShortName">invtrans</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/storecedel0" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">storecedel0</obj_property>
+         <obj_property name="ObjectShortName">storecedel0</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/storecedel1" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">storecedel1</obj_property>
+         <obj_property name="ObjectShortName">storecedel1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/invtransdel" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">invtransdel</obj_property>
+         <obj_property name="ObjectShortName">invtransdel</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/store1invenclr" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">store1invenclr</obj_property>
+         <obj_property name="ObjectShortName">store1invenclr</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/store1inven" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">store1inven</obj_property>
+         <obj_property name="ObjectShortName">store1inven</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/store1ce" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">store1ce</obj_property>
+         <obj_property name="ObjectShortName">store1ce</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/store1ceinv" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">store1ceinv</obj_property>
+         <obj_property name="ObjectShortName">store1ceinv</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/keyinreadyset" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">keyinreadyset</obj_property>
+         <obj_property name="ObjectShortName">keyinreadyset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/keyinreadyclr" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">keyinreadyclr</obj_property>
+         <obj_property name="ObjectShortName">keyinreadyclr</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/globalceenable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">globalceenable</obj_property>
+         <obj_property name="ObjectShortName">globalceenable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/datainreadytemp" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">datainreadytemp</obj_property>
+         <obj_property name="ObjectShortName">datainreadytemp</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/gencer" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">gencer</obj_property>
+         <obj_property name="ObjectShortName">gencer</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/globalceclear" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">globalceclear</obj_property>
+         <obj_property name="ObjectShortName">globalceclear</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/dpmxclmnenset" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dpmxclmnenset</obj_property>
+         <obj_property name="ObjectShortName">dpmxclmnenset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/dpshtrenset" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dpshtrenset</obj_property>
+         <obj_property name="ObjectShortName">dpshtrenset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/ncycles" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">ncycles</obj_property>
+         <obj_property name="ObjectShortName">ncycles</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/nrounds" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">nrounds</obj_property>
+         <obj_property name="ObjectShortName">nrounds</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/controller/syscycles" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">syscycles</obj_property>
+         <obj_property name="ObjectShortName">syscycles</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group149" type="group">
+      <obj_property name="label">DataPath</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/testbench/core0/dataPath0/data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/key0" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">key0[7:0]</obj_property>
+         <obj_property name="ObjectShortName">key0[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/key1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">key1[7:0]</obj_property>
+         <obj_property name="ObjectShortName">key1[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/s0" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">s0</obj_property>
+         <obj_property name="ObjectShortName">s0</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/s1" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">s1</obj_property>
+         <obj_property name="ObjectShortName">s1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/s2" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">s2</obj_property>
+         <obj_property name="ObjectShortName">s2</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/adrs" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">adrs[3:0]</obj_property>
+         <obj_property name="ObjectShortName">adrs[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/shft_r_en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">shft_r_en</obj_property>
+         <obj_property name="ObjectShortName">shft_r_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/subbytesen" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">subbytesen</obj_property>
+         <obj_property name="ObjectShortName">subbytesen</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/inv_en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">inv_en</obj_property>
+         <obj_property name="ObjectShortName">inv_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/mx_clmn_en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">mx_clmn_en</obj_property>
+         <obj_property name="ObjectShortName">mx_clmn_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/q" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">q[7:0]</obj_property>
+         <obj_property name="ObjectShortName">q[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/inv" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">inv</obj_property>
+         <obj_property name="ObjectShortName">inv</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/clk_en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk_en</obj_property>
+         <obj_property name="ObjectShortName">clk_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/reset" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/x_1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">x_1[7:0]</obj_property>
+         <obj_property name="ObjectShortName">x_1[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/mu_1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">mu_1[7:0]</obj_property>
+         <obj_property name="ObjectShortName">mu_1[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/s_b" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">s_b[7:0]</obj_property>
+         <obj_property name="ObjectShortName">s_b[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/buff_1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">buff_1[7:0]</obj_property>
+         <obj_property name="ObjectShortName">buff_1[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/s_r" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">s_r[7:0]</obj_property>
+         <obj_property name="ObjectShortName">s_r[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/m_c" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">m_c[7:0]</obj_property>
+         <obj_property name="ObjectShortName">m_c[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/x_2" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">x_2[7:0]</obj_property>
+         <obj_property name="ObjectShortName">x_2[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/mix_in" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">mix_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">mix_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/mix_in_inv" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">mix_in_inv[7:0]</obj_property>
+         <obj_property name="ObjectShortName">mix_in_inv[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/core0/dataPath0/keyxorin" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">keyxorin[7:0]</obj_property>
+         <obj_property name="ObjectShortName">keyxorin[7:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="divider165" type="divider">
+      <obj_property name="label">New Divider</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#000000</obj_property>
+      <obj_property name="TextColor">230 230 230</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider164" type="divider">
+      <obj_property name="label">New Divider</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#000000</obj_property>
+      <obj_property name="TextColor">230 230 230</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/rst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/inv" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">inv</obj_property>
+      <obj_property name="ObjectShortName">inv</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/ce" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ce</obj_property>
+      <obj_property name="ObjectShortName">ce</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/round10" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">round10</obj_property>
+      <obj_property name="ObjectShortName">round10</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/byte_in" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">byte_in[7:0]</obj_property>
+      <obj_property name="ObjectShortName">byte_in[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/load_count" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">load_count</obj_property>
+      <obj_property name="ObjectShortName">load_count</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/byte_out" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">byte_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">byte_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/en_0" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">en_0</obj_property>
+      <obj_property name="ObjectShortName">en_0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/load_0" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">load_0</obj_property>
+      <obj_property name="ObjectShortName">load_0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/en_inv" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">en_inv</obj_property>
+      <obj_property name="ObjectShortName">en_inv</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/load_inv" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">load_inv</obj_property>
+      <obj_property name="ObjectShortName">load_inv</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/s1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">s1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">s1[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/mixout" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">mixout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mixout[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/core0/dataPath0/mx_clmns/bypassout" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">bypassout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">bypassout[7:0]</obj_property>
+   </wvobject>
+</wave_config>
